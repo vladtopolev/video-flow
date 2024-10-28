@@ -14,8 +14,6 @@ const BackgroundMusicSection = () => {
   const pickedBackgroundMusic = userChoise.music;
   const { setMusic } = actions;
 
-  console.log(backgroundMusicList);
-
   return (
     <Box className="BackgroundMusicSection">
       <Typography sx={{ ...typography.titleS, mt: spacing(10) }} component="h2">
@@ -28,7 +26,7 @@ const BackgroundMusicSection = () => {
         {textDictionary('BackgroundMusic.Subtitle')}
       </Typography>
 
-      <Grid container spacing={2}>
+      <Grid container spacing={spacing(2)}>
         {backgroundMusicList.map((musicItem) => (
           <Grid item xs={6} sm={3} key={musicItem.name}>
             <ClicableContainer

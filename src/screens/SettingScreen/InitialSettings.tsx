@@ -5,8 +5,7 @@ import { useVideoRecordFlowContext } from '../../context/VideoRecordFlow.context
 import TypographySx from '../../styles/typography';
 import { Box } from '@mui/material';
 import BackgroundMusicSection from './sections/BackgroundMusicSection';
-
-const prefixClassName = 'InitialSettings';
+import CameraCheckSection from './sections/CameraCheckSection';
 
 const InitialSettings = () => {
   const setAvailableDevices =
@@ -16,10 +15,11 @@ const InitialSettings = () => {
 
   const { textDictionary } = useVideoRecordFlowContext();
   return (
-    <Box className={prefixClassName}>
-      <h1 className={`${prefixClassName}__title`} style={TypographySx.titleS}>
+    <Box className="InitialSettings">
+      <h1 style={TypographySx.titleL}>
         {textDictionary('SettingVideoFlowScreen.Title')}
       </h1>
+      <CameraCheckSection />
       <BackgroundMusicSection />
     </Box>
   );
