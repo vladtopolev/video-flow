@@ -9,6 +9,7 @@
     "/dist"
   ],
   "scripts": {
+    "prepare": "yarn run build",
     "format": "prettier --write --parser typescript '**/*.{ts,tsx,mjs}'",
     "lint": "eslint . --fix",
     "tsc": "tsc",
