@@ -1,5 +1,5 @@
 {
-  "name": "@vladtopolev/video-flow",
+  "name": "@topolev/video-record-flow",
   "version": "0.0.2",
   "type": "module",
   "main": "dist/index.cjs.js",
