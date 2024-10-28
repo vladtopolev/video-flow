@@ -17,6 +17,6 @@ jobs:
           scope: '@vladtopolev'
       - run: yarn install
       - run: yarn run build
-      - run: npm publish
+      - run: yarn publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
