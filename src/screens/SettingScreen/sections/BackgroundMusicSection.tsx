@@ -1,5 +1,5 @@
-import { Grid, Typography, Box } from '@mui/material';
 import { VolumeOff } from '@mui/icons-material';
+import { Box, Typography } from '@mui/material';
 import AudioPlayer from '../../../components/AudioPlayer/AudioPlayer';
 import ClicableContainer from '../../../components/ClickacbleContainer/ClickableContainer';
 import { useVideoRecordFlowContext } from '../../../context/VideoRecordFlow.context';
@@ -9,7 +9,13 @@ import useTheme from '../../../styles';
 const BackgroundMusicSection = () => {
   const { textDictionary, backgroundMusicList, userChoise, dispatch } =
     useVideoRecordFlowContext();
-  const { typography, spacing, corners, palette } = useTheme();
+  const {
+    typography,
+    spacing,
+    corners,
+    palette,
+    breakpoints: { sm, md, lg },
+  } = useTheme();
 
   const pickedBackgroundMusic = userChoise.music;
   const { setMusic } = actions;
@@ -25,26 +31,33 @@ const BackgroundMusicSection = () => {
       >
         {textDictionary('BackgroundMusic.Subtitle')}
       </Typography>
-
-      <Grid container spacing={spacing(2)}>
+      <div
+        style={{
+          display: 'grid',
+          gap: spacing(2),
+          gridTemplateColumns: '1fr',
+          ...(sm && { gridTemplateColumns: '1fr 1fr' }),
+          ...(md && { gridTemplateColumns: '1fr 1fr 1fr' }),
+          ...(lg && { gridTemplateColumns: '1fr 1fr 1fr 1fr' }),
+        }}
+      >
         {backgroundMusicList.map((musicItem) => (
-          <Grid item xs={6} sm={3} key={musicItem.name}>
-            <ClicableContainer
-              onClick={() => {
-                dispatch(setMusic(musicItem));
-              }}
-              selected={pickedBackgroundMusic?.src === musicItem.src}
-              sx={{ p: 2, mb: 0 }}
-            >
-              <AudioPlayer
-                src={musicItem.src}
-                title={musicItem.name}
-                coverSrc={musicItem.coverSrc}
-              />
-            </ClicableContainer>
-          </Grid>
+          <ClicableContainer
+            key={musicItem.name}
+            onClick={() => {
+              dispatch(setMusic(musicItem));
+            }}
+            selected={pickedBackgroundMusic?.src === musicItem.src}
+            sx={{ p: 2, mb: 0 }}
+          >
+            <AudioPlayer
+              src={musicItem.src}
+              title={musicItem.name}
+              coverSrc={musicItem.coverSrc}
+            />
+          </ClicableContainer>
         ))}
-      </Grid>
+      </div>
 
       <ClicableContainer
         sx={{ mt: spacing(2) }}

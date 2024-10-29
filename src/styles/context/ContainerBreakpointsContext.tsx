@@ -12,6 +12,11 @@ const query = {
   },
   md: {
     minWidth: 600,
+    maxWidth: 899,
+  },
+  lg: {
+    minWidth: 900,
+    maxWidth: 1199,
   },
 };
 

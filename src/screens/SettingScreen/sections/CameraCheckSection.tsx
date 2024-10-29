@@ -10,11 +10,12 @@ const CameraCheckSection = () => {
     corners,
     spacing,
     palette,
-    breakpoints: { md },
+    breakpoints: { xs, sm },
   } = useTheme();
   const {
     mediaStream: { stream },
   } = useVideoRecordFlowContext();
+  const isNotSmall = !xs && !sm;
   return (
     <div
       style={{
@@ -27,7 +28,7 @@ const CameraCheckSection = () => {
         border: `1px solid ${palette.grey[300]}`,
         padding: spacing(4),
         gap: spacing(2),
-        ...(md && {
+        ...(isNotSmall && {
           flexDirection: 'row',
           border: 'none',
           backgroundColor: 'unset',
@@ -54,7 +55,7 @@ const CameraCheckSection = () => {
           backgroundColor: palette.grey[100],
           display: 'flex',
           alignItems: 'center',
-          ...(md && {
+          ...(isNotSmall && {
             width: '100%',
             border: `1px solid ${palette.grey[300]}`,
             padding: spacing(4),
