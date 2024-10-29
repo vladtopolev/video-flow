@@ -1,8 +1,8 @@
-import { Box, Typography } from '@mui/material';
 import { CheckCircle as CheckCircleIcon } from '@mui/icons-material';
-import useTheme from '../../../../styles';
-import { useVideoRecordFlowContext } from '../../../../context/VideoRecordFlow.context';
+import { Typography } from '@mui/material';
 import Badge from '../../../../components/Badge/Badge';
+import { useVideoRecordFlowContext } from '../../../../context/VideoRecordFlow.context';
+import useTheme from '../../../../styles';
 
 type InstructionItemProps = {
   text: string;
@@ -32,18 +32,18 @@ const InstructionsCameraOn = () => {
       <Badge style={{ lineHeight: 1, display: 'inline-block' }}>
         {textDictionary('Instructions.CameraOn.Label')}
       </Badge>
-      <Box
-        sx={{
+      <div
+        style={{
           display: 'flex',
           flexDirection: 'column',
           gap: spacing(4),
-          mt: spacing(5),
+          marginTop: spacing(5),
         }}
       >
         {tips.map((text: string, index: number) => (
           <InstructionItem key={index} text={text} />
         ))}
-      </Box>
+      </div>
     </div>
   );
 };

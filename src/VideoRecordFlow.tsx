@@ -1,18 +1,18 @@
 import { FC, useState } from 'react';
-import VideoRecordFlowContextComponent from './context/VideoRecordFlow.context';
+import {
+  DEFAULT_BACKGROUND_MUSIC_LIST,
+  DEFAULT_QUESTION_LIST,
+} from './VideoRecordFlow.default';
 import type {
   BackgroundMusicConfig,
   QuestionConfig,
   TextDictionaryFunction,
 } from './VideoRecordFlow.types';
 import { DefaultScreenTypes } from './VideoRecordFlow.types';
-import InitialSettings from './screens/SettingScreen/InitialSettings';
+import VideoRecordFlowContextComponent from './context/VideoRecordFlow.context';
 import defaultTextDictionary from './dictionary';
-import { useContainerQuery } from 'react-container-query';
-import {
-  DEFAULT_BACKGROUND_MUSIC_LIST,
-  DEFAULT_QUESTION_LIST,
-} from './VideoRecordFlow.default';
+import InitialSettings from './screens/SettingScreen/InitialSettings';
+import ContainerBreakpointsContextComponent from './styles/context/ContainerBreakpointsContext';
 
 export type VideoRecordFlowProps = {
   questionList?: QuestionConfig[];
@@ -24,21 +24,6 @@ export type VideoRecordFlowProps = {
 
 const SCREENS: { [k: string]: FC } = {
   [DefaultScreenTypes.INITIAL_SETTINGS]: InitialSettings,
-};
-
-const query = {
-  xs: {
-    minWidth: 0,
-    maxWidth: 199,
-  },
-  sm: {
-    minWidth: 200,
-    maxWidth: 599,
-  },
-  md: {
-    minWidth: 600,
-    maxWidth: 959,
-  },
 };
 
 const VideoRecordFlow = ({
@@ -54,8 +39,6 @@ const VideoRecordFlow = ({
   if (!CurrentScreen) {
     throw new Error(`Screen component not defined for key ${currentScreen}`);
   }
-  const [params, containerRef] = useContainerQuery(query, {});
-  console.log(params);
 
   return (
     <VideoRecordFlowContextComponent
@@ -66,9 +49,9 @@ const VideoRecordFlow = ({
       textDictionary={textDictionary}
       {...restProps}
     >
-      <div ref={containerRef}>
+      <ContainerBreakpointsContextComponent>
         <CurrentScreen />
-      </div>
+      </ContainerBreakpointsContextComponent>
     </VideoRecordFlowContextComponent>
   );
 };

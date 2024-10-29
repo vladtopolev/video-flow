@@ -1,11 +1,12 @@
 import { useMemo } from 'react';
-import breakpoints from './breakpoints';
 import palette from './palette';
 import corners from './corners';
 import typography from './typography';
+import { useContainerBreakpoints } from './context/ContainerBreakpointsContext';
 
-const useTheme = () =>
-  useMemo(
+const useTheme = () => {
+  const { breakpoints } = useContainerBreakpoints();
+  return useMemo(
     () => ({
       breakpoints,
       palette,
@@ -13,7 +14,8 @@ const useTheme = () =>
       typography,
       spacing: (space: number) => `${4 * space}px`,
     }),
-    [],
+    [breakpoints],
   );
+};
 
 export default useTheme;

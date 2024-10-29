@@ -2,6 +2,13 @@ import { useCallback, useState } from 'react';
 
 const useMediaStream = () => {
   const [stream, _setStream] = useState<MediaStream | null>(null);
+  const [capturedStreamDimension, setCapturedStreamDimension] = useState<{
+    width: number | null | undefined;
+    height: number | null | undefined;
+  }>({
+    width: null,
+    height: null,
+  });
 
   const setStream = useCallback(async (cameraStream: MediaStream | null) => {
     _setStream((prevStream) => {
@@ -19,7 +26,13 @@ const useMediaStream = () => {
       });
   }, [stream]);
 
-  return { stream, setStream, stopStream };
+  return {
+    stream,
+    setStream,
+    stopStream,
+    capturedStreamDimension,
+    setCapturedStreamDimension,
+  };
 };
 
 export default useMediaStream;

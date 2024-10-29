@@ -1,9 +1,6 @@
 import { useCallback } from 'react';
 import { useVideoRecordFlowContext } from '../../../context/VideoRecordFlow.context';
-import {
-  SetAvailbaleDevicesFunctionType,
-  useAvailableMediaDevices,
-} from '../../../hooks/useAvailableMediaDevices';
+import { useAvailableMediaDevices } from '../../../hooks/useAvailableMediaDevices';
 import useGetMediaStream, {
   SetCapturedStreamFunctionType,
 } from '../../../hooks/useGetMediaStream';
@@ -23,35 +20,23 @@ const useMediaStream = () => {
       selectedVideoDevice,
       selectedAudioDevice,
       setAvailableDevices,
-      setSelectedAudioDevice,
-      setSelectedVideoDevice,
     },
-    mediaStream: { setStream },
+    mediaStream: { setStream, setCapturedStreamDimension },
   } = useVideoRecordFlowContext();
 
   // SET AVAILABLE DEVICES
-  const setAvailableDevicesHandler: SetAvailbaleDevicesFunctionType =
-    useCallback(
-      (availableDevices) => {
-        setAvailableDevices(availableDevices);
-        if (availableDevices.videoDevices[0]) {
-          setSelectedVideoDevice(availableDevices.videoDevices[0]);
-        }
-        if (availableDevices.audioDevices[0]) {
-          setSelectedAudioDevice(availableDevices.audioDevices[0]);
-        }
-      },
-      [setAvailableDevices, setSelectedVideoDevice, setSelectedAudioDevice],
-    );
-
-  useAvailableMediaDevices({ setAvailableDevices: setAvailableDevicesHandler });
+  useAvailableMediaDevices({ setAvailableDevices });
 
   // PICK CAMERA STREAM BASED ON SELECTED DEVICES
   const setCapturedStream = useCallback<SetCapturedStreamFunctionType>(
-    (stream) => {
+    (stream, settings) => {
       setStream(stream);
+      setCapturedStreamDimension({
+        width: settings?.capturedWidth,
+        height: settings?.capturedHeight,
+      });
     },
-    [setStream],
+    [setStream, setCapturedStreamDimension],
   );
 
   useGetMediaStream({

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 export type AvailableMediaDevices = {
   videoDevices: MediaDeviceInfo[];
@@ -6,22 +6,49 @@ export type AvailableMediaDevices = {
 };
 
 const useMediaDevices = () => {
-  const [availableDevices, setAvailableDevices] =
-    useState<AvailableMediaDevices>({ videoDevices: [], audioDevices: [] });
+  const [mediaDevice, setMediaDevice] = useState<{
+    availableDevices: AvailableMediaDevices;
+    selectedVideoDevice: MediaDeviceInfo | null;
+    selectedAudioDevice: MediaDeviceInfo | null;
+  }>({
+    availableDevices: { videoDevices: [], audioDevices: [] },
+    selectedAudioDevice: null,
+    selectedVideoDevice: null,
+  });
 
-  const [selectedVideoDevice, setSelectedVideoDevice] =
-    useState<MediaDeviceInfo | null>(null);
+  const setAvailableDevices = useCallback(
+    (availableDevices: AvailableMediaDevices) =>
+      setMediaDevice((prev) => {
+        const selectedAudioDevice =
+          availableDevices.audioDevices[0] || prev.selectedAudioDevice;
+        const selectedVideoDevice =
+          availableDevices.videoDevices[0] || prev.selectedVideoDevice;
+        return {
+          availableDevices,
+          selectedAudioDevice,
+          selectedVideoDevice,
+        };
+      }),
+    [],
+  );
 
-  const [selectedAudioDevice, setSelectedAudioDevice] =
-    useState<MediaDeviceInfo | null>(null);
+  const setSelectedAudioDevice = useCallback(
+    (device: MediaDeviceInfo | null) =>
+      setMediaDevice((prev) => ({ ...prev, selectedAudioDevice: device })),
+    [],
+  );
+
+  const setSelectedVideoDevice = useCallback(
+    (device: MediaDeviceInfo | null) =>
+      setMediaDevice((prev) => ({ ...prev, selectedVideoDevice: device })),
+    [],
+  );
 
   return {
-    availableDevices,
+    ...mediaDevice,
     setAvailableDevices,
-    selectedVideoDevice,
-    setSelectedVideoDevice,
-    selectedAudioDevice,
     setSelectedAudioDevice,
+    setSelectedVideoDevice,
   };
 };
 

@@ -21,15 +21,25 @@ export type VideoRecordFlowContextType = {
     stream: MediaStream | null;
     setStream: (stream: MediaStream) => void;
     stopStream: () => void;
+    capturedStreamDimension: {
+      width: number | null | undefined;
+      height: number | null | undefined;
+    };
+    setCapturedStreamDimension: Dispatch<
+      SetStateAction<{
+        width: number | null | undefined;
+        height: number | null | undefined;
+      }>
+    >;
   };
 
   mediaDevices: {
     availableDevices: AvailableMediaDevices;
-    setAvailableDevices: Dispatch<SetStateAction<AvailableMediaDevices>>;
+    setAvailableDevices: (availbaleDevices: AvailableMediaDevices) => void;
     selectedVideoDevice: MediaDeviceInfo | null;
-    setSelectedVideoDevice: Dispatch<SetStateAction<MediaDeviceInfo | null>>;
+    setSelectedVideoDevice: (device: MediaDeviceInfo | null) => void;
     selectedAudioDevice: MediaDeviceInfo | null;
-    setSelectedAudioDevice: Dispatch<SetStateAction<MediaDeviceInfo | null>>;
+    setSelectedAudioDevice: (device: MediaDeviceInfo | null) => void;
   };
   userChoise: UserChoise;
   dispatch: Dispatch<UserChoiseAction>;

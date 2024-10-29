@@ -6,7 +6,10 @@ import CameraCheckSection from './sections/CameraCheckSection';
 import useMediaStream from './hook/useMediaStream';
 
 const InitialSettings = () => {
-  const { textDictionary, mediaStream } = useVideoRecordFlowContext();
+  const {
+    textDictionary,
+    mediaStream: { stream, stopStream },
+  } = useVideoRecordFlowContext();
 
   useMediaStream();
 
@@ -15,9 +18,14 @@ const InitialSettings = () => {
       <h1 style={TypographySx.titleL}>
         {textDictionary('SettingVideoFlowScreen.Title')}
       </h1>
+
       <CameraCheckSection />
-      <BackgroundMusicSection />
-      <button onClick={() => mediaStream.stopStream()}>STOP</button>
+      {stream && (
+        <>
+          <BackgroundMusicSection />
+        </>
+      )}
+      <button onClick={() => stopStream()}>STOP</button>
     </Box>
   );
 };

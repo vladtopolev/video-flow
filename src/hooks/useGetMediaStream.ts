@@ -41,17 +41,26 @@ const useGetMediaStream = ({
           }
         : {}),
     }),
-    [constraints, selectedVideoDevice, selectedAudioDevice],
+    [constraints, selectedVideoDevice?.deviceId, selectedAudioDevice?.deviceId],
   );
 
   useEffect(() => {
+    // it means we don't get the list of devices yet
+    if (!selectedVideoDevice?.deviceId || !selectedAudioDevice?.deviceId) {
+      return;
+    }
     navigator.mediaDevices.getUserMedia(extendedConstraints).then((stream) => {
       const settings = stream.getVideoTracks()[0].getSettings();
       const capturedWidth = settings.width;
       const capturedHeight = settings.height;
       setCapturedStream?.(stream, { capturedHeight, capturedWidth });
     });
-  }, [extendedConstraints, setCapturedStream]);
+  }, [
+    extendedConstraints,
+    setCapturedStream,
+    selectedVideoDevice?.deviceId,
+    selectedAudioDevice?.deviceId,
+  ]);
 };
 
 export default useGetMediaStream;
