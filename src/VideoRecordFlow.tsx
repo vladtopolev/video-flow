@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, ReactNode, useState } from 'react';
 import {
   DEFAULT_BACKGROUND_MUSIC_LIST,
   DEFAULT_QUESTION_LIST,
@@ -11,24 +11,38 @@ import type {
 import { DefaultScreenTypes } from './VideoRecordFlow.types';
 import VideoRecordFlowContextComponent from './context/VideoRecordFlow.context';
 import defaultTextDictionary from './dictionary';
-import InitialSettings from './screens/SettingScreen/InitialSettings';
 import ContainerBreakpointsContextComponent from './styles/context/ContainerBreakpointsContext';
+import { VideoRecordWayTypes } from './recordVideoWays';
+import ActionContainerRendererDefault, {
+  ActionContainerRendererProps,
+} from './components/ActionContainerRenderer/ActionContainerRenderer';
+
+import InitialSettingsScreen from './screens/InitialSettings/InitialSettings';
+import BeforeRecordingScreen from './screens/BeforeRecording/BeforeRecording';
 
 export type VideoRecordFlowProps = {
   questionList?: QuestionConfig[];
   backgroundMusicList?: BackgroundMusicConfig[];
-  textDictionary?: TextDictionaryFunction;
+  videoRecordWayList?: VideoRecordWayTypes[];
   width: number;
   height: number;
+  textDictionary?: TextDictionaryFunction;
+  ActionContainerRenderer?: FC<ActionContainerRendererProps>;
 };
 
 const SCREENS: { [k: string]: FC } = {
-  [DefaultScreenTypes.INITIAL_SETTINGS]: InitialSettings,
+  [DefaultScreenTypes.INITIAL_SETTINGS]: InitialSettingsScreen,
+  [DefaultScreenTypes.BEFORE_RECORDING]: BeforeRecordingScreen,
 };
 
 const VideoRecordFlow = ({
   textDictionary = defaultTextDictionary,
   backgroundMusicList = DEFAULT_BACKGROUND_MUSIC_LIST,
+  videoRecordWayList = [
+    VideoRecordWayTypes.FREELY,
+    VideoRecordWayTypes.RANDOM_QUESTIONS,
+  ],
+  ActionContainerRenderer = ActionContainerRendererDefault,
   ...restProps
 }: VideoRecordFlowProps) => {
   const [currentScreen, setCurrentScreen] = useState<string>(
@@ -45,8 +59,10 @@ const VideoRecordFlow = ({
       currentScreen={currentScreen}
       questionList={DEFAULT_QUESTION_LIST}
       backgroundMusicList={backgroundMusicList}
+      videoRecordWayList={videoRecordWayList}
       setCurrentScreen={setCurrentScreen}
       textDictionary={textDictionary}
+      ActionContainerRenderer={ActionContainerRenderer}
       {...restProps}
     >
       <ContainerBreakpointsContextComponent>

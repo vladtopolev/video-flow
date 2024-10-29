@@ -80,7 +80,7 @@ export default {
       Next: 'Next',
     },
   },
-  BeforeRecordingChunkScreen: {
+  BeforeRecordingScreen: {
     FreelySpeechTitle: 'I am... Describe yourself, your hobbies and goals.',
     Tip: 'You can re-record all videos as many times as you need.',
     Controls: {

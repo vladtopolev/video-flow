@@ -22,6 +22,7 @@ export type BackgroundMusicConfig = {
 
 export enum DefaultScreenTypes {
   INITIAL_SETTINGS = 'INITIAL_SETTINGS',
+  BEFORE_RECORDING = 'BEFORE_RECORDING',
 }
 
 export type TextDictionaryFunction = (key: string) => string;
