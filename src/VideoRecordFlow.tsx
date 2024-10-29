@@ -1,4 +1,4 @@
-import { FC, ReactNode, useState } from 'react';
+import { FC, useState } from 'react';
 import {
   DEFAULT_BACKGROUND_MUSIC_LIST,
   DEFAULT_QUESTION_LIST,
@@ -9,16 +9,16 @@ import type {
   TextDictionaryFunction,
 } from './VideoRecordFlow.types';
 import { DefaultScreenTypes } from './VideoRecordFlow.types';
-import VideoRecordFlowContextComponent from './context/VideoRecordFlow.context';
-import defaultTextDictionary from './dictionary';
-import ContainerBreakpointsContextComponent from './styles/context/ContainerBreakpointsContext';
-import { VideoRecordWayTypes } from './recordVideoWays';
 import ActionContainerRendererDefault, {
   ActionContainerRendererProps,
 } from './components/ActionContainerRenderer/ActionContainerRenderer';
+import VideoRecordFlowContextComponent from './context/VideoRecordFlow.context';
+import defaultTextDictionary from './dictionary';
+import { VideoRecordWayTypes } from './recordVideoWays';
+import ContainerBreakpointsContextComponent from './styles/context/ContainerBreakpointsContext';
 
-import InitialSettingsScreen from './screens/InitialSettings/InitialSettings';
 import BeforeRecordingScreen from './screens/BeforeRecording/BeforeRecording';
+import InitialSettingsScreen from './screens/InitialSettings/InitialSettings';
 
 export type VideoRecordFlowProps = {
   questionList?: QuestionConfig[];
