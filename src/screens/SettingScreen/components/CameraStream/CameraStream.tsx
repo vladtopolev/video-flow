@@ -1,9 +1,9 @@
 import { VideocamOff as VideocamOffIcon } from '@mui/icons-material';
 import { Typography } from '@mui/material';
 import { CSSProperties, ReactNode } from 'react';
-// import StreamVideoPlayer from '../../../../components/StreamVideoPlayer';
 import { useVideoRecordFlowContext } from '../../../../context/VideoRecordFlow.context';
 import useTheme from '../../../../styles';
+import StreamVideoPlayer from '../../../../components/StreamVideoPlayer/StreamVideoPlayer';
 
 const Container = ({
   children,
@@ -62,8 +62,6 @@ const CameraStream = ({
     );
   }
 
-  return <>Test</>;
-  /*
   return (
     <Container style={style}>
       <StreamVideoPlayer
@@ -72,7 +70,6 @@ const CameraStream = ({
       />
     </Container>
   );
-  */
 };
 
 export default CameraStream;

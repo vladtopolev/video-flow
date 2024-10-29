@@ -5,24 +5,39 @@ import {
   SetStateAction,
   useContext,
 } from 'react';
-import useStream from './hooks/useStream';
+import useStream from './hooks/useMediaStream';
 import { VideoRecordFlowProps } from '../VideoRecordFlow';
 import useRecordVideoFlowUserChoise from '../state';
 import type { UserChoise, UserChoiseAction } from '../state';
+import useMediaDevices, {
+  AvailableMediaDevices,
+} from './hooks/useMediaDevices';
 
 export type VideoRecordFlowContextType = {
   currentScreen: string;
-  stream: MediaStream | null;
   setCurrentScreen: Dispatch<SetStateAction<string>>;
-  setStream: (stream: MediaStream) => void;
-  stopStream: () => void;
+
+  mediaStream: {
+    stream: MediaStream | null;
+    setStream: (stream: MediaStream) => void;
+    stopStream: () => void;
+  };
+
+  mediaDevices: {
+    availableDevices: AvailableMediaDevices;
+    setAvailableDevices: Dispatch<SetStateAction<AvailableMediaDevices>>;
+    selectedVideoDevice: MediaDeviceInfo | null;
+    setSelectedVideoDevice: Dispatch<SetStateAction<MediaDeviceInfo | null>>;
+    selectedAudioDevice: MediaDeviceInfo | null;
+    setSelectedAudioDevice: Dispatch<SetStateAction<MediaDeviceInfo | null>>;
+  };
   userChoise: UserChoise;
   dispatch: Dispatch<UserChoiseAction>;
 } & Required<VideoRecordFlowProps>;
 
-const VideoRecordFlowContext = createContext<VideoRecordFlowContextType>({
-  stream: null,
-} as VideoRecordFlowContextType);
+const VideoRecordFlowContext = createContext<VideoRecordFlowContextType>(
+  {} as VideoRecordFlowContextType,
+);
 
 const VideoRecordFlowContextComponent = ({
   children,
@@ -34,17 +49,17 @@ const VideoRecordFlowContextComponent = ({
   currentScreen: string;
   setCurrentScreen: Dispatch<SetStateAction<string>>;
 } & Required<VideoRecordFlowProps>) => {
-  const { stream, setStream, stopStream } = useStream();
+  const mediaStream = useStream();
+  const mediaDevices = useMediaDevices();
   const { userChoise, dispatch } = useRecordVideoFlowUserChoise();
 
   return (
     <VideoRecordFlowContext.Provider
       value={{
-        stream,
         currentScreen,
+        mediaStream,
+        mediaDevices,
         userChoise,
-        setStream,
-        stopStream,
         setCurrentScreen,
         dispatch,
         ...videoRecordFlowProps,

@@ -1,19 +1,15 @@
-import { useCallback } from 'react';
-import type { SetAvailbaleDevicesFunctionType } from '../../hooks/useAvailableMediaDevices';
-import { useAvailableMediaDevices } from '../../hooks/useAvailableMediaDevices';
+import { Box } from '@mui/material';
 import { useVideoRecordFlowContext } from '../../context/VideoRecordFlow.context';
 import TypographySx from '../../styles/typography';
-import { Box } from '@mui/material';
 import BackgroundMusicSection from './sections/BackgroundMusicSection';
 import CameraCheckSection from './sections/CameraCheckSection';
+import useMediaStream from './hook/useMediaStream';
 
 const InitialSettings = () => {
-  const setAvailableDevices =
-    useCallback<SetAvailbaleDevicesFunctionType>(() => {}, []);
+  const { textDictionary, mediaStream } = useVideoRecordFlowContext();
 
-  useAvailableMediaDevices({ setAvailableDevices });
+  useMediaStream();
 
-  const { textDictionary } = useVideoRecordFlowContext();
   return (
     <Box className="InitialSettings">
       <h1 style={TypographySx.titleL}>
@@ -21,6 +17,7 @@ const InitialSettings = () => {
       </h1>
       <CameraCheckSection />
       <BackgroundMusicSection />
+      <button onClick={() => mediaStream.stopStream()}>STOP</button>
     </Box>
   );
 };

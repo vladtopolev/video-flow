@@ -6,11 +6,13 @@ type StreamVideoPlayerProps = {
 };
 const StreamVideoPlayer = ({ stream, style }: StreamVideoPlayerProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
+
   useEffect(() => {
     if (videoRef.current && stream) {
       videoRef.current.srcObject = stream;
     }
   }, [stream]);
+
   return (
     <video
       ref={videoRef}
@@ -27,4 +29,5 @@ const StreamVideoPlayer = ({ stream, style }: StreamVideoPlayerProps) => {
     />
   );
 };
+
 export default memo(StreamVideoPlayer);

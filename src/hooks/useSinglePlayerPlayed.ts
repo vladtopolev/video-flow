@@ -25,7 +25,7 @@ class GlobalPlayMediaManager {
 
 const globalPlayMediaManager = new GlobalPlayMediaManager();
 
-export const useSinglePlayerPlayed = (playerControls: PlayerControlsType) => {
+const useSinglePlayerPlayed = (playerControls: PlayerControlsType) => {
   const playerIdRef = useRef(uuid4());
 
   useEffect(() => {
@@ -41,3 +41,5 @@ export const useSinglePlayerPlayed = (playerControls: PlayerControlsType) => {
 
   return { playSideEffectCallback };
 };
+
+export default useSinglePlayerPlayed;

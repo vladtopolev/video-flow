@@ -15,7 +15,7 @@ const Badge = ({
     <div
       style={{
         display: 'flex',
-        padding: `${spacing(2)} ${spacing(0.5)}`,
+        padding: `${spacing(0.5)} ${spacing(2)}`,
         backgroundColor: palette.primary.main,
         borderRadius: corners.sm,
         color: palette.error.contrastText,

@@ -9,7 +9,7 @@ import {
 import useTheme from '../../styles';
 import PlayButtonContainer from './components/PlayButtonContainer';
 import ProgressBar from './components/ProgressBar';
-import { useSinglePlayerPlayed } from '../../hooks/video';
+import useSinglePlayerPlayed from '../../hooks/useSinglePlayerPlayed';
 
 type AudioPlayerProps = {
   src: string;

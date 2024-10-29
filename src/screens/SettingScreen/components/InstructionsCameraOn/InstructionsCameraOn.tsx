@@ -9,32 +9,37 @@ type InstructionItemProps = {
 };
 
 const InstructionItem = ({ text }: InstructionItemProps) => {
-  const { typography, palette } = useTheme();
+  const { typography, palette, spacing } = useTheme();
   return (
     <div style={{ display: 'flex' }}>
       <CheckCircleIcon sx={{ color: palette.success.main, fontSize: 16 }} />
-      <Typography sx={{ ...typography.bodyS, ml: 2 }}>{text}</Typography>
+      <Typography sx={{ ...typography.bodyS, ml: spacing(2) }}>
+        {text}
+      </Typography>
     </div>
   );
 };
 
 const InstructionsCameraOn = () => {
   const { textDictionary } = useVideoRecordFlowContext();
+  const { spacing } = useTheme();
   const tips: string[] = textDictionary(
     'Instructions.CameraOn.Tips',
   ) as unknown as string[];
 
   return (
-    <div
-      style={{
-        width: '100%',
-        height: '100%',
-      }}
-    >
+    <div>
       <Badge style={{ lineHeight: 1, display: 'inline-block' }}>
         {textDictionary('Instructions.CameraOn.Label')}
       </Badge>
-      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4, mt: 5 }}>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: spacing(4),
+          mt: spacing(5),
+        }}
+      >
         {tips.map((text: string, index: number) => (
           <InstructionItem key={index} text={text} />
         ))}

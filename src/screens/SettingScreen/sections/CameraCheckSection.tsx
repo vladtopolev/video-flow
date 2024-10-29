@@ -6,7 +6,9 @@ import InstructionsCameraOn from '../components/InstructionsCameraOn/Instruction
 
 const CameraCheckSection = () => {
   const { corners, spacing, palette } = useTheme();
-  const { stream } = useVideoRecordFlowContext();
+  const {
+    mediaStream: { stream },
+  } = useVideoRecordFlowContext();
   return (
     <div style={{ display: 'flex', gap: spacing(4) }}>
       <div
@@ -29,6 +31,7 @@ const CameraCheckSection = () => {
           borderRadius: corners.md,
           overflow: 'hidden',
           border: `1px solid ${palette.grey[300]}`,
+          width: '100%',
         }}
       >
         {stream ? <InstructionsCameraOn /> : <InstructionsCameraOff />}
