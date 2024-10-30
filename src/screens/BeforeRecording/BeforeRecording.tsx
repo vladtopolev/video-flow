@@ -1,10 +1,9 @@
 import { TextField, Typography } from '@mui/material';
-import { useVideoRecordFlowContext } from '../../context/VideoRecordFlow.context';
 import TipContainer from '../../components/TipContainer/TipContainer';
-import useTheme from '../../styles';
+import { useVideoRecordFlowContext } from '../../context/VideoRecordFlow.context';
 import { actions } from '../../state';
+import useTheme from '../../styles';
 import Header from './components/QuestionHeader';
-import { DefaultScreenTypes } from '../../VideoRecordFlow.types';
 
 const BeforeRecording = () => {
   const {

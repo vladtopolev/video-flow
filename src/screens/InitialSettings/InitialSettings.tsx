@@ -2,7 +2,6 @@ import { Typography } from '@mui/material';
 import { useVideoRecordFlowContext } from '../../context/VideoRecordFlow.context';
 import { actions } from '../../state';
 import useTheme from '../../styles';
-import { DefaultScreenTypes } from '../../VideoRecordFlow.types';
 import useMediaStream from './hook/useMediaStream';
 import BackgroundMusicSection from './sections/BackgroundMusicSection';
 import CameraCheckSection from './sections/CameraCheckSection';
