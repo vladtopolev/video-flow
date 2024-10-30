@@ -1,5 +1,7 @@
+import { Typography } from '@mui/material';
 import { useVideoRecordFlowContext } from '../../context/VideoRecordFlow.context';
-import TypographySx from '../../styles/typography';
+import { actions } from '../../state';
+import useTheme from '../../styles';
 import { DefaultScreenTypes } from '../../VideoRecordFlow.types';
 import useMediaStream from './hook/useMediaStream';
 import BackgroundMusicSection from './sections/BackgroundMusicSection';
@@ -9,21 +11,22 @@ import PickRecordVideoWaySection from './sections/PickRecordVideoWaySection';
 const InitialSettings = () => {
   const {
     textDictionary,
-    currentScreen,
     mediaStream: { stream, stopStream },
     userChoise: { recordVideoWay },
     ActionContainerRenderer,
-    setCurrentScreen,
+    userChoise: { currentScreen },
+    dispatch,
   } = useVideoRecordFlowContext();
+  const { typography, spacing } = useTheme();
 
   useMediaStream();
 
   return (
     <>
-      <div className="InitialSettings">
-        <h1 style={TypographySx.titleL}>
+      <div className="InitialSettingsScreen">
+        <Typography style={{ ...typography.titleL, marginBottom: spacing(10) }}>
           {textDictionary('SettingVideoFlowScreen.Title')}
-        </h1>
+        </Typography>
 
         <CameraCheckSection />
         {stream && (
@@ -40,7 +43,7 @@ const InitialSettings = () => {
         buttons={{
           next: {
             onAction: () => {
-              setCurrentScreen(DefaultScreenTypes.BEFORE_RECORDING);
+              dispatch(actions.goNext());
             },
             disabled: !recordVideoWay || !stream,
           },

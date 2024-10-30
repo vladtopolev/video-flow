@@ -1,7 +1,21 @@
 import { Box } from '@mui/material';
+import { useEffect } from 'react';
+import { useVideoRecordFlowContext } from '../../../context/VideoRecordFlow.context';
+import { actions } from '../../../state';
 
+// TODO
 const RandomQuestions = () => {
-  console.log();
+  const {
+    dispatch,
+    questionList,
+    userChoise: { questionsTeleprompterNotes },
+  } = useVideoRecordFlowContext();
+  useEffect(() => {
+    console.log('==>', questionList);
+    dispatch(actions.setPickedQuestions(questionList.slice(0, 3)));
+  }, [dispatch, questionList]);
+
+  console.log(questionsTeleprompterNotes);
   return (
     <Box sx={{ mt: 2 }}>
       Test

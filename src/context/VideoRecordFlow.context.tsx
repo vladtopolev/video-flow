@@ -5,18 +5,14 @@ import {
   SetStateAction,
   useContext,
 } from 'react';
-import useStream from './hooks/useMediaStream';
 import { VideoRecordFlowProps } from '../VideoRecordFlow';
-import useRecordVideoFlowUserChoise from '../state';
 import type { UserChoise, UserChoiseAction } from '../state';
 import useMediaDevices, {
   AvailableMediaDevices,
 } from './hooks/useMediaDevices';
+import useStream from './hooks/useMediaStream';
 
 export type VideoRecordFlowContextType = {
-  currentScreen: string;
-  setCurrentScreen: Dispatch<SetStateAction<string>>;
-
   mediaStream: {
     stream: MediaStream | null;
     setStream: (stream: MediaStream) => void;
@@ -51,27 +47,21 @@ const VideoRecordFlowContext = createContext<VideoRecordFlowContextType>(
 
 const VideoRecordFlowContextComponent = ({
   children,
-  currentScreen,
-  setCurrentScreen,
+
   ...videoRecordFlowProps
 }: {
   children: ReactNode;
-  currentScreen: string;
-  setCurrentScreen: Dispatch<SetStateAction<string>>;
+  userChoise: UserChoise;
+  dispatch: Dispatch<UserChoiseAction>;
 } & Required<VideoRecordFlowProps>) => {
   const mediaStream = useStream();
   const mediaDevices = useMediaDevices();
-  const { userChoise, dispatch } = useRecordVideoFlowUserChoise();
 
   return (
     <VideoRecordFlowContext.Provider
       value={{
-        currentScreen,
         mediaStream,
         mediaDevices,
-        userChoise,
-        setCurrentScreen,
-        dispatch,
         ...videoRecordFlowProps,
       }}
     >
