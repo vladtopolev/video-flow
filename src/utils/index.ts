@@ -18,4 +18,15 @@ function get<T extends Record<string, any>, K = any>(
   return get(obj[keys[0]], keys.slice(1).join('.'), defaultValue);
 }
 
-export default { get };
+const hex2rgba = (hex = '', alpha = 1) => {
+  let normalizedHex = hex;
+
+  if (hex.length === 4) {
+    normalizedHex = hex + hex.replace('#', '');
+  }
+  const hexMatch = normalizedHex.match(/\w\w/g);
+  const [r, g, b] = hexMatch?.map((x) => parseInt(x, 16)) || [];
+  return `rgba(${r},${g},${b},${alpha})`;
+};
+
+export default { get, hex2rgba };

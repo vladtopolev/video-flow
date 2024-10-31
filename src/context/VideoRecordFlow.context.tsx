@@ -1,42 +1,14 @@
-import {
-  createContext,
-  Dispatch,
-  ReactNode,
-  SetStateAction,
-  useContext,
-} from 'react';
+import { createContext, Dispatch, ReactNode, useContext } from 'react';
 import { VideoRecordFlowProps } from '../VideoRecordFlow';
 import type { UserChoise, UserChoiseAction } from '../state';
-import useMediaDevices, {
-  AvailableMediaDevices,
-} from './hooks/useMediaDevices';
+import useMediaDevices from './hooks/useMediaDevices';
 import useStream from './hooks/useMediaStream';
+import useTelepromterSettings from './hooks/useTelepromterSettings';
 
 export type VideoRecordFlowContextType = {
-  mediaStream: {
-    stream: MediaStream | null;
-    setStream: (stream: MediaStream) => void;
-    stopStream: () => void;
-    capturedStreamDimension: {
-      width: number | null | undefined;
-      height: number | null | undefined;
-    };
-    setCapturedStreamDimension: Dispatch<
-      SetStateAction<{
-        width: number | null | undefined;
-        height: number | null | undefined;
-      }>
-    >;
-  };
-
-  mediaDevices: {
-    availableDevices: AvailableMediaDevices;
-    setAvailableDevices: (availbaleDevices: AvailableMediaDevices) => void;
-    selectedVideoDevice: MediaDeviceInfo | null;
-    setSelectedVideoDevice: (device: MediaDeviceInfo | null) => void;
-    selectedAudioDevice: MediaDeviceInfo | null;
-    setSelectedAudioDevice: (device: MediaDeviceInfo | null) => void;
-  };
+  mediaStream: ReturnType<typeof useStream>;
+  mediaDevices: ReturnType<typeof useMediaDevices>;
+  telepromterSettings: ReturnType<typeof useTelepromterSettings>;
   userChoise: UserChoise;
   dispatch: Dispatch<UserChoiseAction>;
 } & Required<VideoRecordFlowProps>;
@@ -56,12 +28,14 @@ const VideoRecordFlowContextComponent = ({
 } & Required<VideoRecordFlowProps>) => {
   const mediaStream = useStream();
   const mediaDevices = useMediaDevices();
+  const telepromterSettings = useTelepromterSettings();
 
   return (
     <VideoRecordFlowContext.Provider
       value={{
         mediaStream,
         mediaDevices,
+        telepromterSettings,
         ...videoRecordFlowProps,
       }}
     >
