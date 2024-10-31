@@ -10,20 +10,50 @@ import useStyles from './RecordingChunk.styles';
 import CameraStream from './sections/CameraStream';
 import TelepromterOverlay from './sections/TelepromterOverlay';
 import RecordControls from './components/RecordControls';
+import useRecordingControl from './hooks/useRecordingControl';
+import {
+  useCurrentQuestionDuration,
+  useVideoRecordFlowContext,
+} from '../../context/VideoRecordFlow.context';
+import { actions } from '../../state';
 
 const RecordingChunk = () => {
+  const {
+    dispatch,
+    telepromterSettings: { shouldBeScrolled },
+  } = useVideoRecordFlowContext();
+  const { maxDuration, minDuration } = useCurrentQuestionDuration();
+
   const { controlContainerWidth, setVideoContainerWidth } =
     useControlContainerWidth();
   const { spacing } = useTheme();
-  const telepropterRef = useRef<TelepromterManagerProps>(null);
-
   const { videoContainerSx } = useStyles();
 
-  const isChunkRecording = false;
-  const duration = 0;
-  const maxDuration = 100;
-  const minDuration = 0;
-  const beforeRecordingCountdownRun = false;
+  const telepropterRef = useRef<TelepromterManagerProps>(null);
+  const {
+    startRecording,
+    stopRecording,
+    onRerecord,
+    recordingState: { beforeRecordingCountdownRun, duration, isRecording },
+  } = useRecordingControl({
+    maxDuration,
+    startRecordingAction: () => {
+      telepropterRef.current?.stopScrolling();
+      telepropterRef.current?.scrollTo(0);
+      setTimeout(() => {
+        if (shouldBeScrolled) {
+          telepropterRef.current?.startScrolling();
+        }
+      }, 1000);
+    },
+    stopRecordingAction: () => {
+      dispatch(actions.goNext());
+    },
+    reRecordAction: () => {
+      telepropterRef.current?.stopScrolling();
+      telepropterRef.current?.scrollTo(0);
+    },
+  });
 
   return (
     <ReacordingDialog>
@@ -38,18 +68,20 @@ const RecordingChunk = () => {
             }}
           >
             <RecordControls
-              isRecording={isChunkRecording}
+              isRecording={isRecording}
               duration={duration}
               maxDuration={maxDuration}
               minDuration={minDuration}
               disabled={
-                (isChunkRecording && duration < minDuration) ||
+                (isRecording && duration < minDuration) ||
                 beforeRecordingCountdownRun
               }
-              onStart={() => {}}
-              onStop={() => {}}
-              onBack={() => {}}
-              onRerecord={() => {}}
+              onStart={startRecording}
+              onStop={stopRecording}
+              onRerecord={onRerecord}
+              onBack={() => {
+                dispatch(actions.goPrev());
+              }}
             />
           </Box>
         }
@@ -65,27 +97,6 @@ const RecordingChunk = () => {
       </RecordingLayout>
     </ReacordingDialog>
   );
-  /*return (
-    <>
-      <div>Recording Chunl</div>
-      <div>
-        <button
-          onClick={() => {
-            dispatch(actions.goPrev());
-          }}
-        >
-          Prev
-        </button>
-        <button
-          onClick={() => {
-            dispatch(actions.goNext());
-          }}
-        >
-          Next
-        </button>
-      </div>
-    </>
-  );*/
 };
 
 export default RecordingChunk;

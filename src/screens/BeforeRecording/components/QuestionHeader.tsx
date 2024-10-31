@@ -1,22 +1,18 @@
 import { TimerOutlined as TimerIcon } from '@mui/icons-material';
 import { Box, Typography } from '@mui/material';
-import { useVideoRecordFlowContext } from '../../../context/VideoRecordFlow.context';
+import {
+  useCurrentQuestionDuration,
+  useVideoRecordFlowContext,
+} from '../../../context/VideoRecordFlow.context';
 import useTheme from '../../../styles';
 
 const QuestionHeader = () => {
   const {
-    minVideoDurationDefault,
-    maxVideoDurationDefault,
     userChoise: { currentQuestionIndex, pickedQuestions },
   } = useVideoRecordFlowContext();
   const { spacing, palette, typography } = useTheme();
 
-  const minSec =
-    pickedQuestions[currentQuestionIndex]?.duration?.min ||
-    minVideoDurationDefault;
-  const maxSec =
-    pickedQuestions[currentQuestionIndex]?.duration?.max ||
-    maxVideoDurationDefault;
+  const { minDuration, maxDuration } = useCurrentQuestionDuration();
 
   if (pickedQuestions.length === 1) {
     return (
@@ -25,7 +21,7 @@ const QuestionHeader = () => {
         component="div"
       >
         <TimerIcon sx={{ mr: 2, verticalAlign: 'bottom' }} />
-        The duration of the video is up to {maxSec / 60} min.
+        The duration of the video is up to {maxDuration / 60} min.
       </Typography>
     );
   }
@@ -63,7 +59,7 @@ const QuestionHeader = () => {
 
       <Typography sx={typography.titleS}>
         <TimerIcon sx={{ verticalAlign: 'bottom', mr: spacing(2) }} />
-        {minSec}-{maxSec} sec
+        {minDuration}-{maxDuration} sec
       </Typography>
     </Box>
   );

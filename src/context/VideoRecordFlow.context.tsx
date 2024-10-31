@@ -47,4 +47,21 @@ const VideoRecordFlowContextComponent = ({
 export const useVideoRecordFlowContext = () =>
   useContext(VideoRecordFlowContext);
 
+export const useCurrentQuestionDuration = () => {
+  const {
+    minVideoDurationDefault,
+    maxVideoDurationDefault,
+    userChoise: { currentQuestionIndex, pickedQuestions },
+  } = useVideoRecordFlowContext();
+
+  const minDuration =
+    pickedQuestions[currentQuestionIndex]?.duration?.min ||
+    minVideoDurationDefault;
+  const maxDuration =
+    pickedQuestions[currentQuestionIndex]?.duration?.max ||
+    maxVideoDurationDefault;
+
+  return { maxDuration, minDuration };
+};
+
 export default VideoRecordFlowContextComponent;

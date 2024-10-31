@@ -98,7 +98,6 @@ const RecordControls = ({
         sx={{
           display: 'flex',
           alignItems: 'center',
-          width: '100%',
           height: '100%',
           overflow: 'hidden',
           pr: spacing(6),
@@ -117,7 +116,7 @@ const RecordControls = ({
       </Box>
 
       <TooltipElement showTooltip={!isRecording}>
-        <Box sx={{ width: '100%', height: '100%' }}>
+        <Box sx={{ height: '100%' }}>
           <PlayButton
             onKeyDown={(e) => {
               if (e.key === 'Spacebar') {
@@ -132,7 +131,6 @@ const RecordControls = ({
       </TooltipElement>
       <Box
         sx={{
-          width: '100%',
           height: '100%',
           display: 'flex',
           justifyContent: isRecording ? 'space-between' : 'flex-end',

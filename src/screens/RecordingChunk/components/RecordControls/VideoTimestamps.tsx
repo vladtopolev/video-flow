@@ -11,7 +11,7 @@ const VideoTimestamps = ({
 }) => {
   const { typography, spacing, palette } = useTheme();
   return (
-    <Box>
+    <Box sx={{ display: 'flex' }}>
       <Typography
         sx={{
           ...typography.titleXS,

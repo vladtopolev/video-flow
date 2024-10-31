@@ -18,8 +18,9 @@ const BackButton = ({
         color: palette.common.white,
         textTransform: 'uppercase',
         fontWeight: 700,
+        cursor: 'pointer',
       }}
-      onChange={onBack}
+      onClick={onBack}
     >
       <Typography sx={typography.titleS}>
         {titleBackBtn || textDictionary('Buttons.Back')}

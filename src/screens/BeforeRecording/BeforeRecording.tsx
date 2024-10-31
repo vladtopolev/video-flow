@@ -18,12 +18,6 @@ const BeforeRecording = () => {
     dispatch,
     ActionContainerRenderer,
   } = useVideoRecordFlowContext();
-
-  console.log(
-    pickedQuestions,
-    currentQuestionIndex,
-    questionsTeleprompterNotes,
-  );
   const { spacing, typography } = useTheme();
 
   const title = pickedQuestions[currentQuestionIndex]?.webText;

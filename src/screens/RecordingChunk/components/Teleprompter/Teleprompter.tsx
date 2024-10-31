@@ -119,6 +119,7 @@ const Telepromter = ({
             }}
           >
             <Typography
+              component="div"
               className="telepromter-text"
               sx={{
                 fontSize: _fontSize,

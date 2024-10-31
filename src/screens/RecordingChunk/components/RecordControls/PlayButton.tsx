@@ -1,5 +1,6 @@
 import { Box, Button, SxProps } from '@mui/material';
 import { KeyboardEventHandler, useEffect, useRef } from 'react';
+import useTheme from '../../../../styles';
 
 const StartRecordButtonSx: SxProps = {
   backgroundColor: 'error.main',
@@ -27,6 +28,7 @@ const PlayButton = ({
   disabled?: boolean;
 }) => {
   const ref = useRef<HTMLButtonElement>(null);
+  const { palette } = useTheme();
 
   useEffect(() => {
     if (ref && ref.current) {
@@ -50,7 +52,7 @@ const PlayButton = ({
           md: 4,
         },
         borderStyle: 'solid',
-        borderColor: 'common.white',
+        borderColor: palette.common.white,
 
         display: 'flex',
         justifyContent: 'center',
@@ -64,11 +66,11 @@ const PlayButton = ({
         },
 
         '&.Mui-disabled': {
-          borderColor: 'action.disabled',
+          borderColor: palette.action.disabled,
           opacity: 0.3,
         },
         '&.Mui-disabled div': {
-          backgroundColor: 'action.disabled',
+          backgroundColor: palette.action.disabled,
         },
         '&:hover': {
           transform: 'scale(1.05)',

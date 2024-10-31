@@ -6,6 +6,7 @@ import Telepromter, {
   TelepromterManagerProps,
 } from '../components/Teleprompter/Teleprompter';
 import { MutableRefObject, useCallback } from 'react';
+import { actions } from '../../../state';
 
 const TelepromterOverlay = ({
   telepromterManagerRef,
@@ -21,11 +22,19 @@ const TelepromterOverlay = ({
       pickedQuestions,
       questionsTeleprompterNotes,
     },
+    dispatch,
   } = useVideoRecordFlowContext();
 
   const question = pickedQuestions[currentQuestionIndex]?.webText;
   const notes = questionsTeleprompterNotes[currentQuestionIndex];
-  const changeNotes = useCallback(() => {}, []);
+  const changeNotes = useCallback(
+    (notes: string) => {
+      dispatch(
+        actions.setQuestionTeleprompterNote(currentQuestionIndex, notes),
+      );
+    },
+    [dispatch, currentQuestionIndex],
+  );
 
   return (
     <div
