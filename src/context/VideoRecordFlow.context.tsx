@@ -1,4 +1,10 @@
-import { createContext, Dispatch, ReactNode, useContext } from 'react';
+import {
+  createContext,
+  Dispatch,
+  ReactNode,
+  useContext,
+  useState,
+} from 'react';
 import { VideoRecordFlowProps } from '../VideoRecordFlow';
 import type { UserChoise, UserChoiseAction } from '../state';
 import useMediaDevices from './hooks/useMediaDevices';
@@ -9,6 +15,8 @@ export type VideoRecordFlowContextType = {
   mediaStream: ReturnType<typeof useStream>;
   mediaDevices: ReturnType<typeof useMediaDevices>;
   telepromterSettings: ReturnType<typeof useTelepromterSettings>;
+  chunks: Blob[];
+  setChunk: (index: number, chunk: Blob) => void;
   userChoise: UserChoise;
   dispatch: Dispatch<UserChoiseAction>;
 } & Required<VideoRecordFlowProps>;
@@ -26,6 +34,13 @@ const VideoRecordFlowContextComponent = ({
   userChoise: UserChoise;
   dispatch: Dispatch<UserChoiseAction>;
 } & Required<VideoRecordFlowProps>) => {
+  const [chunks, setChunks] = useState<Blob[]>([]);
+  const setChunk = (index: number, chunk: Blob) =>
+    setChunks((prev) => {
+      prev[index] = chunk;
+      return prev;
+    });
+
   const mediaStream = useStream();
   const mediaDevices = useMediaDevices();
   const telepromterSettings = useTelepromterSettings();
@@ -36,6 +51,8 @@ const VideoRecordFlowContextComponent = ({
         mediaStream,
         mediaDevices,
         telepromterSettings,
+        chunks,
+        setChunk,
         ...videoRecordFlowProps,
       }}
     >

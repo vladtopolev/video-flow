@@ -2,7 +2,7 @@ import { Dialog } from '@mui/material';
 import { ReactNode } from 'react';
 import useTheme from '../../styles';
 
-const ReacordingDialog = ({ children }: { children: ReactNode }) => {
+const RecordingDialog = ({ children }: { children: ReactNode }) => {
   const { palette } = useTheme();
   return (
     <Dialog
@@ -20,4 +20,4 @@ const ReacordingDialog = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export default ReacordingDialog;
+export default RecordingDialog;

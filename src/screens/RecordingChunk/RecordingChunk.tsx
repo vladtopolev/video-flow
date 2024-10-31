@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import { useRef } from 'react';
 import FitCenteredContentWithAspectRatio from '../../components/FitCenteredContentWithAspectRatio/FitCenteredContentWithAspectRatio';
-import ReacordingDialog from '../../components/RecordingDialog/ReacordingDialog';
+import ReacordingDialog from '../../components/RecordingDialog/RecordingDialog';
 import RecordingLayout from '../../components/RecordingLayout/RecordingLayout';
 import useTheme from '../../styles';
 import { TelepromterManagerProps } from './components/Teleprompter/Teleprompter';

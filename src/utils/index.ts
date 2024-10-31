@@ -50,10 +50,53 @@ export const supportedVideoMimeType = () =>
     ? VIDEO_MIME_TYPES.videoWebm
     : VIDEO_MIME_TYPES.videoMp4;
 
+export const createFileFromBlobArray = (blobArray: Blob[]) => {
+  const blob: Blob[] = [new Blob(blobArray)];
+  return new File(blob, 'fileName', { type: supportedVideoMimeType() });
+};
+
+export const requestFullscreen = (videoElement: any) => {
+  if (videoElement.requestFullscreen) {
+    videoElement.requestFullscreen();
+  } else if (videoElement.webkitRequestFullscreen) {
+    videoElement.webkitRequestFullscreen();
+  } else if (videoElement.mozRequestFullScreen) {
+    videoElement.mozRequestFullScreen();
+  } else if (videoElement.msRequestFullscreen) {
+    videoElement.msRequestFullscreen();
+  } else if (videoElement.webkitEnterFullscreen) {
+    videoElement.webkitEnterFullscreen();
+  }
+};
+
+export const isFullscreen = () => {
+  const doc = document as any;
+  return (
+    !doc.webkitIsFullScreen && !doc.mozFullScreen && !doc.msFullscreenElement
+  );
+};
+
+export const attachFullscreenEvent = (handler: () => void) => {
+  window.addEventListener('fullscreenchange', handler);
+  window.addEventListener('mozfullscreenchange', handler);
+  document.addEventListener('MSFullscreenChange', handler);
+  document.addEventListener('webkitfullscreenchange', handler);
+  return () => {
+    window.removeEventListener('fullscreenchange', handler);
+    window.removeEventListener('mozfullscreenchange', handler);
+    window.removeEventListener('MSFullscreenChange', handler);
+    window.removeEventListener('webkitfullscreenchange', handler);
+  };
+};
+
 export default {
   get,
   hex2rgba,
   secsToTime,
   VIDEO_MIME_TYPES,
   supportedVideoMimeType,
+  createFileFromBlobArray,
+  attachFullscreenEvent,
+  isFullscreen,
+  requestFullscreen,
 };
