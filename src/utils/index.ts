@@ -29,4 +29,31 @@ const hex2rgba = (hex = '', alpha = 1) => {
   return `rgba(${r},${g},${b},${alpha})`;
 };
 
-export default { get, hex2rgba };
+const secsToTime = (seconds: number, separator = ':') =>
+  [
+    Math.trunc(seconds / 60 / 60),
+    Math.trunc((seconds / 60) % 60),
+    Math.trunc(seconds % 60),
+  ]
+    .join(separator)
+    .replace(/\b(\d)\b/g, '0$1')
+    .replace(/^00:/, '');
+
+// https://stackoverflow.com/questions/61881598/record-the-highest-quality-video-using-mediarecorder-api-in-html5
+export enum VIDEO_MIME_TYPES {
+  videoWebm = 'video/webm;codecs=vp8,opus',
+  videoMp4 = 'video/mp4',
+}
+
+export const supportedVideoMimeType = () =>
+  MediaRecorder.isTypeSupported(VIDEO_MIME_TYPES.videoWebm)
+    ? VIDEO_MIME_TYPES.videoWebm
+    : VIDEO_MIME_TYPES.videoMp4;
+
+export default {
+  get,
+  hex2rgba,
+  secsToTime,
+  VIDEO_MIME_TYPES,
+  supportedVideoMimeType,
+};

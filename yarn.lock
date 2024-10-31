@@ -5184,6 +5184,11 @@ vscode-uri@^3.0.8:
   resolved "https://registry.yarnpkg.com/vscode-uri/-/vscode-uri-3.0.8.tgz#1770938d3e72588659a172d0fd4642780083ff9f"
   integrity sha512-AyFQ0EVmsOZOlAnxoFOGOq1SQDWAB7C6aqMGS23svWAllfOaxbuFvcT8D1i8z3Gyn8fraVeZNNmN6e9bxxXkKw==
 
+webm-fix-duration@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/webm-fix-duration/-/webm-fix-duration-1.0.1.tgz#9000067cfd015d78682779395cd34502f6936db6"
+  integrity sha512-KaL2yq5BQ1ngRlWVpwQ0bI8INW3ZMzrbPfz8L50GvZHhReCeG5+zKqzk4BcpK6vEdMRHSxoNHn/ixiDqVdKZTw==
+
 webpack-virtual-modules@^0.6.2:
   version "0.6.2"
   resolved "https://registry.yarnpkg.com/webpack-virtual-modules/-/webpack-virtual-modules-0.6.2.tgz#057faa9065c8acf48f24cb57ac0e77739ab9a7e8"

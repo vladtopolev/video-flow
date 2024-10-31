@@ -4,14 +4,16 @@ import useTheme from '../../styles';
 const ReacordingLayout = ({
   children,
   footer,
+  className,
 }: {
   children: ReactNode;
   footer: ReactNode;
+  className?: string;
 }) => {
   const { spacing } = useTheme();
   return (
     <div
-      className="RecordingLayout"
+      className={className}
       style={{
         width: '100%',
         height: '100dvh',

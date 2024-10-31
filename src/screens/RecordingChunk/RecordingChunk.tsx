@@ -6,45 +6,58 @@ import RecordingLayout from '../../components/RecordingLayout/RecordingLayout';
 import useTheme from '../../styles';
 import { TelepromterManagerProps } from './components/Teleprompter/Teleprompter';
 import useControlContainerWidth from './hooks/useControlContainerWidth';
+import useStyles from './RecordingChunk.styles';
 import CameraStream from './sections/CameraStream';
 import TelepromterOverlay from './sections/TelepromterOverlay';
+import RecordControls from './components/RecordControls';
 
 const RecordingChunk = () => {
   const { controlContainerWidth, setVideoContainerWidth } =
     useControlContainerWidth();
-  const { spacing, palette, corners } = useTheme();
+  const { spacing } = useTheme();
   const telepropterRef = useRef<TelepromterManagerProps>(null);
+
+  const { videoContainerSx } = useStyles();
+
+  const isChunkRecording = false;
+  const duration = 0;
+  const maxDuration = 100;
+  const minDuration = 0;
+  const beforeRecordingCountdownRun = false;
 
   return (
     <ReacordingDialog>
       <RecordingLayout
+        className="RecordingChunkScreen"
         footer={
           <Box
             sx={{
               width: controlContainerWidth,
               mx: 'auto',
-              marginTop: spacing(6),
+              mt: spacing(6),
             }}
           >
-            <div style={{ height: 42, background: 'red' }} />
+            <RecordControls
+              isRecording={isChunkRecording}
+              duration={duration}
+              maxDuration={maxDuration}
+              minDuration={minDuration}
+              disabled={
+                (isChunkRecording && duration < minDuration) ||
+                beforeRecordingCountdownRun
+              }
+              onStart={() => {}}
+              onStop={() => {}}
+              onBack={() => {}}
+              onRerecord={() => {}}
+            />
           </Box>
         }
       >
         <FitCenteredContentWithAspectRatio
           aspectRatio={600 / 900}
           onDimensionChange={(widthVideo) => setVideoContainerWidth(widthVideo)}
-          sx={{
-            position: 'relative',
-            minHeight: 10,
-            backgroundColor: palette.common.black,
-            display: 'flex',
-            alignItems: 'center',
-            borderRadius: {
-              xs: corners.md,
-              md: corners.lg,
-            },
-            overflow: 'hidden',
-          }}
+          sx={videoContainerSx}
         >
           <CameraStream />
           <TelepromterOverlay telepromterManagerRef={telepropterRef} />
