@@ -5,6 +5,7 @@ import {
 } from './VideoRecordFlow.default';
 import type {
   BackgroundMusicConfig,
+  FinishedHandler,
   QuestionConfig,
   TextDictionaryFunction,
 } from './VideoRecordFlow.types';
@@ -36,6 +37,7 @@ export type VideoRecordFlowProps = {
   textDictionary?: TextDictionaryFunction;
   blobUploader: BlobUploader;
   onCancel: () => void;
+  onFinished: FinishedHandler;
   ActionContainerRenderer?: FC<ActionContainerRendererProps>;
 };
 

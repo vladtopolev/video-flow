@@ -37,15 +37,19 @@ export const Default: Story = {
     onCancel: () => {
       console.log('cancel');
     },
+    onFinished: (props) => {
+      console.log('finished', props);
+    },
     blobUploader: ({ index, onProgress, originalFormat }) =>
       new Promise((resolve) => {
-        const counter = 0;
+        let counter = 0;
         const id = setInterval(() => {
           if (counter >= DELAY) {
             clearInterval(id);
             resolve(`${index}.${originalFormat}`);
             return;
           }
+          counter++;
           onProgress(counter, DELAY);
         }, 1000);
       }),

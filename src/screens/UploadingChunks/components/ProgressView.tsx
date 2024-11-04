@@ -1,7 +1,7 @@
 import { Box, LinearProgress, Typography } from '@mui/material';
-import { useVideoRecordFlowContext } from '../../../../context/VideoRecordFlow.context';
-import useTheme from '../../../../styles';
-import TipContainer from '../../../../components/TipContainer/TipContainer';
+import { useVideoRecordFlowContext } from '../../../context/VideoRecordFlow.context';
+import useTheme from '../../../styles';
+import TipContainer from '../../../components/TipContainer/TipContainer';
 
 const ProgressView = ({ progress }: { progress: number }) => {
   const { textDictionary } = useVideoRecordFlowContext();

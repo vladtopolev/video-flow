@@ -3,7 +3,7 @@ import RecordingDialog from '../../components/RecordingDialog/RecordingDialog';
 import { useVideoRecordFlowContext } from '../../context/VideoRecordFlow.context';
 import useWarningCloseWindow from '../../hooks/useWarningCloseWindow';
 import useTheme from '../../styles';
-import ProgressView from './components/components/ProgressView';
+import ProgressView from './components/ProgressView';
 
 type GenerationVideoState = {
   isLoading: boolean;
@@ -14,7 +14,10 @@ type GenerationVideoState = {
 
 const UploadingChunks = () => {
   const {
+    userChoise,
     mediaStream: { stopStream },
+    chunksManagment: { blobBackgroundUploader },
+    onFinished,
   } = useVideoRecordFlowContext();
 
   const { spacing, palette } = useTheme();
@@ -33,9 +36,32 @@ const UploadingChunks = () => {
   }, [stopStream]);
 
   useEffect(() => {
-    // TODO
-    setState((prev) => prev);
-  }, []);
+    const progressListener = (progress: number, isDone: boolean) => {
+      setState((prevState) => ({
+        ...prevState,
+        progress,
+        isDone,
+      }));
+    };
+
+    blobBackgroundUploader.registerProgressListener(progressListener);
+
+    return () => {
+      blobBackgroundUploader.unRegisterProgressListener(progressListener);
+    };
+  }, [blobBackgroundUploader]);
+
+  useEffect(() => {
+    if (state.isDone) {
+      const { pickedQuestions, music, recordVideoWay } = userChoise;
+      onFinished({
+        questions: pickedQuestions,
+        chunks: blobBackgroundUploader.chunks,
+        music,
+        recordVideoWay,
+      });
+    }
+  }, [state.isDone, userChoise, blobBackgroundUploader, onFinished]);
 
   return (
     <RecordingDialog>

@@ -5,17 +5,11 @@ import { actions } from '../../../state';
 
 // TODO
 const RandomQuestions = () => {
-  const {
-    dispatch,
-    questionList,
-    userChoise: { questionsTeleprompterNotes },
-  } = useVideoRecordFlowContext();
+  const { dispatch, questionList } = useVideoRecordFlowContext();
   useEffect(() => {
-    console.log('==>', questionList);
     dispatch(actions.setPickedQuestions(questionList.slice(0, 3)));
   }, [dispatch, questionList]);
 
-  console.log(questionsTeleprompterNotes);
   return (
     <Box sx={{ mt: 2 }}>
       Test

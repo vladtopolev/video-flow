@@ -1,3 +1,5 @@
+import { VideoRecordWayTypes } from './recordVideoWays';
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export type QuestionConfig = {
   id: string;
@@ -29,4 +31,10 @@ export enum DefaultScreenTypes {
   UPLOADING_CHUNKS = 'UPLOADING_CHUNKS',
 }
 
+export type FinishedHandler = (props: {
+  questions: QuestionConfig[];
+  chunks: string[];
+  music: BackgroundMusicConfig | null;
+  recordVideoWay: VideoRecordWayTypes | null;
+}) => void;
 export type TextDictionaryFunction<T = string> = (key: string, opts?: any) => T;

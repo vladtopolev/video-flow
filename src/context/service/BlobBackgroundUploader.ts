@@ -22,6 +22,10 @@ export class BlobBackgroundUploader {
     | undefined
   > = [];
 
+  get chunks() {
+    return this.blobMeta.map((meta) => meta?.link || '');
+  }
+
   get progress() {
     // 0-100%
     const uploadingVideoProgress =
@@ -94,7 +98,6 @@ export class BlobBackgroundUploader {
           ...this.blobMeta[index]!,
           progress: (uploaded * 100) / total,
           isUploaded: false,
-          link,
         };
         this.notifyProgressListeners();
       },

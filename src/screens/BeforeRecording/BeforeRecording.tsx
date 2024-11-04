@@ -31,7 +31,6 @@ const BeforeRecording = () => {
         <TextField
           value={questionsTeleprompterNotes[currentQuestionIndex]}
           onChange={(e) => {
-            console.log(e.target.value, currentQuestionIndex);
             dispatch(
               actions.setQuestionTeleprompterNote(
                 currentQuestionIndex,
