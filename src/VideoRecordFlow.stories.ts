@@ -33,5 +33,8 @@ export const Default: Story = {
   args: {
     width: 1440,
     height: 1080,
+    onCancel: () => {
+      console.log('cancel');
+    },
   },
 };

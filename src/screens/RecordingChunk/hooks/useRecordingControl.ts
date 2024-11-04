@@ -35,9 +35,12 @@ const useRecordingControl = ({
     userChoise: { currentQuestionIndex },
   } = useVideoRecordFlowContext();
 
-  const onNewChunkAdded = (blob: Blob) => {
-    setChunk(currentQuestionIndex, blob);
-  };
+  const onNewChunkAdded = useCallback(
+    (blob: Blob) => {
+      setChunk(currentQuestionIndex, blob);
+    },
+    [setChunk, currentQuestionIndex],
+  );
 
   const { mediaRecorderManageRef } = useMediaRecorder({
     stream,

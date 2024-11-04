@@ -37,8 +37,9 @@ const VideoRecordFlowContextComponent = ({
   const [chunks, setChunks] = useState<Blob[]>([]);
   const setChunk = (index: number, chunk: Blob) =>
     setChunks((prev) => {
-      prev[index] = chunk;
-      return prev;
+      const newChunks = [...prev];
+      newChunks[index] = chunk;
+      return newChunks;
     });
 
   const mediaStream = useStream();

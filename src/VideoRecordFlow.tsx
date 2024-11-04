@@ -33,6 +33,7 @@ export type VideoRecordFlowProps = {
   minVideoDurationDefault?: number;
   maxVideoDurationDefault?: number;
   textDictionary?: TextDictionaryFunction;
+  onCancel: () => void;
   ActionContainerRenderer?: FC<ActionContainerRendererProps>;
 };
 
