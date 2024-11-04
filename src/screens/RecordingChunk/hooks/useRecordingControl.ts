@@ -70,16 +70,16 @@ const useRecordingControl = ({
     setRecordingState((prev) => ({
       ...prev,
       duration: 0,
-      beforeRecordingCountdown: 0,
+      beforeRecordingCountdown: BEFORE_RECORDING_COUNTDOWN_MAX,
       beforeRecordingCountdownRun: true,
     }));
     // run before countdown for user preparation before recording
     await new Promise<void>((resolve) => {
       clearBeforeRecordingCountdownInterval();
-      let count = 0;
+      let count = BEFORE_RECORDING_COUNTDOWN_MAX;
       beforeRecordingCountdownIntervalId.current = setInterval(() => {
-        count++;
-        if (count > BEFORE_RECORDING_COUNTDOWN_MAX) {
+        count--;
+        if (count === 0) {
           clearBeforeRecordingCountdownInterval();
           resolve();
           return;

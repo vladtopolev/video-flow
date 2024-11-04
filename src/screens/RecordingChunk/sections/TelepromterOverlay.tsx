@@ -10,10 +10,12 @@ import { actions } from '../../../state';
 
 const TelepromterOverlay = ({
   telepromterManagerRef,
+  isChunkRecording,
 }: {
   telepromterManagerRef?: MutableRefObject<
     TelepromterManagerProps | null | undefined
   >;
+  isChunkRecording?: boolean;
 }) => {
   const { spacing } = useTheme();
   const {
@@ -58,6 +60,7 @@ const TelepromterOverlay = ({
             question={question}
             notes={notes}
             onNotesChange={changeNotes}
+            isChunkRecording={isChunkRecording}
             sx={{
               maxHeight: '100%',
               position: 'absolute',

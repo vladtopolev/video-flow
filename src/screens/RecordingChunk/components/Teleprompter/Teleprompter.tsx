@@ -20,18 +20,19 @@ const Telepromter = ({
   maxHeight,
   onNotesChange,
   telepromterManagerRef,
+  isChunkRecording,
 }: {
   question?: string;
   notes?: string;
   sx?: SxProps;
   maxHeight?: number;
   onNotesChange?: (text: string) => void;
+  isChunkRecording?: boolean;
   telepromterManagerRef?: MutableRefObject<
     TelepromterManagerProps | null | undefined
   >;
 }) => {
   const { palette, spacing, corners, typography } = useTheme();
-  const isChunkRecording = false; // TODO
   const isMobile = false; // TODO
 
   const {

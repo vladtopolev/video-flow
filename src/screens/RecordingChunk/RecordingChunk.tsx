@@ -16,13 +16,19 @@ import {
   useVideoRecordFlowContext,
 } from '../../context/VideoRecordFlow.context';
 import { actions } from '../../state';
+import BeforeRecordingCountdown from './components/BeforeRecordingCountdown';
+import Countdown from '../../components/Countdown/Countdown';
+
+const START_COUNTDOWN_BEFORE_IN_SEC = 10;
 
 const RecordingChunk = () => {
   const {
     dispatch,
     telepromterSettings: { shouldBeScrolled },
+    userChoise: { currentQuestionIndex, questionsTeleprompterNotes },
   } = useVideoRecordFlowContext();
   const { maxDuration, minDuration } = useCurrentQuestionDuration();
+  const notes = questionsTeleprompterNotes[currentQuestionIndex];
 
   const { controlContainerWidth, setVideoContainerWidth } =
     useControlContainerWidth();
@@ -34,7 +40,12 @@ const RecordingChunk = () => {
     startRecording,
     stopRecording,
     onRerecord,
-    recordingState: { beforeRecordingCountdownRun, duration, isRecording },
+    recordingState: {
+      beforeRecordingCountdownRun,
+      beforeRecordingCountdown,
+      duration,
+      isRecording,
+    },
   } = useRecordingControl({
     maxDuration,
     startRecordingAction: () => {
@@ -92,7 +103,27 @@ const RecordingChunk = () => {
           sx={videoContainerSx}
         >
           <CameraStream />
-          <TelepromterOverlay telepromterManagerRef={telepropterRef} />
+          <TelepromterOverlay
+            telepromterManagerRef={telepropterRef}
+            isChunkRecording={isRecording}
+          />
+          {beforeRecordingCountdownRun && (
+            <BeforeRecordingCountdown
+              countdown={beforeRecordingCountdown}
+              showTitle={!!notes}
+            />
+          )}
+          {maxDuration - duration <= START_COUNTDOWN_BEFORE_IN_SEC && (
+            <Countdown
+              counter={maxDuration - duration}
+              sx={{
+                position: 'absolute',
+                bottom: 40,
+                width: '100%',
+                zIndex: 1000,
+              }}
+            />
+          )}
         </FitCenteredContentWithAspectRatio>
       </RecordingLayout>
     </ReacordingDialog>

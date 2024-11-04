@@ -20,7 +20,7 @@ const Controls = ({
   toggleScrolling,
 }: {
   isScrolling: boolean;
-  isChunkRecording: boolean;
+  isChunkRecording?: boolean;
   toggleScrolling: () => void;
 }) => {
   const isMobile = false; // TODO
