@@ -1,12 +1,5 @@
 import { supportedVideoMimeType, VIDEO_MIME_TYPES } from '../../utils';
-
-export type BlobUploader = (props: {
-  blob: Blob;
-  index: number;
-  onProgress: (uploaded: number, total: number) => void;
-  abortController: AbortController;
-  originalFormat: 'mp4' | 'webm';
-}) => Promise<string>;
+import { BlobUploader } from '../../VideoRecordFlow.types';
 
 export class BlobBackgroundUploader {
   private blobUploader: BlobUploader;

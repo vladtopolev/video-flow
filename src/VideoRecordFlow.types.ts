@@ -37,4 +37,13 @@ export type FinishedHandler = (props: {
   music: BackgroundMusicConfig | null;
   recordVideoWay: VideoRecordWayTypes | null;
 }) => void;
+
 export type TextDictionaryFunction<T = string> = (key: string, opts?: any) => T;
+
+export type BlobUploader = (props: {
+  blob: Blob;
+  index: number;
+  onProgress: (uploaded: number, total: number) => void;
+  abortController: AbortController;
+  originalFormat: 'mp4' | 'webm';
+}) => Promise<string>;

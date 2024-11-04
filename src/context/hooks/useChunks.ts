@@ -1,8 +1,6 @@
 import { useRef, useState } from 'react';
-import {
-  BlobBackgroundUploader,
-  BlobUploader,
-} from '../service/BlobBackgroundUploader';
+import { BlobBackgroundUploader } from '../service/BlobBackgroundUploader';
+import { BlobUploader } from '../../VideoRecordFlow.types';
 
 const useChunks = ({ blobUploader }: { blobUploader: BlobUploader }) => {
   const blobBackgroundUploader = useRef(

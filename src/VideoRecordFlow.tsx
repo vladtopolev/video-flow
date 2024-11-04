@@ -18,7 +18,7 @@ import defaultTextDictionary from './dictionary';
 import { VideoRecordWayTypes } from './recordVideoWays';
 import ContainerBreakpointsContextComponent from './styles/context/ContainerBreakpointsContext';
 import useRecordVideoFlowUserChoise from './state';
-import type { BlobUploader } from './context/service/BlobBackgroundUploader';
+import type { BlobUploader } from './VideoRecordFlow.types';
 
 import BeforeRecordingScreen from './screens/BeforeRecording/BeforeRecording';
 import InitialSettingsScreen from './screens/InitialSettings/InitialSettings';
