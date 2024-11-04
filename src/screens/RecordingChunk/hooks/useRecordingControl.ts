@@ -31,7 +31,7 @@ const useRecordingControl = ({
 }) => {
   const {
     mediaStream: { stream },
-    setChunk,
+    chunksManagment: { setChunk },
     userChoise: { currentQuestionIndex },
   } = useVideoRecordFlowContext();
 

@@ -17,6 +17,7 @@ import defaultTextDictionary from './dictionary';
 import { VideoRecordWayTypes } from './recordVideoWays';
 import ContainerBreakpointsContextComponent from './styles/context/ContainerBreakpointsContext';
 import useRecordVideoFlowUserChoise from './state';
+import type { BlobUploader } from './context/service/BlobBackgroundUploader';
 
 import BeforeRecordingScreen from './screens/BeforeRecording/BeforeRecording';
 import InitialSettingsScreen from './screens/InitialSettings/InitialSettings';
@@ -33,6 +34,7 @@ export type VideoRecordFlowProps = {
   minVideoDurationDefault?: number;
   maxVideoDurationDefault?: number;
   textDictionary?: TextDictionaryFunction;
+  blobUploader: BlobUploader;
   onCancel: () => void;
   ActionContainerRenderer?: FC<ActionContainerRendererProps>;
 };

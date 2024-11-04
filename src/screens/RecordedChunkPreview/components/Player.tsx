@@ -6,7 +6,7 @@ const Player = () => {
     width,
     height,
     userChoise: { currentQuestionIndex },
-    chunks,
+    chunksManagment: { chunks },
   } = useVideoRecordFlowContext();
 
   const recordedDuration = 100; // TODO: get from context

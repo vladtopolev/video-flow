@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export type QuestionConfig = {
   id: string;
   webText: string; // <- question shown during recording
@@ -28,4 +29,4 @@ export enum DefaultScreenTypes {
   UPLOADING_CHUNKS = 'UPLOADING_CHUNKS',
 }
 
-export type TextDictionaryFunction = (key: string) => string;
+export type TextDictionaryFunction<T = string> = (key: string, opts?: any) => T;

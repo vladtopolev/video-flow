@@ -28,6 +28,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+const DELAY = 20;
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Default: Story = {
   args: {
@@ -36,5 +37,17 @@ export const Default: Story = {
     onCancel: () => {
       console.log('cancel');
     },
+    blobUploader: ({ index, onProgress, originalFormat }) =>
+      new Promise((resolve) => {
+        const counter = 0;
+        const id = setInterval(() => {
+          if (counter >= DELAY) {
+            clearInterval(id);
+            resolve(`${index}.${originalFormat}`);
+            return;
+          }
+          onProgress(counter, DELAY);
+        }, 1000);
+      }),
   },
 };
