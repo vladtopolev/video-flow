@@ -1,10 +1,19 @@
 import { Reducer } from 'react';
 import { UserChoise, UserChoiseAction } from '..';
 import { DefaultScreenTypes } from '../../VideoRecordFlow.types';
+import { VideoRecordWayTypes } from '../../recordVideoWays';
 
 export const goToNextReducer: Reducer<UserChoise, UserChoiseAction> = (
   state,
 ) => {
+  if (state.currentScreen === DefaultScreenTypes.PICK_VIDEO_RECORD_WAY) {
+    if (state.recordVideoWay === VideoRecordWayTypes.UPLOAD_VIDEO) {
+      return { ...state, currentScreen: DefaultScreenTypes.UPLOAD_VIDEO };
+    }
+
+    return { ...state, currentScreen: DefaultScreenTypes.CHECK_CAMERA_STREAM };
+  }
+
   if (state.currentScreen === DefaultScreenTypes.INITIAL_SETTINGS) {
     return {
       ...state,
@@ -38,6 +47,16 @@ export const goToNextReducer: Reducer<UserChoise, UserChoiseAction> = (
 export const goToPrevReducer: Reducer<UserChoise, UserChoiseAction> = (
   state,
 ) => {
+  if (
+    state.currentScreen === DefaultScreenTypes.CHECK_CAMERA_STREAM ||
+    state.currentScreen === DefaultScreenTypes.UPLOAD_VIDEO
+  ) {
+    return {
+      ...state,
+      currentScreen: DefaultScreenTypes.PICK_VIDEO_RECORD_WAY,
+    };
+  }
+
   if (state.currentScreen === DefaultScreenTypes.BEFORE_RECORDING) {
     if (state.currentQuestionIndex === 0) {
       return { ...state, currentScreen: DefaultScreenTypes.INITIAL_SETTINGS };

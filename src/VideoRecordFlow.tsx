@@ -20,8 +20,9 @@ import ContainerBreakpointsContextComponent from './styles/context/ContainerBrea
 import useRecordVideoFlowUserChoise from './state';
 import type { BlobUploader } from './VideoRecordFlow.types';
 
+import PickVideoRecordWayScreen from './screens/PickVideoRecordWay/PickVideoRecordWay';
 import BeforeRecordingScreen from './screens/BeforeRecording/BeforeRecording';
-import InitialSettingsScreen from './screens/InitialSettings/InitialSettings';
+import CheckCameraStreamScreen from './screens/CheckCameraStream/CheckCameraStream';
 import RecordingChunkScreen from './screens/RecordingChunk/RecordingChunk';
 import RecordedChunkPreviewScreen from './screens/RecordedChunkPreview/RecordedChunkPreview';
 import UploadingChunksScreen from './screens/UploadingChunks/UploadingChunks';
@@ -42,7 +43,9 @@ export type VideoRecordFlowProps = {
 };
 
 const SCREENS: { [k: string]: FC } = {
-  [DefaultScreenTypes.INITIAL_SETTINGS]: InitialSettingsScreen,
+  [DefaultScreenTypes.PICK_VIDEO_RECORD_WAY]: PickVideoRecordWayScreen,
+  [DefaultScreenTypes.CHECK_CAMERA_STREAM]: CheckCameraStreamScreen,
+  [DefaultScreenTypes.INITIAL_SETTINGS]: CheckCameraStreamScreen,
   [DefaultScreenTypes.BEFORE_RECORDING]: BeforeRecordingScreen,
   [DefaultScreenTypes.RECORDING_CHUNK]: RecordingChunkScreen,
   [DefaultScreenTypes.RECORDED_CHUNK_PREVIEW]: RecordedChunkPreviewScreen,
@@ -56,6 +59,7 @@ const VideoRecordFlow = ({
   videoRecordWayList = [
     VideoRecordWayTypes.FREELY,
     VideoRecordWayTypes.RANDOM_QUESTIONS,
+    VideoRecordWayTypes.UPLOAD_VIDEO,
   ],
   minVideoDurationDefault = 0,
   maxVideoDurationDefault = 3 * 60,

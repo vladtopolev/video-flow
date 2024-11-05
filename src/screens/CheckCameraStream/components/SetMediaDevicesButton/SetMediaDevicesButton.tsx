@@ -60,7 +60,7 @@ const SetMediaDevicesButton = () => {
       setSelectedVideoDevice,
     },
   } = useVideoRecordFlowContext();
-  const { typography, spacing, palette, corners } = useTheme();
+  const { typography, spacing, palette, corners, button } = useTheme();
 
   const [open, setOpen] = useState(false);
   const onClose = () => setOpen(false);
@@ -131,7 +131,7 @@ const SetMediaDevicesButton = () => {
             borderTop: `1px solid ${palette.grey[400]}`,
           }}
         >
-          <Button onClick={onClose} variant="contained" size="large">
+          <Button onClick={onClose} variant="contained" sx={button.primary}>
             {textDictionary('CameraSettings.Modal.Buttons.Close')}
           </Button>
         </DialogActions>

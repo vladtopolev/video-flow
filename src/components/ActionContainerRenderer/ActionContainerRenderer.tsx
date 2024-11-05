@@ -15,10 +15,113 @@ const ActionContainerRendererDefault = ({
 }: ActionContainerRendererProps) => {
   const {
     spacing,
+    button,
     breakpoints: { xs, sm },
   } = useTheme();
 
   const isNotSmall = !xs && !sm;
+
+  if (currentScreen === DefaultScreenTypes.PICK_VIDEO_RECORD_WAY) {
+    return (
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          padding: spacing(2),
+          marginTop: spacing(6),
+        }}
+      >
+        <Button
+          sx={button.link}
+          onClick={() => {
+            onStopStream();
+          }}
+        >
+          Cancel
+        </Button>
+        {buttons.next && (
+          <Button
+            variant="contained"
+            sx={{ ...button.primary, minWidth: 120 }}
+            onClick={async () => {
+              buttons.next.onAction();
+            }}
+            disabled={buttons.next.disabled}
+          >
+            Next
+          </Button>
+        )}
+      </div>
+    );
+  }
+
+  if (currentScreen === DefaultScreenTypes.CHECK_CAMERA_STREAM) {
+    return (
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: '1fr',
+          gap: spacing(2),
+          padding: spacing(2),
+          marginTop: spacing(6),
+          ...(isNotSmall && { gridTemplateColumns: '1fr auto' }),
+        }}
+      >
+        <Button
+          onClick={() => {
+            onStopStream();
+          }}
+          sx={{
+            ...button.link,
+            order: isNotSmall ? 0 : 1,
+            justifySelf: isNotSmall ? 'start' : 'auto',
+          }}
+        >
+          Cancel
+        </Button>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            gap: spacing(2),
+          }}
+        >
+          {buttons.back && (
+            <Button
+              variant="contained"
+              sx={{
+                ...button.secondary,
+                minWidth: 120,
+                width: isNotSmall ? 'auto' : '100%',
+              }}
+              onClick={async () => {
+                buttons.back.onAction();
+              }}
+              disabled={buttons.back.disabled}
+            >
+              Back
+            </Button>
+          )}
+          {buttons.next && (
+            <Button
+              variant="contained"
+              sx={{
+                ...button.primary,
+                minWidth: 120,
+                width: isNotSmall ? 'auto' : '100%',
+              }}
+              onClick={async () => {
+                buttons.next.onAction();
+              }}
+              disabled={buttons.next.disabled}
+            >
+              Next
+            </Button>
+          )}
+        </div>
+      </div>
+    );
+  }
 
   if (currentScreen === DefaultScreenTypes.INITIAL_SETTINGS)
     return (

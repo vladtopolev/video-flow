@@ -62,6 +62,11 @@ export default {
         Title: 'I would like teleprompter-style recording with prompts.',
         Description: 'Choose up to 4 prompts for guided recording.',
       },
+      UploadVideo: {
+        Title: 'Upload my own video',
+        Description:
+          'Select a pre-recorded video if you do not want to record it again.',
+      },
     },
   },
   BackgroundMusic: {
@@ -72,6 +77,9 @@ export default {
       Title: 'No background music please!',
       Description: 'I prefer silence.',
     },
+  },
+  PickVideoRecordWay: {
+    Title: 'Lets record your introduction video',
   },
   SettingVideoFlowScreen: {
     Title: "Let's record your introduction video",

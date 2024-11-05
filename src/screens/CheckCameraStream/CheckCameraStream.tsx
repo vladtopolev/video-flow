@@ -3,15 +3,12 @@ import { useVideoRecordFlowContext } from '../../context/VideoRecordFlow.context
 import { actions } from '../../state';
 import useTheme from '../../styles';
 import useMediaStream from './hook/useMediaStream';
-import BackgroundMusicSection from './sections/BackgroundMusicSection';
 import CameraCheckSection from './sections/CameraCheckSection';
-import PickRecordVideoWaySection from './sections/PickRecordVideoWaySection';
 
-const InitialSettings = () => {
+const CheckCameraStream = () => {
   const {
     textDictionary,
     mediaStream: { stream, stopStream },
-    userChoise: { recordVideoWay },
     ActionContainerRenderer,
     userChoise: { currentScreen },
     dispatch,
@@ -28,23 +25,23 @@ const InitialSettings = () => {
         </Typography>
 
         <CameraCheckSection />
-        {stream && (
-          <>
-            <PickRecordVideoWaySection />
-            <BackgroundMusicSection />
-          </>
-        )}
       </div>
 
       <ActionContainerRenderer
         currentScreen={currentScreen}
         onStopStream={stopStream}
         buttons={{
+          back: {
+            onAction: () => {
+              stopStream();
+              dispatch(actions.goPrev());
+            },
+          },
           next: {
             onAction: () => {
               dispatch(actions.goNext());
             },
-            disabled: !recordVideoWay || !stream,
+            disabled: !stream,
           },
         }}
       />
@@ -52,4 +49,4 @@ const InitialSettings = () => {
   );
 };
 
-export default InitialSettings;
+export default CheckCameraStream;

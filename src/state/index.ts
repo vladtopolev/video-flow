@@ -19,7 +19,7 @@ export type UserChoise = {
 const initialUserChoise: UserChoise = {
   music: null,
   recordVideoWay: null,
-  currentScreen: DefaultScreenTypes.INITIAL_SETTINGS,
+  currentScreen: DefaultScreenTypes.PICK_VIDEO_RECORD_WAY,
   pickedQuestions: [],
   questionsTeleprompterNotes: [],
   currentQuestionIndex: -1,
