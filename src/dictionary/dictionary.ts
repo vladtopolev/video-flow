@@ -70,7 +70,8 @@ export default {
     },
   },
   BackgroundMusic: {
-    Title: 'Select background music',
+    Title:
+      'Your video is almost ready! Would you like to add background music?',
     Subtitle:
       'Volume will be much lower in the final video than in the preview',
     NoMusicOptions: {

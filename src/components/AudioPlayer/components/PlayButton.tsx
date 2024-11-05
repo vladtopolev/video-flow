@@ -17,11 +17,6 @@ const PlayButton = ({
     <div
       style={{
         cursor: 'pointer',
-        width: 48,
-        height: 48,
-        borderRadius: '50%',
-        border: `1px solid ${palette.grey[400]}`,
-        backgroundColor: palette.background.default,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
@@ -30,9 +25,9 @@ const PlayButton = ({
       onClick={onClick}
     >
       {audioState.isPlaying ? (
-        <PauseIcon sx={{ color: palette.primary.dark }} />
+        <PauseIcon sx={{ color: palette.common.white, fontSize: 32 }} />
       ) : (
-        <PlayIcon sx={{ color: palette.primary.dark }} />
+        <PlayIcon sx={{ color: palette.common.white, fontSize: 32 }} />
       )}
     </div>
   );

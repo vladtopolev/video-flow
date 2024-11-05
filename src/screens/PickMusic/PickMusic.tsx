@@ -15,13 +15,7 @@ const PickMusic = () => {
     userChoise: { music, currentScreen },
     dispatch,
   } = useVideoRecordFlowContext();
-  const {
-    typography,
-    spacing,
-    corners,
-    palette,
-    breakpoints: { sm, md, lg },
-  } = useTheme();
+  const { typography, spacing, corners, palette } = useTheme();
 
   const pickedBackgroundMusic = music;
   const { setMusic } = actions;
@@ -30,25 +24,23 @@ const PickMusic = () => {
     <>
       <Box className="BackgroundMusicSection">
         <Typography
-          sx={{ ...typography.titleS, mt: spacing(10) }}
+          sx={{ ...typography.titleL, mt: spacing(10) }}
           component="h2"
         >
           {textDictionary('BackgroundMusic.Title')}
         </Typography>
         <Typography
-          sx={{ ...typography.bodyM, mb: spacing(6), mt: spacing(1) }}
+          sx={{ ...typography.bodyXL, mt: spacing(6) }}
           component="div"
         >
           {textDictionary('BackgroundMusic.Subtitle')}
         </Typography>
         <div
           style={{
-            display: 'grid',
-            gap: spacing(2),
-            gridTemplateColumns: '1fr',
-            ...(sm && { gridTemplateColumns: '1fr 1fr' }),
-            ...(md && { gridTemplateColumns: '1fr 1fr 1fr' }),
-            ...(lg && { gridTemplateColumns: '1fr 1fr 1fr 1fr' }),
+            marginTop: spacing(10),
+            display: 'flex',
+            gap: spacing(4),
+            flexDirection: 'column',
           }}
         >
           {backgroundMusicList.map((musicItem) => (
@@ -58,7 +50,8 @@ const PickMusic = () => {
                 dispatch(setMusic(musicItem));
               }}
               selected={pickedBackgroundMusic?.src === musicItem.src}
-              sx={{ p: 2, mb: 0 }}
+              isRadio
+              sx={{ p: spacing(2), pr: spacing(16), mb: 0 }}
             >
               <AudioPlayer
                 src={musicItem.src}
@@ -67,41 +60,40 @@ const PickMusic = () => {
               />
             </ClicableContainer>
           ))}
+          <ClicableContainer
+            isRadio
+            onClick={() => {
+              dispatch(actions.setMusic(null));
+            }}
+            selected={pickedBackgroundMusic === null}
+          >
+            <div style={{ minHeight: 48, display: 'flex' }}>
+              <div
+                style={{
+                  minWidth: 48,
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  backgroundColor: palette.grey[100],
+                  borderRadius: corners.sm,
+                }}
+              >
+                <VolumeOff sx={{ color: palette.grey[500] }} />
+              </div>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  marginLeft: spacing(4),
+                }}
+              >
+                <Typography sx={{ ...typography.bodyL }}>
+                  {textDictionary('BackgroundMusic.NoMusicOptions.Title')}
+                </Typography>
+              </div>
+            </div>
+          </ClicableContainer>
         </div>
-
-        <ClicableContainer
-          sx={{ mt: spacing(2) }}
-          onClick={() => {
-            dispatch(actions.setMusic(null));
-          }}
-          selected={pickedBackgroundMusic === null}
-        >
-          <div style={{ minHeight: 48, display: 'flex' }}>
-            <div
-              style={{
-                minWidth: 48,
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                backgroundColor: palette.grey[100],
-                borderRadius: corners.sm,
-              }}
-            >
-              <VolumeOff sx={{ color: palette.grey[500] }} />
-            </div>
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                marginLeft: spacing(4),
-              }}
-            >
-              <Typography sx={{ ...typography.bodyL }}>
-                {textDictionary('BackgroundMusic.NoMusicOptions.Title')}
-              </Typography>
-            </div>
-          </div>
-        </ClicableContainer>
       </Box>
       <ActionContainerRenderer
         currentScreen={currentScreen}

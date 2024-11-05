@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useMemo } from 'react';
 import {
   DEFAULT_BACKGROUND_MUSIC_LIST,
   DEFAULT_QUESTION_LIST,
@@ -17,8 +17,9 @@ import VideoRecordFlowContextComponent from './context/VideoRecordFlow.context';
 import defaultTextDictionary from './dictionary';
 import { VideoRecordWayTypes } from './recordVideoWays';
 import ContainerBreakpointsContextComponent from './styles/context/ContainerBreakpointsContext';
-import useRecordVideoFlowUserChoise from './state';
+import useRecordVideoFlowUserChoise, { actions } from './state';
 import type { BlobUploader } from './VideoRecordFlow.types';
+import utils from './utils';
 
 import PickVideoRecordWayScreen from './screens/PickVideoRecordWay/PickVideoRecordWay';
 import BeforeRecordingScreen from './screens/BeforeRecording/BeforeRecording';
@@ -80,12 +81,22 @@ const VideoRecordFlow = ({
     );
   }
 
+  // shuffle music and set first one as default
+  const shuffledBackgroundMusicList = useMemo(
+    () => utils.shuffleArray(backgroundMusicList),
+    [backgroundMusicList],
+  );
+
+  useEffect(() => {
+    dispatch(actions.setMusic(shuffledBackgroundMusicList[0]));
+  }, [shuffledBackgroundMusicList, dispatch]);
+
   return (
     <VideoRecordFlowContextComponent
       userChoise={userChoise}
       dispatch={dispatch}
       questionList={questionList}
-      backgroundMusicList={backgroundMusicList}
+      backgroundMusicList={shuffledBackgroundMusicList}
       videoRecordWayList={videoRecordWayList}
       minVideoDurationDefault={minVideoDurationDefault}
       maxVideoDurationDefault={maxVideoDurationDefault}

@@ -29,6 +29,12 @@ const hex2rgba = (hex = '', alpha = 1) => {
   return `rgba(${r},${g},${b},${alpha})`;
 };
 
+const shuffleArray = <T>(arr: T[]): T[] =>
+  arr
+    .map((value) => ({ value, sort: Math.random() }))
+    .sort((a, b) => a.sort - b.sort)
+    .map(({ value }) => value);
+
 const secsToTime = (seconds: number, separator = ':') =>
   [
     Math.trunc(seconds / 60 / 60),
@@ -99,4 +105,5 @@ export default {
   attachFullscreenEvent,
   isFullscreen,
   requestFullscreen,
+  shuffleArray,
 };

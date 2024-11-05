@@ -11,7 +11,7 @@ const PlayButtonContainer = ({
   audioState: AudioState;
   coverSrc?: string;
 }) => {
-  const { spacing, corners } = useTheme();
+  const { corners } = useTheme();
   return coverSrc ? (
     <div
       style={{
@@ -21,7 +21,6 @@ const PlayButtonContainer = ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        marginBottom: spacing(2),
       }}
     >
       <div
@@ -35,7 +34,10 @@ const PlayButtonContainer = ({
           overflow: 'hidden',
         }}
       >
-        <img src={coverSrc} />
+        <img
+          src={coverSrc}
+          style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+        />
       </div>
       <PlayButton
         onClick={onClick}

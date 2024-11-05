@@ -30,7 +30,7 @@ const AudioPlayer = ({
   containerStyle,
   coverSrc,
 }: AudioPlayerProps) => {
-  const { typography } = useTheme();
+  const { typography, spacing } = useTheme();
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const progressRef = useRef<HTMLDivElement>(null);
 
@@ -116,18 +116,20 @@ const AudioPlayer = ({
 
   return (
     <Box sx={containerStyle}>
-      <div
-        style={{ display: 'flex', flexDirection: coverSrc ? 'column' : 'row' }}
-      >
-        <PlayButtonContainer
-          onClick={togglePlayerState}
-          audioState={audioState}
-          coverSrc={coverSrc}
-        />
+      <div style={{ display: 'flex', flexDirection: 'row', gap: spacing(6) }}>
+        <div style={{ width: 60 }}>
+          <PlayButtonContainer
+            onClick={togglePlayerState}
+            audioState={audioState}
+            coverSrc={coverSrc}
+          />
+        </div>
+
         <div
           style={{
             display: 'flex',
             flexDirection: 'column',
+            justifyContent: 'center',
             marginLeft: coverSrc ? 0 : 4,
             marginTop: 1,
             flexGrow: 1,
