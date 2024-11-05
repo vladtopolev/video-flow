@@ -31,12 +31,13 @@ export enum DefaultScreenTypes {
   UPLOADING_CHUNKS = 'UPLOADING_CHUNKS',
 }
 
-export type FinishedHandler = (props: {
+export type FinishedHandlerProps = {
   questions: QuestionConfig[];
   chunks: Array<{ link: string; duration: number }>;
   music: BackgroundMusicConfig | null;
   recordVideoWay: VideoRecordWayTypes | null;
-}) => void;
+};
+export type FinishedHandler = (props: FinishedHandlerProps) => void;
 
 export type TextDictionaryFunction<T = string> = (key: string, opts?: any) => T;
 
