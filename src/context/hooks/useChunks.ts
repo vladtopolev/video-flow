@@ -7,12 +7,14 @@ const useChunks = ({ blobUploader }: { blobUploader: BlobUploader }) => {
     new BlobBackgroundUploader(blobUploader),
   );
 
-  const [chunks, setChunks] = useState<Blob[]>([]);
-  const setChunk = (index: number, chunk: Blob) => {
-    blobBackgroundUploader.current.uploadBlob(chunk, index);
+  const [chunks, setChunks] = useState<Array<{ blob: Blob; duration: number }>>(
+    [],
+  );
+  const setChunk = (index: number, blob: Blob, duration: number) => {
+    blobBackgroundUploader.current.uploadBlob(blob, index, duration);
     setChunks((prev) => {
       const newChunks = [...prev];
-      newChunks[index] = chunk;
+      newChunks[index] = { blob, duration };
       return newChunks;
     });
   };

@@ -9,6 +9,7 @@ export class BlobBackgroundUploader {
         progress: number;
         isUploaded: boolean;
         link: string | null;
+        duration: number;
         abortController: AbortController | null;
         originalFormat: 'mp4' | 'webm';
       }
@@ -16,7 +17,10 @@ export class BlobBackgroundUploader {
   > = [];
 
   get chunks() {
-    return this.blobMeta.map((meta) => meta?.link || '');
+    return this.blobMeta.map((meta) => ({
+      link: meta?.link || '',
+      duration: meta?.duration || 0,
+    }));
   }
 
   get progress() {
@@ -65,7 +69,7 @@ export class BlobBackgroundUploader {
     );
   }
 
-  async uploadBlob(blob: Blob, index: number) {
+  async uploadBlob(blob: Blob, index: number, duration: number) {
     const originalFormat =
       supportedVideoMimeType() === VIDEO_MIME_TYPES.videoWebm ? 'webm' : 'mp4';
     // abort preveisly uploading file if it is uploading
@@ -77,6 +81,7 @@ export class BlobBackgroundUploader {
       progress: 0,
       isUploaded: false,
       link: null,
+      duration,
       originalFormat,
       abortController,
     };
@@ -100,6 +105,7 @@ export class BlobBackgroundUploader {
       progress: 100,
       isUploaded: true,
       link,
+      duration,
       originalFormat,
       abortController: null,
     };

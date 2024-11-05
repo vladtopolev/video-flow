@@ -6,12 +6,11 @@ export class MediaRecorderManager {
   private mediaRecorder: MediaRecorder;
   private duration = 0;
   private recordingStartedAt = 0;
-  private stream: MediaStream;
-  private onNewChunkAdded: (chunk: Blob) => void;
 
-  constructor(stream: MediaStream, onNewChunkAdded: (chunk: Blob) => void) {
-    this.stream = stream;
-    this.onNewChunkAdded = onNewChunkAdded;
+  constructor(
+    private stream: MediaStream,
+    private onNewChunkAdded: (chunk: Blob, duration: number) => void,
+  ) {
     this.mediaRecorder = this.createNewRecorder();
   }
 
@@ -42,10 +41,10 @@ export class MediaRecorderManager {
           utils.supportedVideoMimeType() === utils.VIDEO_MIME_TYPES.videoWebm
         ) {
           const fixedBlob = await webmFixDuration(e.data, this.duration);
-          this.onNewChunkAdded(fixedBlob);
+          this.onNewChunkAdded(fixedBlob, this.duration);
           return;
         }
-        this.onNewChunkAdded(e.data);
+        this.onNewChunkAdded(e.data, this.duration);
       }
     });
     return this.mediaRecorder;
@@ -54,22 +53,20 @@ export class MediaRecorderManager {
 
 type UseMediaRecorderArgs = {
   stream: MediaStream | null;
-  onNewChunkAdded: (blob: Blob) => void;
+  onNewChunkAdded: (blob: Blob, duration: number) => void;
 };
 const useMediaRecorder = ({
   stream,
   onNewChunkAdded,
 }: UseMediaRecorderArgs) => {
   const mediaRecorderManageRef = useRef<MediaRecorderManager | null>(null);
-  const recordedChunksRef = useRef<Blob[]>([]);
 
   useEffect(() => {
     if (stream) {
       mediaRecorderManageRef.current = new MediaRecorderManager(
         stream,
-        (blob) => {
-          recordedChunksRef.current.push(blob);
-          onNewChunkAdded(blob);
+        (blob, duration) => {
+          onNewChunkAdded(blob, duration);
         },
       );
     }
@@ -78,7 +75,7 @@ const useMediaRecorder = ({
     };
   }, [stream, onNewChunkAdded]);
 
-  return { mediaRecorderManageRef, recordedChunksRef };
+  return { mediaRecorderManageRef };
 };
 
 export default useMediaRecorder;

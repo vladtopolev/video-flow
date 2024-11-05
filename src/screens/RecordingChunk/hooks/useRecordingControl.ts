@@ -36,8 +36,9 @@ const useRecordingControl = ({
   } = useVideoRecordFlowContext();
 
   const onNewChunkAdded = useCallback(
-    (blob: Blob) => {
-      setChunk(currentQuestionIndex, blob);
+    (blob: Blob, duration: number) => {
+      console.log('onNewChunkAdded', blob, duration);
+      setChunk(currentQuestionIndex, blob, duration);
     },
     [setChunk, currentQuestionIndex],
   );

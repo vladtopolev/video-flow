@@ -33,7 +33,7 @@ export enum DefaultScreenTypes {
 
 export type FinishedHandler = (props: {
   questions: QuestionConfig[];
-  chunks: string[];
+  chunks: Array<{ link: string; duration: number }>;
   music: BackgroundMusicConfig | null;
   recordVideoWay: VideoRecordWayTypes | null;
 }) => void;

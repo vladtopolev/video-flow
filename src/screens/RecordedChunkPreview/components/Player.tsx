@@ -9,8 +9,9 @@ const Player = () => {
     chunksManagment: { chunks },
   } = useVideoRecordFlowContext();
 
-  const recordedDuration = 100; // TODO: get from context
-  const blob = chunks[currentQuestionIndex];
+  const chunk = chunks[currentQuestionIndex];
+  const blob = chunk?.blob;
+  const recordedDuration = chunk?.duration;
   return (
     <div
       className="videoContainer"
