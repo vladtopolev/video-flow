@@ -123,37 +123,6 @@ const ActionContainerRendererDefault = ({
     );
   }
 
-  if (currentScreen === DefaultScreenTypes.INITIAL_SETTINGS)
-    return (
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          padding: spacing(2),
-        }}
-      >
-        <Button
-          variant="outlined"
-          onClick={() => {
-            onStopStream();
-          }}
-        >
-          Cancel
-        </Button>
-        {buttons.next && (
-          <Button
-            variant="contained"
-            onClick={async () => {
-              buttons.next.onAction();
-            }}
-            disabled={buttons.next.disabled}
-          >
-            Next
-          </Button>
-        )}
-      </div>
-    );
-
   if (currentScreen === DefaultScreenTypes.BEFORE_RECORDING) {
     return (
       <div
@@ -162,10 +131,12 @@ const ActionContainerRendererDefault = ({
           gridTemplateColumns: '1fr',
           gap: spacing(2),
           padding: spacing(2),
+          marginTop: spacing(6),
           ...(isNotSmall && { gridTemplateColumns: '1fr auto' }),
         }}
       >
         <Button
+          sx={button.link}
           onClick={() => {
             onStopStream();
           }}
@@ -186,6 +157,11 @@ const ActionContainerRendererDefault = ({
           {buttons.back && (
             <Button
               variant="contained"
+              sx={{
+                ...button.secondary,
+                minWidth: 120,
+                width: isNotSmall ? 'auto' : '100%',
+              }}
               onClick={async () => {
                 buttons.back.onAction();
               }}
@@ -197,6 +173,79 @@ const ActionContainerRendererDefault = ({
           {buttons.next && (
             <Button
               variant="contained"
+              sx={{
+                ...button.primary,
+                minWidth: 120,
+                width: isNotSmall ? 'auto' : '100%',
+              }}
+              onClick={async () => {
+                buttons.next.onAction();
+              }}
+              disabled={buttons.next.disabled}
+            >
+              Next
+            </Button>
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  if (currentScreen === DefaultScreenTypes.PICK_MUSIC) {
+    return (
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: '1fr',
+          gap: spacing(2),
+          padding: spacing(2),
+          marginTop: spacing(6),
+          ...(isNotSmall && { gridTemplateColumns: '1fr auto' }),
+        }}
+      >
+        <Button
+          sx={button.link}
+          onClick={() => {
+            onStopStream();
+          }}
+          style={{
+            order: isNotSmall ? 0 : 1,
+            justifySelf: isNotSmall ? 'start' : 'auto',
+          }}
+        >
+          Cancel
+        </Button>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            gap: spacing(2),
+          }}
+        >
+          {buttons.back && (
+            <Button
+              variant="contained"
+              sx={{
+                ...button.secondary,
+                minWidth: 120,
+                width: isNotSmall ? 'auto' : '100%',
+              }}
+              onClick={async () => {
+                buttons.back.onAction();
+              }}
+              disabled={buttons.next.disabled}
+            >
+              Back
+            </Button>
+          )}
+          {buttons.next && (
+            <Button
+              variant="contained"
+              sx={{
+                ...button.primary,
+                minWidth: 120,
+                width: isNotSmall ? 'auto' : '100%',
+              }}
               onClick={async () => {
                 buttons.next.onAction();
               }}

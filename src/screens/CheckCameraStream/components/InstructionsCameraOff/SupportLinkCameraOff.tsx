@@ -2,6 +2,7 @@ import { Info as InfoIcon } from '@mui/icons-material';
 import { Button } from '@mui/material';
 import { isFirefox, isSafari } from 'react-device-detect';
 import { useVideoRecordFlowContext } from '../../../../context/VideoRecordFlow.context';
+import useTheme from '../../../../styles';
 
 const LINK_SUPPORTS = {
   chrome: 'https://support.google.com/chrome/answer/2693767',
@@ -12,6 +13,7 @@ const LINK_SUPPORTS = {
 
 const SupportLinkCameraOff = () => {
   const { textDictionary } = useVideoRecordFlowContext();
+  const { button } = useTheme();
   let href = LINK_SUPPORTS.chrome;
   if (isSafari) {
     href = LINK_SUPPORTS.safari;
@@ -25,7 +27,7 @@ const SupportLinkCameraOff = () => {
       variant="contained"
       href={href}
       target="_blank"
-      sx={{}}
+      sx={button.primary}
       startIcon={<InfoIcon />}
     >
       {textDictionary('Instructions.CameraOff.Button')}

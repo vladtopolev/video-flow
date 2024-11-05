@@ -3,6 +3,7 @@ import { useVideoRecordFlowContext } from '../../../context/VideoRecordFlow.cont
 import useTheme from '../../../styles';
 import { useContainerQuery } from 'react-container-query';
 import { actions } from '../../../state';
+import palette from '../../../styles/palette';
 
 const query = {
   small: {
@@ -20,7 +21,7 @@ const Actions = () => {
     dispatch,
     onCancel,
   } = useVideoRecordFlowContext();
-  const { spacing } = useTheme();
+  const { spacing, button } = useTheme();
 
   const [params, containerRef] = useContainerQuery(query, {});
 
@@ -38,6 +39,7 @@ const Actions = () => {
       }}
     >
       <Button
+        sx={{ ...button.link, color: palette.common.white }}
         onClick={() => {
           stopStream();
           onCancel();
@@ -58,6 +60,11 @@ const Actions = () => {
       >
         <Button
           variant="contained"
+          sx={{
+            ...button.secondary,
+            minWidth: 120,
+            width: isNotSmall ? 'auto' : '100%',
+          }}
           onClick={async () => {
             dispatch(actions.goPrev());
           }}
@@ -65,6 +72,11 @@ const Actions = () => {
           Re-record
         </Button>
         <Button
+          sx={{
+            ...button.primary,
+            minWidth: 120,
+            width: isNotSmall ? 'auto' : '100%',
+          }}
           variant="contained"
           onClick={async () => {
             dispatch(actions.goNext());

@@ -18,7 +18,6 @@ const Player = () => {
       style={{
         width: '100%',
         aspectRatio: `${width} / ${height}`,
-        background: 'red',
       }}
     >
       <VideoPlayer

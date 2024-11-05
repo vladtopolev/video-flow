@@ -69,24 +69,6 @@ const reducer: Reducer<UserChoise, UserChoiseAction> = (state, action) => {
     return { ...state, questionsTeleprompterNotes };
   }
 
-  if (action.type === UserChoiseActionTypes.GO_TO_SCREEN) {
-    if (
-      state.currentScreen === DefaultScreenTypes.INITIAL_SETTINGS &&
-      action.payload.nextScreen === DefaultScreenTypes.BEFORE_RECORDING
-    ) {
-      return {
-        ...state,
-        currentScreen: action.payload.nextScreen,
-        currentQuestionIndex: 0,
-      };
-    }
-
-    return {
-      ...state,
-      currentScreen: action.payload.nextScreen,
-    };
-  }
-
   return {
     ...state,
     ...action.payload,
@@ -113,10 +95,6 @@ export const actions = {
   setCurrentScreen: (currentScreen: string): UserChoiseAction => ({
     type: UserChoiseActionTypes.SET_PARTIAL_STATE,
     payload: { currentScreen },
-  }),
-  goToScreen: (nextScreen: string): UserChoiseAction => ({
-    type: UserChoiseActionTypes.GO_TO_SCREEN,
-    payload: { nextScreen },
   }),
   setPickedQuestions: (
     pickedQuestions: QuestionConfig[],

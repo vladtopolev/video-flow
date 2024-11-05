@@ -26,6 +26,7 @@ import CheckCameraStreamScreen from './screens/CheckCameraStream/CheckCameraStre
 import RecordingChunkScreen from './screens/RecordingChunk/RecordingChunk';
 import RecordedChunkPreviewScreen from './screens/RecordedChunkPreview/RecordedChunkPreview';
 import UploadingChunksScreen from './screens/UploadingChunks/UploadingChunks';
+import PickMusicScreen from './screens/PickMusic/PickMusic';
 
 export type VideoRecordFlowProps = {
   questionList?: QuestionConfig[];
@@ -45,10 +46,10 @@ export type VideoRecordFlowProps = {
 const SCREENS: { [k: string]: FC } = {
   [DefaultScreenTypes.PICK_VIDEO_RECORD_WAY]: PickVideoRecordWayScreen,
   [DefaultScreenTypes.CHECK_CAMERA_STREAM]: CheckCameraStreamScreen,
-  [DefaultScreenTypes.INITIAL_SETTINGS]: CheckCameraStreamScreen,
   [DefaultScreenTypes.BEFORE_RECORDING]: BeforeRecordingScreen,
   [DefaultScreenTypes.RECORDING_CHUNK]: RecordingChunkScreen,
   [DefaultScreenTypes.RECORDED_CHUNK_PREVIEW]: RecordedChunkPreviewScreen,
+  [DefaultScreenTypes.PICK_MUSIC]: PickMusicScreen,
   [DefaultScreenTypes.UPLOADING_CHUNKS]: UploadingChunksScreen,
 };
 

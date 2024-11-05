@@ -14,31 +14,38 @@ export const goToNextReducer: Reducer<UserChoise, UserChoiseAction> = (
     return { ...state, currentScreen: DefaultScreenTypes.CHECK_CAMERA_STREAM };
   }
 
-  if (state.currentScreen === DefaultScreenTypes.INITIAL_SETTINGS) {
+  if (state.currentScreen === DefaultScreenTypes.CHECK_CAMERA_STREAM) {
     return {
       ...state,
       currentScreen: DefaultScreenTypes.BEFORE_RECORDING,
       currentQuestionIndex: 0,
     };
   }
+
   if (state.currentScreen === DefaultScreenTypes.BEFORE_RECORDING) {
     return { ...state, currentScreen: DefaultScreenTypes.RECORDING_CHUNK };
   }
+
   if (state.currentScreen === DefaultScreenTypes.RECORDING_CHUNK) {
     return {
       ...state,
       currentScreen: DefaultScreenTypes.RECORDED_CHUNK_PREVIEW,
     };
   }
+
   if (state.currentScreen === DefaultScreenTypes.RECORDED_CHUNK_PREVIEW) {
     if (state.currentQuestionIndex === state.pickedQuestions.length - 1) {
-      return { ...state, currentScreen: DefaultScreenTypes.UPLOADING_CHUNKS };
+      return { ...state, currentScreen: DefaultScreenTypes.PICK_MUSIC };
     }
     return {
       ...state,
       currentQuestionIndex: state.currentQuestionIndex + 1,
       currentScreen: DefaultScreenTypes.BEFORE_RECORDING,
     };
+  }
+
+  if (state.currentScreen === DefaultScreenTypes.PICK_MUSIC) {
+    return { ...state, currentScreen: DefaultScreenTypes.UPLOADING_CHUNKS };
   }
 
   return state;
@@ -59,7 +66,10 @@ export const goToPrevReducer: Reducer<UserChoise, UserChoiseAction> = (
 
   if (state.currentScreen === DefaultScreenTypes.BEFORE_RECORDING) {
     if (state.currentQuestionIndex === 0) {
-      return { ...state, currentScreen: DefaultScreenTypes.INITIAL_SETTINGS };
+      return {
+        ...state,
+        currentScreen: DefaultScreenTypes.CHECK_CAMERA_STREAM,
+      };
     }
     return {
       ...state,
@@ -73,5 +83,10 @@ export const goToPrevReducer: Reducer<UserChoise, UserChoiseAction> = (
   ) {
     return { ...state, currentScreen: DefaultScreenTypes.BEFORE_RECORDING };
   }
+
+  if (state.currentScreen === DefaultScreenTypes.PICK_MUSIC) {
+    return { ...state, currentScreen: DefaultScreenTypes.BEFORE_RECORDING };
+  }
+
   return state;
 };
