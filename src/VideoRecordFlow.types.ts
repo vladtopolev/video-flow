@@ -1,6 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { VideoRecordWayTypes } from './recordVideoWays';
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 export type QuestionConfig = {
   id: string;
   webText: string; // <- question shown during recording
@@ -65,3 +65,14 @@ export type FileUploader = (props: {
   onProgress: (uploaded: number, total: number) => void;
   abortController: AbortController;
 }) => Promise<any>;
+
+export type BrandStyle = {
+  fontFamily: {
+    title: string;
+    body: string;
+  };
+  palette: {
+    primary: string;
+    secondary: string;
+  };
+};

@@ -11,6 +11,7 @@ const RandomQuestions = () => {
   const {
     dispatch,
     questionList,
+    maxQuestionsCount,
     userChoise: { pickedQuestions },
   } = useVideoRecordFlowContext();
   const { spacing } = useTheme();
@@ -25,7 +26,7 @@ const RandomQuestions = () => {
     ) {
       return [
         ...pickedQuestions,
-        ...Array(5 - pickedQuestions.length).fill(null),
+        ...Array(maxQuestionsCount - pickedQuestions.length).fill(null),
       ];
     }
     const mandatoryQuestions = questionList.filter(
@@ -33,7 +34,7 @@ const RandomQuestions = () => {
     );
     return [
       ...mandatoryQuestions,
-      ...Array(5 - mandatoryQuestions.length).fill(null),
+      ...Array(maxQuestionsCount - mandatoryQuestions.length).fill(null),
     ];
   });
 

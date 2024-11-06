@@ -4,7 +4,10 @@ import { Videocam as VideocamIcon } from '@mui/icons-material';
 import useTheme from '../../styles';
 import utils from '../../utils';
 
-const tips = ['Max 10MB each (20MB for videos)', 'High resolution video(mp4)'];
+const tips = [
+  '· Max 10MB each (20MB for videos)',
+  '· High resolution video(mp4)',
+];
 
 const FileDropZone = ({
   accept = ['video/*'],

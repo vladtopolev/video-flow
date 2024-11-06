@@ -39,6 +39,7 @@ export type VideoRecordFlowProps = {
   height: number;
   minVideoDurationDefault?: number;
   maxVideoDurationDefault?: number;
+  maxQuestionsCount?: number;
   textDictionary?: TextDictionaryFunction;
   blobUploader: BlobUploader;
   fileUploader?: FileUploader;
@@ -69,6 +70,7 @@ const VideoRecordFlow = ({
   ],
   minVideoDurationDefault = 0,
   maxVideoDurationDefault = 3 * 60,
+  maxQuestionsCount = 5,
   ActionContainerRenderer = ActionContainerRendererDefault,
   ...restProps
 }: VideoRecordFlowProps) => {
@@ -104,6 +106,7 @@ const VideoRecordFlow = ({
       videoRecordWayList={videoRecordWayList}
       minVideoDurationDefault={minVideoDurationDefault}
       maxVideoDurationDefault={maxVideoDurationDefault}
+      maxQuestionsCount={maxQuestionsCount}
       textDictionary={textDictionary}
       ActionContainerRenderer={ActionContainerRenderer}
       {...restProps}
