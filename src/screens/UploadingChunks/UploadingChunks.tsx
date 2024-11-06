@@ -4,6 +4,7 @@ import { useVideoRecordFlowContext } from '../../context/VideoRecordFlow.context
 import useWarningCloseWindow from '../../hooks/useWarningCloseWindow';
 import useTheme from '../../styles';
 import ProgressView from './components/ProgressView';
+import { VideoRecordWayTypes } from '../../recordVideoWays';
 
 type GenerationVideoState = {
   isLoading: boolean;
@@ -58,7 +59,9 @@ const UploadingChunks = () => {
         questions: pickedQuestions,
         chunks: blobBackgroundUploader.chunks,
         music,
-        recordVideoWay,
+        recordVideoWay: recordVideoWay as
+          | VideoRecordWayTypes.FREELY
+          | VideoRecordWayTypes.RANDOM_QUESTIONS,
       });
     }
   }, [state.isDone, userChoise, blobBackgroundUploader, onFinished]);

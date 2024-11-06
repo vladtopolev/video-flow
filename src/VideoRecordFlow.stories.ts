@@ -53,5 +53,19 @@ export const Default: Story = {
           onProgress(counter, DELAY);
         }, 1000);
       }),
+
+    fileUploader: ({ onProgress, file }) =>
+      new Promise<string>((resolve) => {
+        let counter = 0;
+        const id = setInterval(() => {
+          if (counter >= DELAY) {
+            clearInterval(id);
+            resolve(file.name);
+            return;
+          }
+          counter++;
+          onProgress(counter, DELAY);
+        }, 1000);
+      }),
   },
 };

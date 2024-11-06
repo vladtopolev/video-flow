@@ -6,6 +6,12 @@ import useMediaDevices from './hooks/useMediaDevices';
 import useStream from './hooks/useMediaStream';
 import useTelepromterSettings from './hooks/useTelepromterSettings';
 
+type MakeOptional<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
+
+type VideoFlowProps = MakeOptional<
+  Required<VideoRecordFlowProps>,
+  'fileUploader'
+>;
 export type VideoRecordFlowContextType = {
   mediaStream: ReturnType<typeof useStream>;
   mediaDevices: ReturnType<typeof useMediaDevices>;
@@ -13,7 +19,7 @@ export type VideoRecordFlowContextType = {
   chunksManagment: ReturnType<typeof useChunks>;
   userChoise: UserChoise;
   dispatch: Dispatch<UserChoiseAction>;
-} & Required<VideoRecordFlowProps>;
+} & VideoFlowProps;
 
 const VideoRecordFlowContext = createContext<VideoRecordFlowContextType>(
   {} as VideoRecordFlowContextType,
@@ -27,7 +33,7 @@ const VideoRecordFlowContextComponent = ({
   children: ReactNode;
   userChoise: UserChoise;
   dispatch: Dispatch<UserChoiseAction>;
-} & Required<VideoRecordFlowProps>) => {
+} & VideoFlowProps) => {
   const mediaStream = useStream();
   const mediaDevices = useMediaDevices();
   const telepromterSettings = useTelepromterSettings();

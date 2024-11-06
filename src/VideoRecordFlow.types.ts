@@ -34,12 +34,20 @@ export enum DefaultScreenTypes {
   UPLOADING_CHUNKS = 'UPLOADING_CHUNKS',
 }
 
-export type FinishedHandlerProps = {
-  questions: QuestionConfig[];
-  chunks: Array<{ link: string; duration: number }>;
-  music: BackgroundMusicConfig | null;
-  recordVideoWay: VideoRecordWayTypes | null;
-};
+export type FinishedHandlerProps =
+  | {
+      questions: QuestionConfig[];
+      chunks: Array<{ link: string; duration: number }>;
+      music: BackgroundMusicConfig | null;
+      recordVideoWay:
+        | VideoRecordWayTypes.FREELY
+        | VideoRecordWayTypes.RANDOM_QUESTIONS;
+    }
+  | {
+      recordVideoWay: VideoRecordWayTypes.UPLOAD_VIDEO;
+      video: any;
+    };
+
 export type FinishedHandler = (props: FinishedHandlerProps) => void;
 
 export type TextDictionaryFunction<T = string> = (key: string, opts?: any) => T;
@@ -51,3 +59,9 @@ export type BlobUploader = (props: {
   abortController: AbortController;
   originalFormat: 'mp4' | 'webm';
 }) => Promise<string>;
+
+export type FileUploader = (props: {
+  file: File;
+  onProgress: (uploaded: number, total: number) => void;
+  abortController: AbortController;
+}) => Promise<any>;

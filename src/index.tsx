@@ -1,5 +1,6 @@
 export type {
   BlobUploader,
+  FileUploader,
   FinishedHandler,
   QuestionConfig,
   BackgroundMusicConfig,

@@ -259,6 +259,39 @@ const ActionContainerRendererDefault = ({
     );
   }
 
+  if (currentScreen === DefaultScreenTypes.UPLOAD_VIDEO) {
+    return (
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          padding: spacing(2),
+          marginTop: spacing(6),
+        }}
+      >
+        <Button
+          sx={button.link}
+          onClick={() => {
+            onStopStream();
+          }}
+        >
+          Cancel
+        </Button>
+        {buttons.back && (
+          <Button
+            variant="contained"
+            sx={{ ...button.primary, minWidth: 120 }}
+            onClick={async () => {
+              buttons.back.onAction();
+            }}
+          >
+            Back
+          </Button>
+        )}
+      </div>
+    );
+  }
+
   return null;
 };
 

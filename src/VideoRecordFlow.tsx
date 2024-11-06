@@ -5,6 +5,7 @@ import {
 } from './VideoRecordFlow.default';
 import type {
   BackgroundMusicConfig,
+  FileUploader,
   FinishedHandler,
   QuestionConfig,
   TextDictionaryFunction,
@@ -28,6 +29,7 @@ import RecordingChunkScreen from './screens/RecordingChunk/RecordingChunk';
 import RecordedChunkPreviewScreen from './screens/RecordedChunkPreview/RecordedChunkPreview';
 import UploadingChunksScreen from './screens/UploadingChunks/UploadingChunks';
 import PickMusicScreen from './screens/PickMusic/PickMusic';
+import UploadOwnVideoScreen from './screens/UploadOwnVideo/UploadOwnVideo';
 
 export type VideoRecordFlowProps = {
   questionList?: QuestionConfig[];
@@ -39,6 +41,7 @@ export type VideoRecordFlowProps = {
   maxVideoDurationDefault?: number;
   textDictionary?: TextDictionaryFunction;
   blobUploader: BlobUploader;
+  fileUploader?: FileUploader;
   onCancel: () => void;
   onFinished: FinishedHandler;
   ActionContainerRenderer?: FC<ActionContainerRendererProps>;
@@ -52,6 +55,7 @@ const SCREENS: { [k: string]: FC } = {
   [DefaultScreenTypes.RECORDED_CHUNK_PREVIEW]: RecordedChunkPreviewScreen,
   [DefaultScreenTypes.PICK_MUSIC]: PickMusicScreen,
   [DefaultScreenTypes.UPLOADING_CHUNKS]: UploadingChunksScreen,
+  [DefaultScreenTypes.UPLOAD_VIDEO]: UploadOwnVideoScreen,
 };
 
 const VideoRecordFlow = ({
