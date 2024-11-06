@@ -1,84 +1,73 @@
 import { Box } from '@mui/material';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { QuestionConfig } from '../../../VideoRecordFlow.types';
 import { useVideoRecordFlowContext } from '../../../context/VideoRecordFlow.context';
 import { actions } from '../../../state';
+import useTheme from '../../../styles';
+import QuestionControl from './components/QuestionControl/QuestionControl';
+import { FREELY_SPEECH_ID } from '../Freely/Freely';
 
-// TODO
 const RandomQuestions = () => {
-  const { dispatch, questionList } = useVideoRecordFlowContext();
+  const {
+    dispatch,
+    questionList,
+    userChoise: { pickedQuestions },
+  } = useVideoRecordFlowContext();
+  const { spacing } = useTheme();
+
+  const [userPickedQuestion, setUserPickedQuestion] = useState<
+    Array<QuestionConfig | null>
+  >(() => {
+    // if user alredy picked questions and return to the initial screen again
+    if (
+      pickedQuestions.length > 0 &&
+      pickedQuestions[0].id !== FREELY_SPEECH_ID
+    ) {
+      return [
+        ...pickedQuestions,
+        ...Array(5 - pickedQuestions.length).fill(null),
+      ];
+    }
+    const mandatoryQuestions = questionList.filter(
+      (question) => question.mandatory,
+    );
+    return [
+      ...mandatoryQuestions,
+      ...Array(5 - mandatoryQuestions.length).fill(null),
+    ];
+  });
+
+  const onChangeQuestion = (question: QuestionConfig | null, index: number) =>
+    setUserPickedQuestion((prev) => {
+      const newQuestions = [...prev];
+      newQuestions[index] = question;
+      return newQuestions;
+    });
+
   useEffect(() => {
-    dispatch(actions.setPickedQuestions(questionList.slice(0, 3)));
-  }, [dispatch, questionList]);
+    dispatch(
+      actions.setPickedQuestions(userPickedQuestion.filter((q) => q !== null)),
+    );
+  }, [userPickedQuestion, dispatch]);
 
   return (
-    <Box sx={{ mt: 2 }}>
-      Test
-      {/*
-      <Grid container spacing={4}>
-        {randomisedQuestions.map((question, index) => {
-          const disabled =
-            totalSelected >= requiredNumberSelectedQuestions &&
-            !question.checked &&
-            !question.mandatory;
-          const selected = question.mandatory || question.checked;
-
-          return (
-            <Grid item xs={12} sm={6} md={4} key={index}>
-              <ClicableContainer
-                sx={{
-                  height: '100%',
-                  width: '100%',
-                  backgroundColor: 'grey.100',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  minHeight: { sm: 130 },
-                }}
-                onClick={() => {
-                  if (!question.mandatory) {
-                    changeQuestion(index, { checked: !question.checked });
-                  }
-                }}
-                selected={selected}
-                disabled={disabled}
-              >
-                <Typography
-                  variant="titleXS"
-                  sx={{
-                    flexGrow: 1,
-                    ...(disabled && { color: 'text.disabled' }),
-                  }}
-                >
-                  {question.webText}
-                </Typography>
-                <Box
-                  sx={{
-                    display: 'flex',
-                    justifyContent: 'flex-end',
-                  }}
-                >
-                  {!selected && !disabled && (
-                    <IconButton
-                      sx={{
-                        backgroundColor: 'common.white',
-                        width: 32,
-                        height: 32,
-                      }}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        refreshQuestion(index);
-                      }}
-                    >
-                      <RefreshIcon
-                        sx={{ color: 'primary.dark', fontSize: 20 }}
-                      />
-                    </IconButton>
-                  )}
-                </Box>
-              </ClicableContainer>
-            </Grid>
-          );
-        })}
-      </Grid>*/}
+    <Box
+      sx={{ mt: 2 }}
+      onClick={(e) => {
+        e.stopPropagation();
+      }}
+    >
+      <div
+        style={{ gap: spacing(2), display: 'flex', flexDirection: 'column' }}
+      >
+        {userPickedQuestion.map((question, index) => (
+          <QuestionControl
+            key={index}
+            question={question}
+            onChange={(q) => onChangeQuestion(q, index)}
+          />
+        ))}
+      </div>
     </Box>
   );
 };

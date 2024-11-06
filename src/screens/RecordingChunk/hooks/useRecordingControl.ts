@@ -37,7 +37,6 @@ const useRecordingControl = ({
 
   const onNewChunkAdded = useCallback(
     (blob: Blob, duration: number) => {
-      console.log('onNewChunkAdded', blob, duration);
       setChunk(currentQuestionIndex, blob, duration);
     },
     [setChunk, currentQuestionIndex],
