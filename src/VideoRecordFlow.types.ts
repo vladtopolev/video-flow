@@ -34,19 +34,26 @@ export enum DefaultScreenTypes {
   UPLOADING_CHUNKS = 'UPLOADING_CHUNKS',
 }
 
+export type FinishedHandlerAfterRecordingProcessProps = {
+  questions: QuestionConfig[];
+  chunks: Array<{
+    link: string;
+    duration: number;
+  }>;
+  music: BackgroundMusicConfig | null;
+  recordVideoWay:
+    | VideoRecordWayTypes.FREELY
+    | VideoRecordWayTypes.RANDOM_QUESTIONS;
+};
+
+export type FinishedHadlerAfterUploadingOwnVideoProps = {
+  recordVideoWay: VideoRecordWayTypes.UPLOAD_VIDEO;
+  video: any;
+};
+
 export type FinishedHandlerProps =
-  | {
-      questions: QuestionConfig[];
-      chunks: Array<{ link: string; duration: number }>;
-      music: BackgroundMusicConfig | null;
-      recordVideoWay:
-        | VideoRecordWayTypes.FREELY
-        | VideoRecordWayTypes.RANDOM_QUESTIONS;
-    }
-  | {
-      recordVideoWay: VideoRecordWayTypes.UPLOAD_VIDEO;
-      video: any;
-    };
+  | FinishedHandlerAfterRecordingProcessProps
+  | FinishedHadlerAfterUploadingOwnVideoProps;
 
 export type FinishedHandler = (props: FinishedHandlerProps) => void;
 

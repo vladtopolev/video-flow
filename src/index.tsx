@@ -5,6 +5,8 @@ export type {
   QuestionConfig,
   BackgroundMusicConfig,
   FinishedHandlerProps,
+  FinishedHadlerAfterUploadingOwnVideoProps,
+  FinishedHandlerAfterRecordingProcessProps,
   BrandStyle,
 } from './VideoRecordFlow.types';
 
