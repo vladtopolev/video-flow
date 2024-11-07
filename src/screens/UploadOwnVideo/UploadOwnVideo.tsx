@@ -4,7 +4,7 @@ import FileDropZone from '../../components/FileDropZone/FileDropZone';
 import ActionContainerRenderer from '../../components/ActionContainerRenderer/ActionContainerRenderer';
 import { useVideoRecordFlowContext } from '../../context/VideoRecordFlow.context';
 import { actions } from '../../state';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import FileUploadInfo from '../../components/FileUploadInfo/FileUploadInfo';
 import { VideoRecordWayTypes } from '../../recordVideoWays';
 
@@ -27,29 +27,32 @@ const UploadOwnVideo = () => {
   const file = state?.file;
   const abortController = state?.abortController;
 
-  useEffect(() => {
-    if (file && fileUploader && abortController) {
-      fileUploader({
-        file,
-        abortController,
-        onProgress: (uploded, total) => {
+  const uploadFile = useCallback(
+    (file: File, abortController: AbortController) => {
+      if (fileUploader) {
+        fileUploader({
+          file,
+          abortController,
+          onProgress: (uploded, total) => {
+            if (!abortController.signal.aborted) {
+              setState((prev) => ({
+                ...prev!,
+                progress: (uploded / total) * 100,
+              }));
+            }
+          },
+        }).then((video) => {
           if (!abortController.signal.aborted) {
-            setState((prev) => ({
-              ...prev!,
-              progress: (uploded / total) * 100,
-            }));
+            onFinished({
+              recordVideoWay: VideoRecordWayTypes.UPLOAD_VIDEO,
+              video,
+            });
           }
-        },
-      }).then((video) => {
-        if (!abortController.signal.aborted) {
-          onFinished({
-            recordVideoWay: VideoRecordWayTypes.UPLOAD_VIDEO,
-            video,
-          });
-        }
-      });
-    }
-  }, [file, fileUploader, abortController, onFinished]);
+        });
+      }
+    },
+    [fileUploader, onFinished],
+  );
 
   return (
     <>
@@ -60,11 +63,13 @@ const UploadOwnVideo = () => {
         {!state?.file && (
           <FileDropZone
             onChange={(files) => {
+              const abortController = new AbortController();
               setState({
                 file: files[0],
                 progress: 0,
-                abortController: new AbortController(),
+                abortController,
               });
+              uploadFile(files[0], abortController);
             }}
           />
         )}
