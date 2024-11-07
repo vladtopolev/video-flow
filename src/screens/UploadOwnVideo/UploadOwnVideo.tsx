@@ -1,12 +1,12 @@
 import { Typography } from '@mui/material';
-import useTheme from '../../styles';
-import FileDropZone from '../../components/FileDropZone/FileDropZone';
+import { useCallback, useState } from 'react';
 import ActionContainerRenderer from '../../components/ActionContainerRenderer/ActionContainerRenderer';
-import { useVideoRecordFlowContext } from '../../context/VideoRecordFlow.context';
-import { actions } from '../../state';
-import { useCallback, useEffect, useState } from 'react';
+import FileDropZone from '../../components/FileDropZone/FileDropZone';
 import FileUploadInfo from '../../components/FileUploadInfo/FileUploadInfo';
+import { useVideoRecordFlowContext } from '../../context/VideoRecordFlow.context';
 import { VideoRecordWayTypes } from '../../recordVideoWays';
+import { actions } from '../../state';
+import useTheme from '../../styles';
 
 const UploadOwnVideo = () => {
   const { typography, spacing } = useTheme();
@@ -25,7 +25,6 @@ const UploadOwnVideo = () => {
   }>(null);
 
   const file = state?.file;
-  const abortController = state?.abortController;
 
   const uploadFile = useCallback(
     (file: File, abortController: AbortController) => {
