@@ -8,6 +8,6 @@ export type {
   BrandStyle,
 } from './VideoRecordFlow.types';
 
-export type { VideoRecordWayTypes } from './recordVideoWays';
+export { VideoRecordWayTypes } from './recordVideoWays';
 
 export { default as VideoRecordFlow } from './VideoRecordFlow';
