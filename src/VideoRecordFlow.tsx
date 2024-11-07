@@ -9,6 +9,7 @@ import type {
   FinishedHandler,
   QuestionConfig,
   TextDictionaryFunction,
+  BrandStyle,
 } from './VideoRecordFlow.types';
 import { DefaultScreenTypes } from './VideoRecordFlow.types';
 import ActionContainerRendererDefault, {
@@ -40,6 +41,7 @@ export type VideoRecordFlowProps = {
   minVideoDurationDefault?: number;
   maxVideoDurationDefault?: number;
   maxQuestionsCount?: number;
+  brandStyle?: BrandStyle;
   textDictionary?: TextDictionaryFunction;
   blobUploader: BlobUploader;
   fileUploader?: FileUploader;
@@ -68,6 +70,16 @@ const VideoRecordFlow = ({
     VideoRecordWayTypes.RANDOM_QUESTIONS,
     VideoRecordWayTypes.UPLOAD_VIDEO,
   ],
+  brandStyle = {
+    fontFamily: {
+      title: 'Inter, sans-serif',
+      body: 'Inter, sans-serif',
+    },
+    palette: {
+      primary: '#4338CA',
+      secondary: '#4338CA',
+    },
+  },
   minVideoDurationDefault = 0,
   maxVideoDurationDefault = 3 * 60,
   maxQuestionsCount = 5,
@@ -108,6 +120,7 @@ const VideoRecordFlow = ({
       maxVideoDurationDefault={maxVideoDurationDefault}
       maxQuestionsCount={maxQuestionsCount}
       textDictionary={textDictionary}
+      brandStyle={brandStyle}
       ActionContainerRenderer={ActionContainerRenderer}
       {...restProps}
     >

@@ -3,7 +3,6 @@ import { useVideoRecordFlowContext } from '../../../context/VideoRecordFlow.cont
 import useTheme from '../../../styles';
 import { useContainerQuery } from 'react-container-query';
 import { actions } from '../../../state';
-import palette from '../../../styles/palette';
 
 const query = {
   small: {
@@ -21,7 +20,7 @@ const Actions = () => {
     dispatch,
     onCancel,
   } = useVideoRecordFlowContext();
-  const { spacing, button } = useTheme();
+  const { spacing, button, palette } = useTheme();
 
   const [params, containerRef] = useContainerQuery(query, {});
 

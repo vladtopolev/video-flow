@@ -1,7 +1,7 @@
-import paletteDefault from './palette';
+import compilePalette from './palette';
 
-const getButtons = (
-  pallete: typeof paletteDefault,
+const compileButtons = (
+  pallete: ReturnType<typeof compilePalette>,
   spacing: (space: number) => string,
 ) => ({
   link: {
@@ -35,4 +35,4 @@ const getButtons = (
   },
 });
 
-export default getButtons;
+export default compileButtons;

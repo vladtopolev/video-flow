@@ -95,6 +95,39 @@ export const attachFullscreenEvent = (handler: () => void) => {
   };
 };
 
+function adjustColor(color: string, percent: number): string {
+  // Remove the "#" if it exists
+  const hex = color.replace('#', '');
+
+  // Check if the hex code is valid
+  if (hex.length !== 6) {
+    throw new Error('Invalid hex color format. Use a 6-digit hex color code.');
+  }
+
+  // Parse the hex values
+  let r = parseInt(hex.substring(0, 2), 16);
+  let g = parseInt(hex.substring(2, 4), 16);
+  let b = parseInt(hex.substring(4, 6), 16);
+
+  // Adjust each color channel by the given percentage
+  r = Math.min(255, Math.max(0, r + (r * percent) / 100));
+  g = Math.min(255, Math.max(0, g + (g * percent) / 100));
+  b = Math.min(255, Math.max(0, b + (b * percent) / 100));
+
+  // Convert the adjusted values back to hex and format as a string
+  const newColor = `#${(
+    (1 << 24) +
+    (Math.round(r) << 16) +
+    (Math.round(g) << 8) +
+    Math.round(b)
+  )
+    .toString(16)
+    .slice(1)
+    .toUpperCase()}`;
+
+  return newColor;
+}
+
 export default {
   get,
   hex2rgba,
@@ -106,4 +139,5 @@ export default {
   isFullscreen,
   requestFullscreen,
   shuffleArray,
+  adjustColor,
 };

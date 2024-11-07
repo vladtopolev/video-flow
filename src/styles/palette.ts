@@ -1,13 +1,15 @@
-const palette = {
+import utils from '../utils';
+
+const compilePalette = (colors: { primary: string; secondary: string }) => ({
   text: {
     primary: '#262630',
     secondary: '#6B7280',
     disabled: '#B6BBC3',
   },
   primary: {
-    main: '#4338CA', // +
-    dark: '#2E278D', // +
-    light: '#685FD4',
+    main: colors.primary,
+    dark: utils.adjustColor(colors.primary, -30),
+    light: utils.adjustColor(colors.primary, 30),
     contrastText: '#FFFFFF',
     invisible: '#ECEBFA',
   },
@@ -66,6 +68,6 @@ const palette = {
   shadows: {
     default: '0px 0px 20px 0px rgba(0, 0, 0, 0.10)',
   },
-};
+});
 
-export default palette;
+export default compilePalette;
