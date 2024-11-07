@@ -15,6 +15,8 @@ type GenerationVideoState = {
 
 const UploadingChunks = () => {
   const {
+    width,
+    height,
     userChoise,
     mediaStream: { stopStream },
     chunksManagment: { blobBackgroundUploader },
@@ -56,6 +58,8 @@ const UploadingChunks = () => {
     if (state.isDone) {
       const { pickedQuestions, music, recordVideoWay } = userChoise;
       onFinished({
+        width,
+        height,
         questions: pickedQuestions,
         chunks: blobBackgroundUploader.chunks,
         music,
@@ -64,7 +68,14 @@ const UploadingChunks = () => {
           | VideoRecordWayTypes.RANDOM_QUESTIONS,
       });
     }
-  }, [state.isDone, userChoise, blobBackgroundUploader, onFinished]);
+  }, [
+    state.isDone,
+    userChoise,
+    blobBackgroundUploader,
+    onFinished,
+    width,
+    height,
+  ]);
 
   return (
     <RecordingDialog>

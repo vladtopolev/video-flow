@@ -35,6 +35,8 @@ export enum DefaultScreenTypes {
 }
 
 export type FinishedHandlerAfterRecordingProcessProps = {
+  width: number;
+  height: number;
   questions: QuestionConfig[];
   chunks: Array<{
     link: string;
