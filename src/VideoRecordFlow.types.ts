@@ -75,6 +75,14 @@ export type FileUploader = (props: {
   abortController: AbortController;
 }) => Promise<any>;
 
+export type Corners = {
+  xs: string; //'2px';
+  sm: string; // '4px';
+  md: string; //'8px';
+  lg: string; //'16px';
+  xl: string; //'24px';
+};
+
 export type BrandStyle = {
   fontFamily: {
     title: string;
@@ -84,4 +92,5 @@ export type BrandStyle = {
     primary: string;
     secondary: string;
   };
+  corners?: Corners;
 };

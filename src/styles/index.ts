@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import compilePalette from './palette';
-import corners from './corners';
+import cornersDefault from './corners';
 import compileTypography from './typography';
 import compileButtons from './buttons';
 import { useContainerBreakpoints } from './context/ContainerBreakpointsContext';
@@ -12,7 +12,8 @@ const useTheme = () => {
 
   const spacing = (space: number) => `${4 * space}px`;
   const palette = compilePalette(brandStyle.palette);
-  const button = compileButtons(palette, spacing);
+  const corners = brandStyle.corners || cornersDefault;
+  const button = compileButtons(palette, spacing, corners);
   const typography = compileTypography(brandStyle.fontFamily);
 
   return useMemo(

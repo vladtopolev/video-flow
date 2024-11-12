@@ -21,6 +21,7 @@ const Container = ({
         borderRadius: corners.md,
         display: 'flex',
         gap: spacing(2),
+        justifyContent: 'space-between',
         alignItems: 'center',
         ...style,
       }}

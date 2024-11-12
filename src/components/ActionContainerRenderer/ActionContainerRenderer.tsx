@@ -1,6 +1,7 @@
 import { Button } from '@mui/material';
 import { DefaultScreenTypes } from '../../VideoRecordFlow.types';
 import useTheme from '../../styles';
+import { useVideoRecordFlowContext } from '../../context/VideoRecordFlow.context';
 
 export type ActionContainerRendererProps = {
   currentScreen: string;
@@ -18,6 +19,7 @@ const ActionContainerRendererDefault = ({
     button,
     breakpoints: { xs, sm },
   } = useTheme();
+  const { onCancel } = useVideoRecordFlowContext();
 
   const isNotSmall = !xs && !sm;
 
@@ -35,6 +37,7 @@ const ActionContainerRendererDefault = ({
           sx={button.link}
           onClick={() => {
             onStopStream();
+            onCancel();
           }}
         >
           Cancel
@@ -70,6 +73,7 @@ const ActionContainerRendererDefault = ({
         <Button
           onClick={() => {
             onStopStream();
+            onCancel();
           }}
           sx={{
             ...button.link,
@@ -139,6 +143,7 @@ const ActionContainerRendererDefault = ({
           sx={button.link}
           onClick={() => {
             onStopStream();
+            onCancel();
           }}
           style={{
             order: isNotSmall ? 0 : 1,
@@ -207,6 +212,7 @@ const ActionContainerRendererDefault = ({
           sx={button.link}
           onClick={() => {
             onStopStream();
+            onCancel();
           }}
           style={{
             order: isNotSmall ? 0 : 1,
@@ -273,6 +279,7 @@ const ActionContainerRendererDefault = ({
           sx={button.link}
           onClick={() => {
             onStopStream();
+            onCancel();
           }}
         >
           Cancel

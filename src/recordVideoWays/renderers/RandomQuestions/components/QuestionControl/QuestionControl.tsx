@@ -1,5 +1,6 @@
 import { ArrowDropDown as ArrowDropDownIcon } from '@mui/icons-material';
-import { Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
+import { DeleteOutline as DeleteIcon } from '@mui/icons-material';
 import useTheme from '../../../../../styles';
 import { QuestionConfig } from '../../../../../VideoRecordFlow.types';
 import QuestionMenu from '../QuestionMenu/QuestionMenu';
@@ -32,17 +33,25 @@ const QuestionControl = ({
           borderColor: question ? palette.grey[400] : palette.grey[300],
         }}
       >
-        <Typography
-          sx={{
-            ...typography.bodyL,
-            flexGrow: 1,
-            color: question ? palette.text.primary : palette.grey[300],
+        <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
+          <Typography
+            sx={{
+              ...typography.bodyL,
+              flexGrow: 1,
+              color: question ? palette.text.primary : palette.grey[300],
+            }}
+          >
+            {question?.webText || 'Add question from the list (optional)'}
+          </Typography>
+          <ArrowDropDownIcon />
+        </Box>
+        <DeleteIcon
+          sx={{ color: palette.grey[500] }}
+          onClick={(e) => {
+            e.stopPropagation();
+            onChange(null);
           }}
-        >
-          {question?.webText || 'Add question from the list (optional)'}
-        </Typography>
-
-        <ArrowDropDownIcon />
+        />
       </Container>
       <QuestionMenu
         anchorEl={anchorEl}

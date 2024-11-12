@@ -25,7 +25,10 @@ const BeforeRecording = () => {
     <>
       <div className="BeforeRecordingScreen">
         <Header />
-        <Typography sx={{ my: 10, ...typography.titleL }} component="div">
+        <Typography
+          sx={{ mt: spacing(6), mb: spacing(10), ...typography.titleL }}
+          component="div"
+        >
           {title}
         </Typography>
         <TextField
