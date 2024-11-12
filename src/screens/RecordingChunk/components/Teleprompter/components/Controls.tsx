@@ -5,6 +5,9 @@ import { Box, Button, Switch, Typography } from '@mui/material';
 import { useVideoRecordFlowContext } from '../../../../../context/VideoRecordFlow.context';
 import useTheme from '../../../../../styles';
 import SliderWithButtons from '../../../../../components/SliderWithButtons/SliderWithButtons';
+import useWindowSize from '../../../../../hooks/useWindowSize';
+
+const BREAKPOINT_WIDTH = 900;
 
 const MIN_SPEED = 1;
 const MAX_SPEED = 5;
@@ -23,7 +26,8 @@ const Controls = ({
   isChunkRecording?: boolean;
   toggleScrolling: () => void;
 }) => {
-  const isMobile = false; // TODO
+  const { width } = useWindowSize();
+  const isMobile = width < BREAKPOINT_WIDTH;
   const { palette, spacing, typography } = useTheme();
 
   const {

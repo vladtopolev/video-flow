@@ -1,20 +1,9 @@
 import { Box, Button, SxProps } from '@mui/material';
 import { KeyboardEventHandler, useEffect, useRef } from 'react';
 import useTheme from '../../../../styles';
+import useWindowSize from '../../../../hooks/useWindowSize';
 
-const StartRecordButtonSx: SxProps = {
-  backgroundColor: 'error.main',
-  width: { xs: 38, md: 68 },
-  height: { xs: 38, md: 68 },
-  borderRadius: '50%',
-};
-
-const StopRecordButtonSx: SxProps = {
-  backgroundColor: 'error.main',
-  width: { xs: 20, md: 32 },
-  height: { xs: 20, md: 32 },
-  borderRadius: { xs: 1, md: 1.75 },
-};
+const BREAKPOINT_WIDTH = 900;
 
 const PlayButton = ({
   disabled,
@@ -29,6 +18,23 @@ const PlayButton = ({
 }) => {
   const ref = useRef<HTMLButtonElement>(null);
   const { palette } = useTheme();
+  const { width } = useWindowSize();
+
+  const isMobile = width < BREAKPOINT_WIDTH;
+
+  const StartRecordButtonSx: SxProps = {
+    backgroundColor: 'error.main',
+    width: isMobile ? 38 : 68,
+    height: isMobile ? 38 : 68,
+    borderRadius: '50%',
+  };
+
+  const StopRecordButtonSx: SxProps = {
+    backgroundColor: 'error.main',
+    width: isMobile ? 20 : 32,
+    height: isMobile ? 20 : 32,
+    borderRadius: { xs: 1, md: 1.75 },
+  };
 
   useEffect(() => {
     if (ref && ref.current) {
@@ -42,8 +48,8 @@ const PlayButton = ({
       onKeyDown={onKeyDown}
       disabled={disabled}
       sx={{
-        width: { xs: 48, md: 80 },
-        height: { xs: 48, md: 80 },
+        width: isMobile ? 48 : 80,
+        height: isMobile ? 48 : 80,
         minWidth: 'unset',
         p: 0,
         borderRadius: '50%',
