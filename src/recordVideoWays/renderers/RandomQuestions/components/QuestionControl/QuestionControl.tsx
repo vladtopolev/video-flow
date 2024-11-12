@@ -54,6 +54,7 @@ const QuestionControl = ({
         />
       </Container>
       <QuestionMenu
+        question={question}
         anchorEl={anchorEl}
         handleClose={onClose}
         onChange={onChange}

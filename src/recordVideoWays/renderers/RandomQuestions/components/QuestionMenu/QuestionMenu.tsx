@@ -10,9 +10,11 @@ const QuestionMenu = ({
   anchorEl,
   handleClose,
   onChange,
+  question,
 }: {
   anchorEl: null | HTMLElement;
   handleClose: () => void;
+  question: QuestionConfig | null;
   onChange: (question: QuestionConfig | null) => void;
 }) => {
   const {
@@ -22,14 +24,14 @@ const QuestionMenu = ({
 
   const menuQuestionList = useMemo(
     () => [
-      ...pickedQuestions.filter(Boolean).map((q) => ({ ...q, selected: true })),
+      ...(question ? [{ ...question, selected: true }] : []),
       ...questionList
         .filter(
           (question) => !pickedQuestions.find((q) => question.id === q.id),
         )
         .map((q) => ({ ...q, selected: false })),
     ],
-    [questionList, pickedQuestions],
+    [questionList, pickedQuestions, question],
   );
 
   return (

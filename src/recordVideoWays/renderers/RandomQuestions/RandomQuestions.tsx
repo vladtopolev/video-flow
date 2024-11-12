@@ -25,7 +25,7 @@ const RandomQuestions = () => {
       pickedQuestions[0].id !== FREELY_SPEECH_ID
     ) {
       return [
-        ...pickedQuestions,
+        ...pickedQuestions.filter((q) => q !== null),
         ...Array(maxQuestionsCount - pickedQuestions.length).fill(null),
       ];
     }
