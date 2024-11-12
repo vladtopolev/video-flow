@@ -10,8 +10,10 @@ const compileButtons = (
     color: pallete.text.secondary,
     padding: `${spacing(3)} ${spacing(4)}`,
     borderRadius: corners.md,
+    fontSize: { xs: '12px', md: '16px' },
   },
   primary: {
+    fontSize: { xs: '12px', md: '16px' },
     backgroundColor: pallete.primary.main,
     color: pallete.primary.contrastText,
     padding: `${spacing(3)} ${spacing(4)}`,
@@ -23,6 +25,7 @@ const compileButtons = (
     },
   },
   secondary: {
+    fontSize: { xs: '12px', md: '16px' },
     backgroundColor: pallete.background.default,
     color: pallete.primary.dark,
     border: `1px solid`,
