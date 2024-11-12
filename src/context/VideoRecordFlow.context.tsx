@@ -5,13 +5,16 @@ import useChunks from './hooks/useChunks';
 import useMediaDevices from './hooks/useMediaDevices';
 import useStream from './hooks/useMediaStream';
 import useTelepromterSettings from './hooks/useTelepromterSettings';
+import { TextDictionaryFunction } from '../VideoRecordFlow.types';
 
 type MakeOptional<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
 
 type VideoFlowProps = MakeOptional<
-  Required<VideoRecordFlowProps>,
+  Required<Omit<VideoRecordFlowProps, 'textDictionary'>>,
   'fileUploader'
->;
+> & {
+  textDictionary: TextDictionaryFunction;
+};
 export type VideoRecordFlowContextType = {
   mediaStream: ReturnType<typeof useStream>;
   mediaDevices: ReturnType<typeof useMediaDevices>;
@@ -27,7 +30,6 @@ const VideoRecordFlowContext = createContext<VideoRecordFlowContextType>(
 
 const VideoRecordFlowContextComponent = ({
   children,
-
   ...videoRecordFlowProps
 }: {
   children: ReactNode;

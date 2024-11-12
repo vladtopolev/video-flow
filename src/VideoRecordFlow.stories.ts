@@ -34,6 +34,11 @@ export const Default: Story = {
   args: {
     width: 1440,
     height: 1080,
+    textDictionary: (key: string) => {
+      if (key === 'VideoRecordWay.Options.Freely.Description') {
+        return 'Max 3 minutes. ==>Custom text';
+      }
+    },
     onCancel: () => {
       console.log('cancel');
     },

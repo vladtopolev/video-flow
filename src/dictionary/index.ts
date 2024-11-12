@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import utils from '../utils/index';
 import type { TextDictionaryFunction } from '../VideoRecordFlow.types';
 import defaultDictionary from './dictionary';
-import utils from '../utils/index';
 
 const TEMPLATE = /{{(.*?)}}/g;
 

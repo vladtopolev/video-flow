@@ -60,6 +60,10 @@ export type FinishedHandlerProps =
 export type FinishedHandler = (props: FinishedHandlerProps) => void;
 
 export type TextDictionaryFunction<T = string> = (key: string, opts?: any) => T;
+export type CustomTextDictionaryFunction<T = string> = (
+  key: string,
+  opts?: any,
+) => T | undefined | null;
 
 export type BlobUploader = (props: {
   blob: Blob;

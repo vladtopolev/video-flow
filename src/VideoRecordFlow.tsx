@@ -1,4 +1,4 @@
-import { FC, useEffect, useMemo } from 'react';
+import { FC, useCallback, useEffect, useMemo } from 'react';
 import {
   DEFAULT_BACKGROUND_MUSIC_LIST,
   DEFAULT_QUESTION_LIST,
@@ -10,6 +10,7 @@ import type {
   QuestionConfig,
   TextDictionaryFunction,
   BrandStyle,
+  CustomTextDictionaryFunction,
 } from './VideoRecordFlow.types';
 import { DefaultScreenTypes } from './VideoRecordFlow.types';
 import ActionContainerRendererDefault, {
@@ -42,7 +43,7 @@ export type VideoRecordFlowProps = {
   maxVideoDurationDefault?: number;
   maxQuestionsCount?: number;
   brandStyle?: BrandStyle;
-  textDictionary?: TextDictionaryFunction;
+  textDictionary?: CustomTextDictionaryFunction;
   blobUploader: BlobUploader;
   fileUploader?: FileUploader;
   onCancel: () => void;
@@ -62,7 +63,7 @@ const SCREENS: { [k: string]: FC } = {
 };
 
 const VideoRecordFlow = ({
-  textDictionary = defaultTextDictionary,
+  textDictionary: customTextDictionary,
   backgroundMusicList = DEFAULT_BACKGROUND_MUSIC_LIST,
   questionList = DEFAULT_QUESTION_LIST,
   videoRecordWayList = [
@@ -105,12 +106,19 @@ const VideoRecordFlow = ({
     [backgroundMusicList],
   );
 
+  const textDictionary = useCallback<TextDictionaryFunction>(
+    (text, opts) =>
+      customTextDictionary?.(text, opts) || defaultTextDictionary(text, opts),
+    [customTextDictionary],
+  );
+
   useEffect(() => {
     dispatch(actions.setMusic(shuffledBackgroundMusicList[0]));
   }, [shuffledBackgroundMusicList, dispatch]);
 
   return (
     <VideoRecordFlowContextComponent
+      textDictionary={textDictionary}
       userChoise={userChoise}
       dispatch={dispatch}
       questionList={questionList}
@@ -119,7 +127,6 @@ const VideoRecordFlow = ({
       minVideoDurationDefault={minVideoDurationDefault}
       maxVideoDurationDefault={maxVideoDurationDefault}
       maxQuestionsCount={maxQuestionsCount}
-      textDictionary={textDictionary}
       brandStyle={brandStyle}
       ActionContainerRenderer={ActionContainerRenderer}
       {...restProps}
