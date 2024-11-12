@@ -15,7 +15,8 @@ const PickMusic = () => {
     userChoise: { music, currentScreen },
     dispatch,
   } = useVideoRecordFlowContext();
-  const { typography, spacing, corners, palette } = useTheme();
+  const { typography, spacing, corners, palette, breakpoints } = useTheme();
+  const isMobile = breakpoints.xs || breakpoints.sm;
 
   const pickedBackgroundMusic = music;
   const { setMusic } = actions;
@@ -24,7 +25,10 @@ const PickMusic = () => {
     <>
       <Box className="BackgroundMusicSection">
         <Typography
-          sx={{ ...typography.titleL, mt: spacing(10) }}
+          sx={{
+            ...(isMobile ? typography.titleM : typography.titleL),
+            mt: spacing(10),
+          }}
           component="h2"
         >
           {textDictionary('BackgroundMusic.Title')}

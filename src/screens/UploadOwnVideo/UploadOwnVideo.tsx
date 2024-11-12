@@ -9,7 +9,9 @@ import { actions } from '../../state';
 import useTheme from '../../styles';
 
 const UploadOwnVideo = () => {
-  const { typography, spacing } = useTheme();
+  const { typography, spacing, breakpoints } = useTheme();
+  const isMobile = breakpoints.xs || breakpoints.sm;
+
   const {
     dispatch,
     fileUploader,
@@ -56,7 +58,12 @@ const UploadOwnVideo = () => {
   return (
     <>
       <div>
-        <Typography sx={{ ...typography.titleL, mb: spacing(10) }}>
+        <Typography
+          sx={{
+            ...(isMobile ? typography.titleM : typography.titleL),
+            mb: spacing(10),
+          }}
+        >
           Upload my own video
         </Typography>
         {!state?.file && (

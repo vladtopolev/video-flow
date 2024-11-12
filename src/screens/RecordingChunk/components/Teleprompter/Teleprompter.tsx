@@ -1,5 +1,6 @@
 import { Box, SxProps, Typography } from '@mui/material';
 import { MutableRefObject, useImperativeHandle, useRef, useState } from 'react';
+import { useRecordingDialog } from '../../../../components/RecordingDialog/RecordingDialog';
 import { useVideoRecordFlowContext } from '../../../../context/VideoRecordFlow.context';
 import useInterval from '../../../../hooks/useInterval';
 import useMeasure from '../../../../hooks/useMeasure';
@@ -12,6 +13,7 @@ export type TelepromterManagerProps = {
   startScrolling: () => void;
   stopScrolling: () => void;
 };
+const BREAKPOINT_WIDTH = 900;
 
 const Telepromter = ({
   question,
@@ -32,8 +34,10 @@ const Telepromter = ({
     TelepromterManagerProps | null | undefined
   >;
 }) => {
+  const { width } = useRecordingDialog();
+
   const { palette, spacing, corners, typography } = useTheme();
-  const isMobile = false; // TODO
+  const isMobile = width < BREAKPOINT_WIDTH;
 
   const {
     telepromterSettings: { fontSize, speed },
@@ -93,13 +97,7 @@ const Telepromter = ({
       {question && (
         <Typography
           className="telepromter-question"
-          sx={
-            isMobile
-              ? { ...typography.bodyM, mb: 2 }
-              : { ...typography.bodyXL, mb: 4 }
-          }
-          // variant={isMobile ? 'bodyM' : 'bodyXL'}
-          // sx={notes ? { mb: { xs: 2, sm: 4 } } : {}}
+          sx={isMobile ? { ...typography.bodyM } : { ...typography.bodyXL }}
         >
           {question}
         </Typography>
@@ -112,6 +110,7 @@ const Telepromter = ({
             sx={{
               flexGrow: 1,
               overflowY: isScrolling ? 'hidden' : 'scroll',
+              ...(isMobile ? { mt: 2 } : { mt: 4 }),
               ...(maxHeight && { maxHeight }),
             }}
             ref={(element: HTMLDivElement) => {

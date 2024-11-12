@@ -1,9 +1,16 @@
 import { Dialog } from '@mui/material';
-import { ReactNode } from 'react';
+import { createContext, ReactNode, useContext } from 'react';
 import useTheme from '../../styles';
+import useWindowSize from '../../hooks/useWindowSize';
+
+const RecordingDialogContext = createContext<{ width: number }>({
+  width: 0,
+});
 
 const RecordingDialog = ({ children }: { children: ReactNode }) => {
   const { palette } = useTheme();
+  const { width } = useWindowSize();
+
   return (
     <Dialog
       fullScreen
@@ -15,9 +22,13 @@ const RecordingDialog = ({ children }: { children: ReactNode }) => {
         },
       }}
     >
-      {children}
+      <RecordingDialogContext.Provider value={{ width }}>
+        {children}
+      </RecordingDialogContext.Provider>
     </Dialog>
   );
 };
 
 export default RecordingDialog;
+
+export const useRecordingDialog = () => useContext(RecordingDialogContext);

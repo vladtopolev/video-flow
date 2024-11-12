@@ -18,7 +18,8 @@ const BeforeRecording = () => {
     dispatch,
     ActionContainerRenderer,
   } = useVideoRecordFlowContext();
-  const { spacing, typography } = useTheme();
+  const { spacing, typography, breakpoints } = useTheme();
+  const isMobile = breakpoints.xs || breakpoints.sm;
 
   const title = pickedQuestions[currentQuestionIndex]?.webText;
   return (
@@ -26,7 +27,11 @@ const BeforeRecording = () => {
       <div className="BeforeRecordingScreen">
         <Header />
         <Typography
-          sx={{ mt: spacing(6), mb: spacing(10), ...typography.titleL }}
+          sx={{
+            mt: spacing(6),
+            mb: spacing(10),
+            ...(isMobile ? typography.titleM : typography.titleL),
+          }}
           component="div"
         >
           {title}

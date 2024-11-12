@@ -5,7 +5,8 @@ import TipContainer from '../../../components/TipContainer/TipContainer';
 
 const ProgressView = ({ progress }: { progress: number }) => {
   const { textDictionary } = useVideoRecordFlowContext();
-  const { spacing, typography, palette } = useTheme();
+  const { spacing, typography, palette, breakpoints } = useTheme();
+  const isMobile = breakpoints.xs || breakpoints.sm;
   return (
     <Box>
       <Typography
@@ -16,7 +17,11 @@ const ProgressView = ({ progress }: { progress: number }) => {
       </Typography>
       <Typography
         component="h1"
-        sx={{ mt: spacing(6), mb: spacing(10), ...typography.titleL }}
+        sx={{
+          mt: spacing(6),
+          mb: spacing(10),
+          ...(isMobile ? typography.titleM : typography.titleL),
+        }}
       >
         {textDictionary('UploadingChunkScreen.Progress.Title')}
       </Typography>

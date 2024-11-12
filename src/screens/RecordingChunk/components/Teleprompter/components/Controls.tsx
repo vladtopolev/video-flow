@@ -1,11 +1,13 @@
-import { PlayArrow as PlayArrowIcon } from '@mui/icons-material';
-import { Stop as StopIcon } from '@mui/icons-material';
-import { Pause as PauseIcon } from '@mui/icons-material';
+import {
+  Pause as PauseIcon,
+  PlayArrow as PlayArrowIcon,
+  Stop as StopIcon,
+} from '@mui/icons-material';
 import { Box, Button, Switch, Typography } from '@mui/material';
+import { useRecordingDialog } from '../../../../../components/RecordingDialog/RecordingDialog';
+import SliderWithButtons from '../../../../../components/SliderWithButtons/SliderWithButtons';
 import { useVideoRecordFlowContext } from '../../../../../context/VideoRecordFlow.context';
 import useTheme from '../../../../../styles';
-import SliderWithButtons from '../../../../../components/SliderWithButtons/SliderWithButtons';
-import useWindowSize from '../../../../../hooks/useWindowSize';
 
 const BREAKPOINT_WIDTH = 900;
 
@@ -26,7 +28,7 @@ const Controls = ({
   isChunkRecording?: boolean;
   toggleScrolling: () => void;
 }) => {
-  const { width } = useWindowSize();
+  const { width } = useRecordingDialog();
   const isMobile = width < BREAKPOINT_WIDTH;
   const { palette, spacing, typography } = useTheme();
 

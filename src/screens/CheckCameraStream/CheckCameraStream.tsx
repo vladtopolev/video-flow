@@ -13,14 +13,20 @@ const CheckCameraStream = () => {
     userChoise: { currentScreen },
     dispatch,
   } = useVideoRecordFlowContext();
-  const { typography, spacing } = useTheme();
+  const { typography, spacing, breakpoints } = useTheme();
+  const isMobile = breakpoints.xs || breakpoints.sm;
 
   useMediaStream();
 
   return (
     <>
       <div className="InitialSettingsScreen">
-        <Typography style={{ ...typography.titleL, marginBottom: spacing(10) }}>
+        <Typography
+          style={{
+            ...(isMobile ? typography.titleM : typography.titleL),
+            marginBottom: spacing(10),
+          }}
+        >
           {textDictionary('SettingVideoFlowScreen.Title')}
         </Typography>
 

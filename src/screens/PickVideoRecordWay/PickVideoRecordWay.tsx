@@ -7,7 +7,7 @@ import { VIDEO_RECORD_WAYS_RENDERERS } from '../../recordVideoWays';
 import ActionContainerRenderer from '../../components/ActionContainerRenderer/ActionContainerRenderer';
 
 const PickRecordVideoWaySection = () => {
-  const { typography, spacing, palette } = useTheme();
+  const { typography, spacing, palette, breakpoints } = useTheme();
   const {
     textDictionary,
     videoRecordWayList,
@@ -16,11 +16,16 @@ const PickRecordVideoWaySection = () => {
     dispatch,
   } = useVideoRecordFlowContext();
 
+  const isMobile = breakpoints.xs || breakpoints.sm;
+
   return (
     <>
       <Box>
         <Typography
-          sx={{ ...typography.titleL, mb: spacing(10) }}
+          sx={{
+            ...(isMobile ? typography.titleM : typography.titleL),
+            mb: spacing(10),
+          }}
           component="h1"
         >
           {textDictionary('PickVideoRecordWay.Title')}

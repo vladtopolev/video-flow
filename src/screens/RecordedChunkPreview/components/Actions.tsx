@@ -1,18 +1,8 @@
 import { Box, Button } from '@mui/material';
+import { useRecordingDialog } from '../../../components/RecordingDialog/RecordingDialog';
 import { useVideoRecordFlowContext } from '../../../context/VideoRecordFlow.context';
-import useTheme from '../../../styles';
-import { useContainerQuery } from 'react-container-query';
 import { actions } from '../../../state';
-
-const query = {
-  small: {
-    minWidth: 0,
-    maxWidth: 299,
-  },
-  medium: {
-    minWidth: 300,
-  },
-};
+import useTheme from '../../../styles';
 
 const Actions = () => {
   const {
@@ -22,13 +12,12 @@ const Actions = () => {
   } = useVideoRecordFlowContext();
   const { spacing, button, palette } = useTheme();
 
-  const [params, containerRef] = useContainerQuery(query, {});
+  const { width } = useRecordingDialog();
 
-  const isNotSmall = params.medium;
+  const isNotSmall = width > 600;
 
   return (
     <Box
-      ref={containerRef}
       style={{
         display: 'grid',
         gridTemplateColumns: '1fr',
