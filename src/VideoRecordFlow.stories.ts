@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import VideoRecordFlow from './VideoRecordFlow';
+import { BRAND_STYLES } from './VideoRecordFlow.default';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
@@ -44,6 +45,13 @@ export const Default: Story = {
     },
     onFinished: (props) => {
       console.log('finished', props);
+    },
+    brandStyle: {
+      ...BRAND_STYLES,
+      palette: {
+        primary: '#4338CA',
+        secondary: '#F95D51',
+      },
     },
     blobUploader: ({ index, onProgress, originalFormat }) =>
       new Promise((resolve) => {

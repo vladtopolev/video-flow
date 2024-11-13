@@ -1,16 +1,18 @@
 import { FC, useCallback, useEffect, useMemo } from 'react';
 import {
+  BRAND_STYLES,
   DEFAULT_BACKGROUND_MUSIC_LIST,
   DEFAULT_QUESTION_LIST,
 } from './VideoRecordFlow.default';
 import type {
   BackgroundMusicConfig,
+  BlobUploader,
+  BrandStyle,
+  CustomTextDictionaryFunction,
   FileUploader,
   FinishedHandler,
   QuestionConfig,
   TextDictionaryFunction,
-  BrandStyle,
-  CustomTextDictionaryFunction,
 } from './VideoRecordFlow.types';
 import { DefaultScreenTypes } from './VideoRecordFlow.types';
 import ActionContainerRendererDefault, {
@@ -19,19 +21,18 @@ import ActionContainerRendererDefault, {
 import VideoRecordFlowContextComponent from './context/VideoRecordFlow.context';
 import defaultTextDictionary from './dictionary';
 import { VideoRecordWayTypes } from './recordVideoWays';
-import ContainerBreakpointsContextComponent from './styles/context/ContainerBreakpointsContext';
 import useRecordVideoFlowUserChoise, { actions } from './state';
-import type { BlobUploader } from './VideoRecordFlow.types';
+import ContainerBreakpointsContextComponent from './styles/context/ContainerBreakpointsContext';
 import utils from './utils';
 
-import PickVideoRecordWayScreen from './screens/PickVideoRecordWay/PickVideoRecordWay';
 import BeforeRecordingScreen from './screens/BeforeRecording/BeforeRecording';
 import CheckCameraStreamScreen from './screens/CheckCameraStream/CheckCameraStream';
-import RecordingChunkScreen from './screens/RecordingChunk/RecordingChunk';
-import RecordedChunkPreviewScreen from './screens/RecordedChunkPreview/RecordedChunkPreview';
-import UploadingChunksScreen from './screens/UploadingChunks/UploadingChunks';
 import PickMusicScreen from './screens/PickMusic/PickMusic';
+import PickVideoRecordWayScreen from './screens/PickVideoRecordWay/PickVideoRecordWay';
+import RecordedChunkPreviewScreen from './screens/RecordedChunkPreview/RecordedChunkPreview';
+import RecordingChunkScreen from './screens/RecordingChunk/RecordingChunk';
 import UploadOwnVideoScreen from './screens/UploadOwnVideo/UploadOwnVideo';
+import UploadingChunksScreen from './screens/UploadingChunks/UploadingChunks';
 
 export type VideoRecordFlowProps = {
   questionList?: QuestionConfig[];
@@ -71,16 +72,7 @@ const VideoRecordFlow = ({
     VideoRecordWayTypes.RANDOM_QUESTIONS,
     VideoRecordWayTypes.UPLOAD_VIDEO,
   ],
-  brandStyle = {
-    fontFamily: {
-      title: 'Inter, sans-serif',
-      body: 'Inter, sans-serif',
-    },
-    palette: {
-      primary: '#4338CA',
-      secondary: '#4338CA',
-    },
-  },
+  brandStyle = BRAND_STYLES,
   minVideoDurationDefault = 0,
   maxVideoDurationDefault = 3 * 60,
   maxQuestionsCount = 5,

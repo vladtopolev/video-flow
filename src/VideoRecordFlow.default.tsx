@@ -1,8 +1,19 @@
 import type {
   BackgroundMusicConfig,
+  BrandStyle,
   QuestionConfig,
 } from './VideoRecordFlow.types';
 
+export const BRAND_STYLES: BrandStyle = {
+  fontFamily: {
+    title: 'Inter, sans-serif',
+    body: 'Inter, sans-serif',
+  },
+  palette: {
+    primary: '#4338CA',
+    secondary: '#FFB000',
+  },
+};
 export const DEFAULT_BACKGROUND_MUSIC_LIST: BackgroundMusicConfig[] = [
   {
     name: 'A Breath of Hope',

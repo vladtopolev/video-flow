@@ -14,9 +14,9 @@ const compilePalette = (colors: { primary: string; secondary: string }) => ({
     invisible: '#ECEBFA',
   },
   secondary: {
-    main: '#FFB000',
-    dark: '#B27B00',
-    light: '#FFBF33',
+    main: colors.secondary,
+    dark: utils.adjustColor(colors.secondary, -30),
+    light: utils.adjustColor(colors.secondary, 30),
     contrastText: '#FFFFFF',
   },
   grey: {
