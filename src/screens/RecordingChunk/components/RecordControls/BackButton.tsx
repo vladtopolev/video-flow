@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Button } from '@mui/material';
 import { useVideoRecordFlowContext } from '../../../../context/VideoRecordFlow.context';
 import useTheme from '../../../../styles';
 
@@ -10,22 +10,15 @@ const BackButton = ({
   titleBackBtn?: string;
 }) => {
   const { textDictionary } = useVideoRecordFlowContext();
-  const { typography, palette } = useTheme();
+  const { palette, button } = useTheme();
 
   return (
-    <Box
-      sx={{
-        color: palette.common.white,
-        textTransform: 'uppercase',
-        fontWeight: 700,
-        cursor: 'pointer',
-      }}
-      onClick={onBack}
+    <Button
+      sx={{ ...button.link, color: palette.common.white }}
+      onClick={() => onBack()}
     >
-      <Typography sx={typography.titleS}>
-        {titleBackBtn || textDictionary('Buttons.Back')}
-      </Typography>
-    </Box>
+      {titleBackBtn || textDictionary('Buttons.Back')}
+    </Button>
   );
 };
 export default BackButton;
