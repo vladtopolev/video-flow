@@ -13,7 +13,6 @@ const CameraStream = () => {
       style={{
         width: '100%',
         aspectRatio: `${width} / ${height}`,
-        background: 'red',
       }}
     >
       {stream && (

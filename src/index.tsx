@@ -8,6 +8,7 @@ export type {
   FinishedHadlerAfterUploadingOwnVideoProps,
   FinishedHandlerAfterRecordingProcessProps,
   BrandStyle,
+  CustomTextDictionaryFunction,
 } from './VideoRecordFlow.types';
 
 export { VideoRecordWayTypes } from './recordVideoWays';

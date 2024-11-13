@@ -48,7 +48,6 @@ export default {
     },
   },
   VideoRecordWay: {
-    Title: 'WOULD YOU LIKE PROMPTS TO ASSIST WITH RECORDING?',
     Options: {
       Freely: {
         Title: 'I am comfortable speaking without prompts.',
@@ -83,7 +82,7 @@ export default {
     Title: 'Lets record your introduction video',
   },
   SettingVideoFlowScreen: {
-    Title: "Let's record your introduction video",
+    Title: "Let's record your video",
     Buttons: {
       Cancel: 'Cancel',
       Next: 'Next',
