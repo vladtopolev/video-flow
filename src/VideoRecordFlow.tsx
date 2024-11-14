@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect, useMemo } from 'react';
+import { FC, lazy, Suspense, useCallback, useEffect, useMemo } from 'react';
 import {
   BRAND_STYLES,
   DEFAULT_BACKGROUND_MUSIC_LIST,
@@ -25,14 +25,14 @@ import useRecordVideoFlowUserChoise, { actions } from './state';
 import ContainerBreakpointsContextComponent from './styles/context/ContainerBreakpointsContext';
 import utils from './utils';
 
-import BeforeRecordingScreen from './screens/BeforeRecording/BeforeRecording';
-import CheckCameraStreamScreen from './screens/CheckCameraStream/CheckCameraStream';
-import PickMusicScreen from './screens/PickMusic/PickMusic';
-import PickVideoRecordWayScreen from './screens/PickVideoRecordWay/PickVideoRecordWay';
-import RecordedChunkPreviewScreen from './screens/RecordedChunkPreview/RecordedChunkPreview';
-import RecordingChunkScreen from './screens/RecordingChunk/RecordingChunk';
-import UploadOwnVideoScreen from './screens/UploadOwnVideo/UploadOwnVideo';
-import UploadingChunksScreen from './screens/UploadingChunks/UploadingChunks';
+const BeforeRecordingScreen = lazy(() => import('./screens/BeforeRecording/BeforeRecording'));
+const CheckCameraStreamScreen = lazy(() => import('./screens/CheckCameraStream/CheckCameraStream'));
+const PickMusicScreen = lazy(() => import('./screens/PickMusic/PickMusic'));
+const PickVideoRecordWayScreen = lazy(() => import('./screens/PickVideoRecordWay/PickVideoRecordWay'));
+const RecordedChunkPreviewScreen = lazy(() => import('./screens/RecordedChunkPreview/RecordedChunkPreview'));
+const RecordingChunkScreen = lazy(() => import('./screens/RecordingChunk/RecordingChunk'));
+const UploadOwnVideoScreen = lazy(() => import('./screens/UploadOwnVideo/UploadOwnVideo'));
+const UploadingChunksScreen = lazy(() => import('./screens/UploadingChunks/UploadingChunks'));
 
 export type VideoRecordFlowProps = {
   questionList?: QuestionConfig[];
@@ -124,7 +124,9 @@ const VideoRecordFlow = ({
       {...restProps}
     >
       <ContainerBreakpointsContextComponent>
-        <CurrentScreen />
+        <Suspense fallback={"...Loading"}>
+          <CurrentScreen />
+        </Suspense>
       </ContainerBreakpointsContextComponent>
     </VideoRecordFlowContextComponent>
   );
