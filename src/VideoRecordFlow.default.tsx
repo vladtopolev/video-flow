@@ -14,6 +14,7 @@ export const BRAND_STYLES: BrandStyle = {
     secondary: '#FFB000',
   },
 };
+
 export const DEFAULT_BACKGROUND_MUSIC_LIST: BackgroundMusicConfig[] = [
   {
     name: 'A Breath of Hope',
@@ -85,7 +86,6 @@ export const DEFAULT_QUESTION_LIST: QuestionConfig[] = [
     id: '2',
     webText: 'When people meet me, they would never guess ...',
     tipText: '',
-    mandatory: true,
     promptTip: 'QUestion 2 propmt',
     duration: {
       min: MIN_VIDEO_DURATION,

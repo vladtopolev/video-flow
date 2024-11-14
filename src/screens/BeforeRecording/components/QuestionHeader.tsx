@@ -5,16 +5,17 @@ import {
   useVideoRecordFlowContext,
 } from '../../../context/VideoRecordFlow.context';
 import useTheme from '../../../styles';
+import { VideoRecordWayTypes } from '../../../recordVideoWays';
 
 const QuestionHeader = () => {
   const {
-    userChoise: { currentQuestionIndex, pickedQuestions },
+    userChoise: { currentQuestionIndex, pickedQuestions, recordVideoWay },
   } = useVideoRecordFlowContext();
   const { spacing, palette, typography } = useTheme();
 
   const { minDuration, maxDuration } = useCurrentQuestionDuration();
 
-  if (pickedQuestions.length === 1) {
+  if (recordVideoWay === VideoRecordWayTypes.FREELY) {
     return (
       <Typography
         sx={{ color: palette.primary.dark, ...typography.titleS }}
