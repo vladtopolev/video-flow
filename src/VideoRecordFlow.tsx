@@ -14,13 +14,15 @@ import type {
   QuestionConfig,
   TextDictionaryFunction,
 } from './VideoRecordFlow.types';
-import { DefaultScreenTypes } from './VideoRecordFlow.types';
+import {
+  DefaultScreenTypes,
+  VideoRecordWayTypes,
+} from './VideoRecordFlow.types';
 import ActionContainerRendererDefault, {
   ActionContainerRendererProps,
 } from './components/ActionContainerRenderer/ActionContainerRenderer';
 import VideoRecordFlowContextComponent from './context/VideoRecordFlow.context';
 import defaultTextDictionary from './dictionary';
-import { VideoRecordWayTypes } from './recordVideoWays';
 import useRecordVideoFlowUserChoise, { actions } from './state';
 import ContainerBreakpointsContextComponent from './styles/context/ContainerBreakpointsContext';
 import { shuffleArray } from './utils';

@@ -4,9 +4,9 @@ import ActionContainerRenderer from '../../components/ActionContainerRenderer/Ac
 import FileDropZone from '../../components/FileDropZone/FileDropZone';
 import FileUploadInfo from '../../components/FileUploadInfo/FileUploadInfo';
 import { useVideoRecordFlowContext } from '../../context/VideoRecordFlow.context';
-import { VideoRecordWayTypes } from '../../recordVideoWays';
 import { actions } from '../../state';
 import useTheme from '../../styles';
+import { VideoRecordWayTypes } from '../../VideoRecordFlow.types';
 
 const UploadOwnVideo = () => {
   const { typography, spacing, breakpoints } = useTheme();

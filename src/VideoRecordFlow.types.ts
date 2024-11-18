@@ -1,5 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { VideoRecordWayTypes } from './recordVideoWays';
+export enum VideoRecordWayTypes {
+  FREELY = 'Freely',
+  RANDOM_QUESTIONS = 'RandomQuestions',
+  UPLOAD_VIDEO = 'UploadVideo',
+}
 
 export type QuestionConfig = {
   id: string;

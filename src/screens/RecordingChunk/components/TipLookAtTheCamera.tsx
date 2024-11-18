@@ -1,6 +1,6 @@
 import { Box, SxProps, Typography } from '@mui/material';
 import useTheme from '../../../styles';
-import utils from '../../../utils';
+import { hex2rgba } from '../../../utils';
 import { useVideoRecordFlowContext } from '../../../context/VideoRecordFlow.context';
 
 const TipLookAtTheCamera = ({ sx }: { sx?: SxProps }) => {
@@ -17,7 +17,7 @@ const TipLookAtTheCamera = ({ sx }: { sx?: SxProps }) => {
         py: spacing(3.5),
         position: 'relative',
         color: 'common.white',
-        backgroundColor: utils.hex2rgba(palette.background.dark_60, 0.6),
+        backgroundColor: hex2rgba(palette.background.dark_60, 0.6),
         textAlign: 'center',
         ...sx,
       }}

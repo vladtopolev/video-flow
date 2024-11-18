@@ -5,7 +5,7 @@ import { useVideoRecordFlowContext } from '../../../../context/VideoRecordFlow.c
 import useInterval from '../../../../hooks/useInterval';
 import useMeasure from '../../../../hooks/useMeasure';
 import useTheme from '../../../../styles';
-import utils from '../../../../utils';
+import { hex2rgba } from '../../../../utils';
 import Controls from './components/Controls';
 
 export type TelepromterManagerProps = {
@@ -85,7 +85,7 @@ const Telepromter = ({
         p: { xs: spacing(4), md: spacing(6) },
         pb: { xs: spacing(4), md: spacing(4) },
         borderRadius: corners.md,
-        background: utils.hex2rgba(palette.background.dark_60, 0.6),
+        background: hex2rgba(palette.background.dark_60, 0.6),
         backdropFilter: 'blur(20px)',
         color: palette.common.white,
         display: 'flex',

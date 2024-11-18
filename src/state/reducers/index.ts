@@ -1,7 +1,9 @@
 import { Reducer } from 'react';
 import { UserChoise, UserChoiseAction } from '..';
-import { DefaultScreenTypes } from '../../VideoRecordFlow.types';
-import { VideoRecordWayTypes } from '../../recordVideoWays';
+import {
+  DefaultScreenTypes,
+  VideoRecordWayTypes,
+} from '../../VideoRecordFlow.types';
 
 export const goToNextReducer: Reducer<UserChoise, UserChoiseAction> = (
   state,

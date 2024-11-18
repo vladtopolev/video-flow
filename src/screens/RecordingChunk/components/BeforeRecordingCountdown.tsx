@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material';
 import Countdown from '../../../components/Countdown/Countdown';
 import useTheme from '../../../styles';
-import utils from '../../../utils';
+import { hex2rgba } from '../../../utils';
 
 const BeforeRecordingCountdownsScreen = ({
   countdown,
@@ -22,7 +22,7 @@ const BeforeRecordingCountdownsScreen = ({
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'column',
-        background: utils.hex2rgba(palette.background.dark_60, 0.6),
+        background: hex2rgba(palette.background.dark_60, 0.6),
       }}
     >
       <Countdown counter={countdown} sx={{ width: '100%' }} />

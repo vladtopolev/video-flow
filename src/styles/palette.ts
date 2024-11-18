@@ -1,4 +1,4 @@
-import utils from '../utils';
+import { adjustColor } from '../utils';
 
 const compilePalette = (colors: { primary: string; secondary: string }) => ({
   text: {
@@ -8,15 +8,15 @@ const compilePalette = (colors: { primary: string; secondary: string }) => ({
   },
   primary: {
     main: colors.primary,
-    dark: utils.adjustColor(colors.primary, -30),
-    light: utils.adjustColor(colors.primary, 30),
+    dark: adjustColor(colors.primary, -30),
+    light: adjustColor(colors.primary, 30),
     contrastText: '#FFFFFF',
     invisible: '#ECEBFA',
   },
   secondary: {
     main: colors.secondary,
-    dark: utils.adjustColor(colors.secondary, -30),
-    light: utils.adjustColor(colors.secondary, 30),
+    dark: adjustColor(colors.secondary, -30),
+    light: adjustColor(colors.secondary, 30),
     contrastText: '#FFFFFF',
   },
   grey: {

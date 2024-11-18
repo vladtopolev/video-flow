@@ -1,5 +1,5 @@
 import { Box, Typography } from '@mui/material';
-import utils from '../../../../utils';
+import { secsToTime } from '../../../../utils';
 import useTheme from '../../../../styles';
 
 const VideoTimestamps = ({
@@ -20,7 +20,7 @@ const VideoTimestamps = ({
           color: 'white',
         }}
       >
-        {utils.secsToTime(duration)}
+        {secsToTime(duration)}
       </Typography>
       <Typography
         sx={{
@@ -29,7 +29,7 @@ const VideoTimestamps = ({
           color: palette.text.secondary,
         }}
       >
-        {utils.secsToTime(maxDuration)}
+        {secsToTime(maxDuration)}
       </Typography>
     </Box>
   );

@@ -4,7 +4,7 @@ import { useVideoRecordFlowContext } from '../../context/VideoRecordFlow.context
 import useWarningCloseWindow from '../../hooks/useWarningCloseWindow';
 import useTheme from '../../styles';
 import ProgressView from './components/ProgressView';
-import { VideoRecordWayTypes } from '../../recordVideoWays';
+import { VideoRecordWayTypes } from '../../VideoRecordFlow.types';
 
 type GenerationVideoState = {
   isLoading: boolean;

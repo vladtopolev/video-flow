@@ -5,7 +5,7 @@ import {
   useVideoRecordFlowContext,
 } from '../../../context/VideoRecordFlow.context';
 import useTheme from '../../../styles';
-import { VideoRecordWayTypes } from '../../../recordVideoWays';
+import { VideoRecordWayTypes } from '../../../VideoRecordFlow.types';
 
 const QuestionHeader = () => {
   const {

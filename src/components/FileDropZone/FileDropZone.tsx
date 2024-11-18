@@ -2,7 +2,7 @@ import { Typography } from '@mui/material';
 import { useDropzone } from 'react-dropzone';
 import { Videocam as VideocamIcon } from '@mui/icons-material';
 import useTheme from '../../styles';
-import utils from '../../utils';
+import { hex2rgba } from '../../utils';
 
 const tips = [
   '· Max 10MB each (20MB for videos)',
@@ -31,12 +31,12 @@ const FileDropZone = ({
   const { spacing, palette, typography, corners } = useTheme();
 
   const backgroundActive = isDragReject
-    ? utils.hex2rgba(palette.error.main, 0.2)
-    : utils.hex2rgba(palette.success.main, 0.2);
+    ? hex2rgba(palette.error.main, 0.2)
+    : hex2rgba(palette.success.main, 0.2);
 
   const borderColorActive = isDragReject
-    ? utils.hex2rgba(palette.error.main, 0.2)
-    : utils.hex2rgba(palette.success.main, 0.2);
+    ? hex2rgba(palette.error.main, 0.2)
+    : hex2rgba(palette.success.main, 0.2);
 
   return (
     <div

@@ -3,8 +3,8 @@ import {
   BackgroundMusicConfig,
   DefaultScreenTypes,
   QuestionConfig,
+  VideoRecordWayTypes,
 } from '../VideoRecordFlow.types';
-import { VideoRecordWayTypes } from '../recordVideoWays';
 import { goToNextReducer, goToPrevReducer } from './reducers';
 
 export type UserChoise = {

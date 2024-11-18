@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Box, SxProps } from '@mui/material';
-import utils from '../../utils';
+import { createFileFromBlobArray } from '../../utils';
 import { useEffect, useRef, VideoHTMLAttributes } from 'react';
 import useVideoControls from './hooks/useVideoControls';
 import PlayerControls, { PlayerSizes } from '../PlayerControls/PlayerControls';
@@ -48,7 +48,7 @@ const VideoPlayer = (props: VideoPlayerProps) => {
 
   useEffect(() => {
     if (videoRef.current && blob) {
-      const file = utils.createFileFromBlobArray([blob]);
+      const file = createFileFromBlobArray([blob]);
 
       videoRef.current.src = URL.createObjectURL(file);
       videoRef.current.load();

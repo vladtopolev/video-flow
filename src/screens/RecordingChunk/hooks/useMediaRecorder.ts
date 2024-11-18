@@ -1,4 +1,4 @@
-import utils from '../../../utils';
+import { supportedVideoMimeType, VIDEO_MIME_TYPES } from '../../../utils';
 import { useEffect, useRef } from 'react';
 import { webmFixDuration } from 'webm-fix-duration';
 
@@ -32,14 +32,12 @@ export class MediaRecorderManager {
     this.duration = 0;
 
     this.mediaRecorder = new MediaRecorder(this.stream, {
-      mimeType: `${utils.supportedVideoMimeType()}`,
+      mimeType: `${supportedVideoMimeType()}`,
       bitsPerSecond: 2500000,
     });
     this.mediaRecorder.addEventListener('dataavailable', async (e) => {
       if (e.data.size > 0) {
-        if (
-          utils.supportedVideoMimeType() === utils.VIDEO_MIME_TYPES.videoWebm
-        ) {
+        if (supportedVideoMimeType() === VIDEO_MIME_TYPES.videoWebm) {
           const fixedBlob = await webmFixDuration(e.data, this.duration);
           this.onNewChunkAdded(fixedBlob, this.duration);
           return;
