@@ -1,6 +1,6 @@
 {
   "name": "@topolev/video-record-flow",
-  "version": "0.0.44",
+  "version": "0.0.45",
   "type": "module",
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
@@ -14,6 +14,7 @@
     "lint": "eslint . --fix",
     "tsc": "tsc",
     "build": "tsc && vite build",
+    "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
@@ -57,7 +58,8 @@
     "typescript-eslint": "^8.11.0",
     "uuid": "^8.3.2",
     "vite": "^5.4.10",
-    "vite-plugin-dts": "^4.3.0"
+    "vite-plugin-dts": "^4.3.0",
+    "webm-fix-duration": "^1.0.1"
   },
   "peerDependencies": {
     "@emotion/react": "^11.7.1",
@@ -69,7 +71,9 @@
     "react-device-detect": "^2.2.2",
     "react-dom": "^17.0.2",
     "uuid": "^8.3.2",
-    "react-dropzone": "14.2.3"
+    "react-dropzone": "14.2.3",
+    "webm-fix-duration": "^1.0.1",
+    "react-container-query": "^0.13.0"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
@@ -84,8 +88,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "react-container-query": "^0.13.0",
-    "webm-fix-duration": "^1.0.1"
+    "react-container-query": "^0.13.0"
   },
   "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }

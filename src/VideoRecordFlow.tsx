@@ -23,16 +23,30 @@ import defaultTextDictionary from './dictionary';
 import { VideoRecordWayTypes } from './recordVideoWays';
 import useRecordVideoFlowUserChoise, { actions } from './state';
 import ContainerBreakpointsContextComponent from './styles/context/ContainerBreakpointsContext';
-import utils from './utils';
+import { shuffleArray } from './utils';
 
-const BeforeRecordingScreen = lazy(() => import('./screens/BeforeRecording/BeforeRecording'));
-const CheckCameraStreamScreen = lazy(() => import('./screens/CheckCameraStream/CheckCameraStream'));
+const BeforeRecordingScreen = lazy(
+  () => import('./screens/BeforeRecording/BeforeRecording'),
+);
+const CheckCameraStreamScreen = lazy(
+  () => import('./screens/CheckCameraStream/CheckCameraStream'),
+);
 const PickMusicScreen = lazy(() => import('./screens/PickMusic/PickMusic'));
-const PickVideoRecordWayScreen = lazy(() => import('./screens/PickVideoRecordWay/PickVideoRecordWay'));
-const RecordedChunkPreviewScreen = lazy(() => import('./screens/RecordedChunkPreview/RecordedChunkPreview'));
-const RecordingChunkScreen = lazy(() => import('./screens/RecordingChunk/RecordingChunk'));
-const UploadOwnVideoScreen = lazy(() => import('./screens/UploadOwnVideo/UploadOwnVideo'));
-const UploadingChunksScreen = lazy(() => import('./screens/UploadingChunks/UploadingChunks'));
+const PickVideoRecordWayScreen = lazy(
+  () => import('./screens/PickVideoRecordWay/PickVideoRecordWay'),
+);
+const RecordedChunkPreviewScreen = lazy(
+  () => import('./screens/RecordedChunkPreview/RecordedChunkPreview'),
+);
+const RecordingChunkScreen = lazy(
+  () => import('./screens/RecordingChunk/RecordingChunk'),
+);
+const UploadOwnVideoScreen = lazy(
+  () => import('./screens/UploadOwnVideo/UploadOwnVideo'),
+);
+const UploadingChunksScreen = lazy(
+  () => import('./screens/UploadingChunks/UploadingChunks'),
+);
 
 export type VideoRecordFlowProps = {
   questionList?: QuestionConfig[];
@@ -94,7 +108,7 @@ const VideoRecordFlow = ({
 
   // shuffle music and set first one as default
   const shuffledBackgroundMusicList = useMemo(
-    () => utils.shuffleArray(backgroundMusicList),
+    () => shuffleArray(backgroundMusicList),
     [backgroundMusicList],
   );
 
@@ -124,7 +138,7 @@ const VideoRecordFlow = ({
       {...restProps}
     >
       <ContainerBreakpointsContextComponent>
-        <Suspense fallback={"...Loading"}>
+        <Suspense fallback={'...Loading'}>
           <CurrentScreen />
         </Suspense>
       </ContainerBreakpointsContextComponent>

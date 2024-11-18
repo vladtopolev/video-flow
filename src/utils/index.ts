@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-function get<T extends Record<string, any>, K = any>(
+export function get<T extends Record<string, any>, K = any>(
   obj: T,
   path: string,
   defaultValue?: K,
@@ -18,7 +18,7 @@ function get<T extends Record<string, any>, K = any>(
   return get(obj[keys[0]], keys.slice(1).join('.'), defaultValue);
 }
 
-const hex2rgba = (hex = '', alpha = 1) => {
+export const hex2rgba = (hex = '', alpha = 1) => {
   let normalizedHex = hex;
 
   if (hex.length === 4) {
@@ -29,13 +29,13 @@ const hex2rgba = (hex = '', alpha = 1) => {
   return `rgba(${r},${g},${b},${alpha})`;
 };
 
-const shuffleArray = <T>(arr: T[]): T[] =>
+export const shuffleArray = <T>(arr: T[]): T[] =>
   arr
     .map((value) => ({ value, sort: Math.random() }))
     .sort((a, b) => a.sort - b.sort)
     .map(({ value }) => value);
 
-const secsToTime = (seconds: number, separator = ':') =>
+export const secsToTime = (seconds: number, separator = ':') =>
   [
     Math.trunc(seconds / 60 / 60),
     Math.trunc((seconds / 60) % 60),
@@ -95,7 +95,7 @@ export const attachFullscreenEvent = (handler: () => void) => {
   };
 };
 
-function adjustColor(color: string, percent: number): string {
+export function adjustColor(color: string, percent: number): string {
   // Remove the "#" if it exists
   const hex = color.replace('#', '');
 
