@@ -9,7 +9,8 @@ export type {
   FinishedHandlerAfterRecordingProcessProps,
   BrandStyle,
   CustomTextDictionaryFunction,
-  VideoRecordWayTypes,
 } from './VideoRecordFlow.types';
+
+export { VideoRecordWayTypes } from './VideoRecordFlow.types';
 
 export { default as VideoRecordFlow } from './VideoRecordFlow';
