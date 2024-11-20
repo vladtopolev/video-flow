@@ -63,7 +63,7 @@ const RandomQuestions = () => {
       >
         {userPickedQuestion.map((question, index) => (
           <QuestionControl
-            key={index}
+            key={question?.id || `empty-${index}`}
             question={question}
             onChange={(q) => onChangeQuestion(q, index)}
           />
