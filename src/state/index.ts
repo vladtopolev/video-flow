@@ -82,6 +82,10 @@ const useRecordVideoFlowUserChoise = () => {
 };
 
 export const actions = {
+  setPatialState: (partialState: Partial<UserChoise>): UserChoiseAction => ({
+    type: UserChoiseActionTypes.SET_PARTIAL_STATE,
+    payload: partialState,
+  }),
   setMusic: (music: BackgroundMusicConfig | null): UserChoiseAction => ({
     type: UserChoiseActionTypes.SET_PARTIAL_STATE,
     payload: { music },
