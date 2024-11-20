@@ -5,7 +5,6 @@ import ClicableContainer from '../../components/ClickacbleContainer/ClickableCon
 import { useVideoRecordFlowContext } from '../../context/VideoRecordFlow.context';
 import { actions } from '../../state';
 import useTheme from '../../styles';
-import ActionContainerRenderer from '../../components/ActionContainerRenderer/ActionContainerRenderer';
 
 const PickMusic = () => {
   const {
@@ -14,6 +13,7 @@ const PickMusic = () => {
     mediaStream: { stopStream },
     userChoise: { music, currentScreen },
     dispatch,
+    ActionContainerRenderer,
   } = useVideoRecordFlowContext();
   const { typography, spacing, corners, palette, breakpoints } = useTheme();
   const isMobile = breakpoints.xs || breakpoints.sm;

@@ -1,6 +1,5 @@
 import { Typography } from '@mui/material';
 import { useCallback, useState } from 'react';
-import ActionContainerRenderer from '../../components/ActionContainerRenderer/ActionContainerRenderer';
 import FileDropZone from '../../components/FileDropZone/FileDropZone';
 import FileUploadInfo from '../../components/FileUploadInfo/FileUploadInfo';
 import { useVideoRecordFlowContext } from '../../context/VideoRecordFlow.context';
@@ -18,6 +17,7 @@ const UploadOwnVideo = () => {
     onFinished,
     mediaStream: { stopStream },
     userChoise: { currentScreen },
+    ActionContainerRenderer,
   } = useVideoRecordFlowContext();
 
   const [state, setState] = useState<null | {

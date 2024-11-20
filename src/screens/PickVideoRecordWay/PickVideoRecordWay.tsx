@@ -4,7 +4,6 @@ import useTheme from '../../styles';
 import ClicableContainer from '../../components/ClickacbleContainer/ClickableContainer';
 import { actions } from '../../state';
 import { VIDEO_RECORD_WAYS_RENDERERS } from '../../recordVideoWays';
-import ActionContainerRenderer from '../../components/ActionContainerRenderer/ActionContainerRenderer';
 
 const PickRecordVideoWaySection = () => {
   const { typography, spacing, palette, breakpoints } = useTheme();
@@ -14,6 +13,7 @@ const PickRecordVideoWaySection = () => {
     mediaStream: { stopStream },
     userChoise: { recordVideoWay, currentScreen },
     dispatch,
+    ActionContainerRenderer,
   } = useVideoRecordFlowContext();
 
   const isMobile = breakpoints.xs || breakpoints.sm;
