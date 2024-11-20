@@ -5,6 +5,7 @@ import {
   DEFAULT_QUESTION_LIST,
 } from './VideoRecordFlow.default';
 import type {
+  ActionContainerRendererProps,
   BackgroundMusicConfig,
   BlobUploader,
   BrandStyle,
@@ -18,9 +19,7 @@ import {
   DefaultScreenTypes,
   VideoRecordWayTypes,
 } from './VideoRecordFlow.types';
-import ActionContainerRendererDefault, {
-  ActionContainerRendererProps,
-} from './components/ActionContainerRenderer/ActionContainerRenderer';
+import ActionContainerRendererDefault from './components/ActionContainerRenderer/ActionContainerRenderer';
 import VideoRecordFlowContextComponent from './context/VideoRecordFlow.context';
 import defaultTextDictionary from './dictionary';
 import useRecordVideoFlowUserChoise, { actions } from './state';

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export enum VideoRecordWayTypes {
   FREELY = 'Freely',
   RANDOM_QUESTIONS = 'RandomQuestions',
@@ -100,4 +101,10 @@ export type BrandStyle = {
     secondary: string;
   };
   corners?: Corners;
+};
+
+export type ActionContainerRendererProps = {
+  currentScreen: string;
+  onStopStream: () => void;
+  buttons: { [k: string]: { onAction: () => void; disabled?: boolean } };
 };
