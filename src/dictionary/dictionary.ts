@@ -90,6 +90,7 @@ export default {
   },
   BeforeRecordingScreen: {
     FreelySpeechTitle: 'I am... Describe yourself, your hobbies and goals.',
+    FreelySpeechTelepromterTitle: '',
     Tip: 'You can re-record all videos as many times as you need.',
     Controls: {
       Notes: {

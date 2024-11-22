@@ -1,12 +1,13 @@
 import { Box } from '@mui/material';
+import { MutableRefObject, useCallback } from 'react';
 import { useVideoRecordFlowContext } from '../../../context/VideoRecordFlow.context';
+import { actions } from '../../../state';
 import useTheme from '../../../styles';
-import TipLookAtTheCamera from '../components/TipLookAtTheCamera';
+import { VideoRecordWayTypes } from '../../../VideoRecordFlow.types';
 import Telepromter, {
   TelepromterManagerProps,
 } from '../components/Teleprompter/Teleprompter';
-import { MutableRefObject, useCallback } from 'react';
-import { actions } from '../../../state';
+import TipLookAtTheCamera from '../components/TipLookAtTheCamera';
 
 const TelepromterOverlay = ({
   telepromterManagerRef,
@@ -23,11 +24,16 @@ const TelepromterOverlay = ({
       currentQuestionIndex,
       pickedQuestions,
       questionsTeleprompterNotes,
+      recordVideoWay,
     },
     dispatch,
+    textDictionary,
   } = useVideoRecordFlowContext();
 
-  const question = pickedQuestions[currentQuestionIndex]?.webText;
+  const question =
+    recordVideoWay === VideoRecordWayTypes.FREELY
+      ? textDictionary('BeforeRecordingScreen.FreelySpeechTelepromterTitle')
+      : pickedQuestions[currentQuestionIndex]?.webText;
   const notes = questionsTeleprompterNotes[currentQuestionIndex];
   const changeNotes = useCallback(
     (notes: string) => {
